@@ -14,7 +14,7 @@
         android:layout_below="@+id/textViewWorkFinished"
         android:layout_alignStart="@+id/textViewWorkFinished"
         android:background="@color/colorAccent"
-        android:text="@string/dayly_work"
+        android:text="@string/daily_work"
         android:textColor="@color/text_button_color"
         android:textStyle="bold" />
 
@@ -72,7 +72,7 @@
         android:layout_below="@+id/textViewWork"
         android:layout_alignStart="@+id/buttonDailyWorkFinished"
         android:background="@color/colorAccent"
-        android:text="@string/dayly_work"
+        android:text="@string/daily_work"
         android:textColor="@color/text_button_color"
         android:textStyle="bold" />
 

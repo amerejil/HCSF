@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">Aplicacion_Mantenimiento_HCSF</string>
+    <string name="app_name">Departamento de Mantenimiento</string>
     <string name="works">Trabajos</string>
     <string name="finished_work">Trabajos Finalizados</string>
-    <string name="dayly_work">Diarios</string>
+    <string name="daily_work">Diarios</string>
     <string name="monthly_work">Mensuales</string>
+    <string name="submenu_daily_work">Trabajos Diarios</string>
+    <string name="new_work">Ingresar Nuevo Trabajo</string>
 </resources>
