@@ -3,32 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingTop="20dp"
     android:layout_height="match_parent"
+    android:paddingTop="20dp"
     tools:context=".Menu_Principal">
 
     <Button
         android:id="@+id/buttonDailyWorkFinished"
-        android:textColor="@color/text_button_color"
-        android:background="@color/colorAccent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewWorkFinished"
         android:layout_alignStart="@+id/textViewWorkFinished"
-        android:textStyle="bold"
-        android:text="@string/dayly_work" />
+        android:background="@color/colorAccent"
+        android:text="@string/dayly_work"
+        android:textColor="@color/text_button_color"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonMonthlyWorkFinished"
-        android:textColor="@color/text_button_color"
-        android:background="@color/colorAccent"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewWorkFinished"
         android:layout_alignEnd="@+id/textViewWorkFinished"
+        android:background="@color/colorAccent"
         android:fadingEdge=""
-        android:text="@string/monthly_work" />
+        android:text="@string/monthly_work"
+        android:textColor="@color/text_button_color"
+        android:textStyle="bold" />
 
     <TextView
 
@@ -39,20 +39,20 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="140dp"
         android:text="@string/finished_work"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimary"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewWork"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/works"
         android:textColor="@color/colorPrimary"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageViewLogoHCSF"
@@ -73,18 +73,18 @@
         android:layout_alignStart="@+id/buttonDailyWorkFinished"
         android:background="@color/colorAccent"
         android:text="@string/dayly_work"
-        android:textStyle="bold"
-        android:textColor="@color/text_button_color" />
+        android:textColor="@color/text_button_color"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonMonthlyWork"
-        android:textColor="@color/text_button_color"
-        android:background="@color/colorAccent"
         android:layout_width="wrap_content"
-        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewWork"
         android:layout_alignEnd="@+id/buttonMonthlyWorkFinished"
-        android:text="@string/monthly_work" />
+        android:background="@color/colorAccent"
+        android:text="@string/monthly_work"
+        android:textColor="@color/text_button_color"
+        android:textStyle="bold" />
 
 </RelativeLayout>
