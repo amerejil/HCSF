@@ -6,4 +6,7 @@
     <string name="monthly_work">Mensuales</string>
     <string name="submenu_daily_work">Trabajos Diarios</string>
     <string name="new_work">Ingresar Nuevo Trabajo</string>
+    <string name="submenu_monthly_work">Trabajos Mensuales</string>
+    <string name="submenu_daily_work_finished">Trabajos Diarios Finalizados</string>
+    <string name="submenu_monthly_work_finished">Trabajos Mensuales Finalizados</string>
 </resources>

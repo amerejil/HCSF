@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Trabajos_Diarios"></activity>
+        <activity android:name=".Trabajos_Diarios" />
+        <activity android:name=".Trabajos_Mensuales" />
+        <activity android:name=".Trabajos_Diarios_Finalizados" />
+        <activity android:name=".Trabajos_Mensuales_Finalizados"></activity>
     </application>
 
 </manifest>
