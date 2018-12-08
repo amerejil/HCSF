@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Trabajos_Mensuales_Finalizados">
+    tools:context=".Activities.Trabajos_Mensuales_Finalizados">
 
     <TextView
         android:id="@+id/textViewMonthlyWorkFinished"

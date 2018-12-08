@@ -1,7 +1,9 @@
-package com.example.amere.aplicacion_mantenimiento_hcsf;
+package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 
 public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
 

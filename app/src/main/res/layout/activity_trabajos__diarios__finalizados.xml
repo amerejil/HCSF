@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Trabajos_Diarios_Finalizados">
+    tools:context=".Activities.Trabajos_Diarios_Finalizados">
 
     <TextView
         android:id="@+id/textViewDailyWorkFinished"
@@ -13,6 +13,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/submenu_daily_work_finished"
         android:gravity="center"
+        android:padding="10dp"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
         android:textStyle="bold" />

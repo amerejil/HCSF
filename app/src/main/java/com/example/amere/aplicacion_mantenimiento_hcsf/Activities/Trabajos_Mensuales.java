@@ -1,14 +1,16 @@
-package com.example.amere.aplicacion_mantenimiento_hcsf;
+package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Trabajos_Diarios extends AppCompatActivity {
+import com.example.amere.aplicacion_mantenimiento_hcsf.R;
+
+public class Trabajos_Mensuales extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trabajos__diarios);
+        setContentView(R.layout.activity_trabajos__mensuales);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
