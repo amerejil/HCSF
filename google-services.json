@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "1051546622460",
+    "firebase_url": "https://mantenimiento-hcsf.firebaseio.com",
+    "project_id": "mantenimiento-hcsf",
+    "storage_bucket": "mantenimiento-hcsf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051546622460:android:8c03488395fef4e8",
+        "android_client_info": {
+          "package_name": "com.example.amere.aplicacion_mantenimiento_hcsf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051546622460-76dpcbktv446mhhrtj3ur6v5sbnkec3p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amere.aplicacion_mantenimiento_hcsf",
+            "certificate_hash": "9c4a3c2eb12e7e454b6b5d05999745d49b80c16c"
+          }
+        },
+        {
+          "client_id": "1051546622460-vchpfcng68pv7pdg4o7u3kor6c844g34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmWDoI9zydjbZZ4dRMrsUN0tr1S-fR36k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051546622460-vchpfcng68pv7pdg4o7u3kor6c844g34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051546622460:android:af6f1e7c8f48aded",
+        "android_client_info": {
+          "package_name": "com.example.amere.firebase_notification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051546622460-tus6onp7ospc3lfju1q6u8eb82t1qhjg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amere.firebase_notification",
+            "certificate_hash": "9c4a3c2eb12e7e454b6b5d05999745d49b80c16c"
+          }
+        },
+        {
+          "client_id": "1051546622460-vchpfcng68pv7pdg4o7u3kor6c844g34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmWDoI9zydjbZZ4dRMrsUN0tr1S-fR36k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051546622460-vchpfcng68pv7pdg4o7u3kor6c844g34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
