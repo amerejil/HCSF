@@ -1,12 +1,50 @@
 <resources>
     <string name="app_name">Departamento de Mantenimiento</string>
-    <string name="works">Trabajos</string>
+    <string name="type">Tipo</string>
+    <string name="date">Fecha</string>
+    <string name="state">Estado</string>
     <string name="finished_work">Trabajos Finalizados</string>
-    <string name="daily_work">Diarios</string>
-    <string name="monthly_work">Mensuales</string>
     <string name="submenu_daily_work">Trabajos Diarios</string>
-    <string name="new_work">Ingresar Nuevo Trabajo</string>
+    <string name="new_daily_task">Ingresar Nuevo Trabajo Diario</string>
     <string name="submenu_monthly_work">Trabajos Mensuales</string>
     <string name="submenu_daily_work_finished">Trabajos Diarios Finalizados</string>
     <string name="submenu_monthly_work_finished">Trabajos Mensuales Finalizados</string>
+    <string name="Tipo">Tipo</string>
+    <string name="Ubicacion">Ubicación</string>
+    <string name="Atencion">Atención</string>
+    <string name="Piso">Piso</string>
+    <string name="Area">Area</string>
+    <string name="Subarea">Subarea</string>
+    <string name="Solicitante">Solicitante</string>
+    <string name="Trabajo">Trabajo solicitado</string>
+    <string-array name="tipo">
+        <item>Eléctrico</item>
+        <item>Electrónico</item>
+        <item>Climatización</item>
+        <item>Gasfitería</item>
+        <item>Albañilería</item>
+        <item>Cerrajería</item>
+        <item>Mecáncico</item>
+        <item>Pintura</item>
+        <item>Varios</item>
+    </string-array>
+    <string-array name="ubicacion">
+        <item>HCSF</item>
+        <item>TP</item>
+        <item>MGK</item>
+        <item>MGD</item>
+        <item>MGV</item>
+    </string-array>
+    <string-array name="atencion">
+        <item>Alta</item>
+        <item>Baja</item>
+    </string-array>
+    <string-array name="piso">
+        <item>Sótano</item>
+        <item>Piso 1</item>
+        <item>Psio 2</item>
+        <item>Piso 3</item>
+        <item>Piso 4</item>
+        <item>Terraza</item>
+    </string-array>
 </resources>

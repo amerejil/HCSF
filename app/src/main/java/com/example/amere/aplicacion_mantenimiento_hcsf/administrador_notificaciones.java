@@ -5,6 +5,9 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 
 public class administrador_notificaciones extends ContextWrapper
@@ -19,14 +22,18 @@ public class administrador_notificaciones extends ContextWrapper
         if(Build.VERSION.SDK_INT>=26)
         {
             NotificationChannel higChannel=new NotificationChannel(CHANNEL_HIGH_ID,CHANNEL_HIGH_NAME,NotificationManager.IMPORTANCE_HIGH);
+            higChannel.enableLights(true);
+            higChannel.setLightColor(Color.YELLOW);
             NotificationChannel lowChannel=new NotificationChannel(CHANNEL_LOW_ID,CHANNEL_LOW_NAME,NotificationManager.IMPORTANCE_LOW);
             getManager().createNotificationChannel(higChannel);
             getManager().createNotificationChannel(lowChannel);
         }
     }
 
-    public administrador_notificaciones(Context base) {
+    public administrador_notificaciones(Context base)
+    {
         super(base);
+        crearCanales();
     }
 
     public NotificationManager getManager()
@@ -37,17 +44,17 @@ public class administrador_notificaciones extends ContextWrapper
         }
         return manager;
     }
-    private Notification.Builder createNotification (String title, String message, boolean isHighImportance)
+    public Notification.Builder createNotification (String title, String message, boolean isHighImportance)
     {
         if(Build.VERSION.SDK_INT>=26)
         {
             if (isHighImportance)
             {
-                return this.createNotificaionWithChannel(title,message,CHANNEL_HIGH_ID);
+                return this.createNotificationWithChannel(title,message,CHANNEL_HIGH_ID);
             }
-            return this.createNotificaionWithChannel(title,message,CHANNEL_LOW_ID);
+            return this.createNotificationWithChannel(title,message,CHANNEL_LOW_ID);
         }
-        return this.createNotificaionWithoutChannel(title,message);
+        return this.createNotificationWithoutChannel(title,message);
     }
     private Notification.Builder createNotificationWithChannel(String title, String message,String channelId)
     {
@@ -60,12 +67,16 @@ public class administrador_notificaciones extends ContextWrapper
         }
         return null;
     }
-    private Notification.Builder createNotificaionWithoutChannel(String title, String message)
+    private Notification.Builder createNotificationWithoutChannel(String title, String message)
     {
+        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         return new Notification.Builder(getApplicationContext())
                 .setContentTitle(title)
                 .setContentText(message)
+                .setPriority(Notification.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.icon_task)
+                .setSound(defaultSoundUri)
                 .setAutoCancel(true);
+
     }
 }

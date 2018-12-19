@@ -18,32 +18,31 @@
             android:orientation="horizontal"
             >
                 <TextView
-
+                    android:gravity="center_vertical"
                     android:layout_margin="8dp"
                     android:id="@+id/textViewTypeList"
                     android:layout_width="0dp"
-                    android:layout_weight="0.35"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="0.37"
+                    android:layout_height="match_parent"
                     android:textSize="16sp"
 
                 />
                 <TextView
+                    android:gravity="center_vertical"
                     android:layout_margin="8dp"
                     android:id="@+id/textViewDateList"
                     android:layout_width="0dp"
-                    android:layout_weight="0.30"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:layout_height="match_parent"
                     android:textSize="16sp"
-
-
                 />
                 <TextView
-
+                    android:gravity="center_vertical"
                     android:layout_margin="8dp"
                     android:id="@+id/textViewStateList"
                     android:layout_width="0dp"
-                    android:layout_weight="0.35"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="0.30"
+                    android:layout_height="match_parent"
                     android:textSize="16sp"
                     />
         </LinearLayout>

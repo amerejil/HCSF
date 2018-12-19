@@ -9,15 +9,18 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView_menu_principal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_height="wrap_content"
         android:layout_margin="5dp" />
 
     <ImageView
+        android:layout_alignParentBottom="true"
         android:id="@+id/image_HCSF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="63dp"
         android:layout_below="@+id/recyclerView_menu_principal"
-        android:src="@drawable/hcsf" />
+        android:layout_centerInParent="true"
 
+        android:src="@drawable/hcsf" />
 </RelativeLayout>

@@ -4,18 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
+
+    android:id="@+id/relativeLayout"
     tools:context=".Activities.Trabajos_Diarios">
 
     <TextView
+        android:padding="5dp"
         android:id="@+id/textViewDailyWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:text="@string/submenu_daily_work"
         android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
+        android:textSize="22sp"
         android:textStyle="bold"
     />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutDailyTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewDailyWork"
+        >
+
+        <TextView
+            android:id="@+id/textViewType"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.35"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:text="@string/type" />
+        <TextView
+            android:id="@+id/textViewDate"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.30"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:text="@string/date" />
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/textViewState"
+            android:layout_width="0dp"
+            android:layout_weight="0.35"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/state" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/linearLayoutDailyTask"
+        android:id="@+id/recyclerViewDailyTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:maxImageSize="35dp"
+        app:srcCompat="@drawable/icon_add_task" />
+
 </RelativeLayout>

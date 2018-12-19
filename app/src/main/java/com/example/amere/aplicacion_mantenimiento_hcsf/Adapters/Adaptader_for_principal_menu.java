@@ -11,14 +11,15 @@ import android.widget.TextView;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_cardView_item;
+
 import java.util.ArrayList;
 
-public class Adaptador_for_principal_menu extends RecyclerView.Adapter<Adaptador_for_principal_menu.ViewHolder>
+public class Adaptader_for_principal_menu extends RecyclerView.Adapter<Adaptader_for_principal_menu.ViewHolder>
 {
     private ArrayList<data_cardView_item> item_menus;
     private OnItemClickListener listener;
 
-    public Adaptador_for_principal_menu(ArrayList<data_cardView_item> item_menus, OnItemClickListener listener) {
+    public Adaptader_for_principal_menu(ArrayList<data_cardView_item> item_menus, OnItemClickListener listener) {
         this.item_menus = item_menus;
         this.listener = listener;
     }
@@ -56,7 +57,7 @@ public class Adaptador_for_principal_menu extends RecyclerView.Adapter<Adaptador
             this.cardView_task=itemView.findViewById(R.id.cardView_menu_principal_item);
 
         }
-        public void bind(final data_cardView_item data,final OnItemClickListener listener)
+        public void bind(final data_cardView_item data, final OnItemClickListener listener)
         {
             this.textView_Task.setText(data.getType_task());
             this.imageView_Task.setImageResource(data.getPicture_task());
@@ -71,6 +72,6 @@ public class Adaptador_for_principal_menu extends RecyclerView.Adapter<Adaptador
     }
     public interface OnItemClickListener
     {
-        void onItemClick(data_cardView_item data,int position);
+        void onItemClick(data_cardView_item data, int position);
     }
 }
