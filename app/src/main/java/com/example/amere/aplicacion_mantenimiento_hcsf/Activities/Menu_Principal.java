@@ -3,6 +3,7 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,7 +32,7 @@ public class Menu_Principal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu__principal);
         preferences=getSharedPreferences("tipo",Context.MODE_PRIVATE);

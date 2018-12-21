@@ -17,14 +17,17 @@ public class data_task
     private String estado;
     private String solicitante;
     private String trabajo_solicitado;
+    private String estado_equipo;
+    private String fecha_inicio_entero;
+    private String fehca_finalizacion_entero;
     public data_task()
     {
 
     }
-
     public data_task(String id, String tipo, String ubicacion, String piso, String area,
                      String subarea, String atencion, String solicitante, String trabajo_solicitado,
-                     String fecha_inicio, String fecha_finalizacion, String estado) {
+                     String fecha_inicio, String fecha_inicio_entero,
+                     String fecha_finalizacion,String fehca_finalizacion_entero, String estado, String estado_equipo) {
         this.tipo = tipo;
         this.ubicacion = ubicacion;
         this.piso = piso;
@@ -35,8 +38,11 @@ public class data_task
         this.trabajo_solicitado = trabajo_solicitado;
         this.id=id;
         this.fecha_inicio = fecha_inicio;
+        this.fecha_inicio_entero=fecha_inicio_entero;
         this.fecha_finalizacion=fecha_finalizacion;
         this.estado=estado;
+        this.estado_equipo=estado_equipo;
+        this.fehca_finalizacion_entero=fehca_finalizacion_entero;
     }
     public String getTipo() {
         return tipo;
@@ -81,4 +87,16 @@ public class data_task
     public String getEstado() {
         return estado;
     }
+    public String getEstado_equipo() {
+        return estado_equipo;
+    }
+    public String getFecha_inicio_entero() {
+        return fecha_inicio_entero;
+    }
+
+    public String getFehca_finalizacion_entero() {
+        return fehca_finalizacion_entero;
+    }
+
+
 }

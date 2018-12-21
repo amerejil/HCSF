@@ -47,4 +47,7 @@
         <item>Piso 4</item>
         <item>Terraza</item>
     </string-array>
+    <string name="eleminar_tarea">Elminar tarea</string>
+    <string name="cambiar_estado_iniciar">Iniciar tarea</string>
+    <string name="cambiar_estado_finalizar">Finalizar tarea</string>
 </resources>

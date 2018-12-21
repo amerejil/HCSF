@@ -1,14 +1,23 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Adapters;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
+import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -16,10 +25,12 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
 {
     private ArrayList<data_task> item_menus;
     private OnItemClickListener listener;
+    private Activity activity;
 
-    public Adapter_for_task_list(ArrayList<data_task> item_menus, OnItemClickListener listener) {
+    public Adapter_for_task_list(ArrayList<data_task> item_menus, OnItemClickListener listener,Activity activity) {
         this.item_menus = item_menus;
         this.listener = listener;
+        this.activity=activity;
     }
 
 
@@ -27,7 +38,7 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
     {
-        View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_lista_trabajos_diarios,viewGroup,false);
+        View view=LayoutInflater.from(activity).inflate(R.layout.cardview_lista_trabajos_diarios,viewGroup,false);
         return new ViewHolder(view);
     }
 
@@ -42,17 +53,22 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         return item_menus.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener,MenuItem.OnMenuItemClickListener
     {
         public TextView textViewType;
         public TextView textViewDate;
         public TextView textViewState;
+        public CardView cardView;
+        private DatabaseReference task;
+        private FirebaseDatabase database_hcsf;
         public ViewHolder(View itemView)
         {
             super(itemView);
             this.textViewType=itemView.findViewById(R.id.textViewTypeList);
             this.textViewDate=itemView.findViewById(R.id.textViewDateList);
             this.textViewState=itemView.findViewById(R.id.textViewStateList);
+            this.cardView=itemView.findViewById(R.id.cardView_lista_trabajos_diarios);
+            itemView.setOnCreateContextMenuListener(this);
 
         }
         public void bind(final data_task data,final OnItemClickListener listener)
@@ -60,12 +76,50 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
             this.textViewState.setText(data.getEstado());
             this.textViewDate.setText(data.getFecha_inicio());
             this.textViewType.setText(data.getTipo());
+            if(data.getAtencion().equals("Alta"))
+            {
+                this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity,R.color.prioridad_alta));
+                this.textViewDate.setTextColor(ContextCompat.getColor(activity,R.color.text_button_color));
+                this.textViewState.setTextColor(ContextCompat.getColor(activity,R.color.text_button_color));
+                this.textViewType.setTextColor(ContextCompat.getColor(activity,R.color.text_button_color));
+            }
+            if(data.getAtencion().equals("Baja"))
+            {
+                this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity,R.color.prioridad_bajo));
+                this.textViewDate.setTextColor(ContextCompat.getColor(activity,R.color.text_button_color));
+                this.textViewState.setTextColor(ContextCompat.getColor(activity,R.color.text_button_color));
+                this.textViewType.setTextColor(ContextCompat.getColor(activity,R.color.text_button_color));
+            }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onItemClick(data,getAdapterPosition());
                 }
             });
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            database_hcsf=Utils.getDatabase();
+            task = database_hcsf.getReference("Tareas");
+            switch(item.getItemId()){
+                case R.id.change_state_iniciado:
+                    String id=item_menus.get(this.getAdapterPosition()).getId();
+                    task.child(id).child("estado").setValue("En proceso");
+
+            return true;
+            default:
+                return false;
+            }
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            MenuInflater inflater=activity.getMenuInflater();
+            inflater.inflate(R.menu.contex_menu_tareas_diarias,menu);
+            for(int i=0;i<menu.size();i++)
+                menu.getItem(i).setOnMenuItemClickListener(this);
+
         }
     }
     public interface OnItemClickListener

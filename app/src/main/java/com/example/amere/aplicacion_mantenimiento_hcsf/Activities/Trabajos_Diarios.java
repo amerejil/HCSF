@@ -2,6 +2,7 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajos__diarios);
         database_hcsf = Utils.getDatabase();
@@ -66,8 +68,14 @@ public class Trabajos_Diarios extends AppCompatActivity {
         floatingActionButtonAddDailyTask=findViewById(R.id.floatingActionButton);
         administradorNotificaciones=new administrador_notificaciones(this);
         click_text_type=0;
+        click_text_state=0;
+        click_text_date=0;
+        final Query orden_estado =task.orderByChild("estado");
+        final Query orden_tipo=task.orderByChild("tipo");
+        final Query orden_fecha=task.orderByChild("fecha_inicio_entero");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerViewTDailyTask.setAdapter(adaptador);
+
         textViewType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,13 +85,54 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 if(click_text_type==1)
                 {
                     textViewType.setText("Tipo ↓");
+                        orden_tipo.addValueEventListener(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                lista_tareas_diarias=new ArrayList<>();
+                                for(DataSnapshot datasnapshot:dataSnapshot.getChildren())
+                                {
+
+                                    lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
+
+                                }
+                                adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(data_task data, int position) {
+                                        Intent intent_detalle_tareas=new Intent(Trabajos_Diarios.this,Detalle_tareas_diarias.class);
+                                        String id=data.getId();
+                                        intent_detalle_tareas.putExtra("Id",id);
+                                        startActivity(intent_detalle_tareas);
+
+                                    }
+                                },Trabajos_Diarios.this);
+                                recyclerViewTDailyTask.setAdapter(adaptador);
+                                // This method is called once with the initial value and again
+
+                                // whenever data at this location is updated.
+
+
+                            }
+
+
+
+                            @Override
+
+                            public void onCancelled(DatabaseError error) {
+
+                                // Failed to read value
+
+
+
+                            }
+
+                        });
+                    click_text_type=0;
+
                 }
 
-                if(click_text_type==2)
-                {
-                    textViewType.setText("Tipo ↑");
-                    click_text_type=0;
-                }
+
             }
         });
         textViewDate.setOnClickListener(new View.OnClickListener() {
@@ -95,13 +144,52 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 if(click_text_date==1)
                 {
                     textViewDate.setText("Fecha ↓");
-                }
+                    orden_fecha.addValueEventListener(new ValueEventListener() {
 
-                if(click_text_date==2)
-                {
-                    textViewDate.setText("Fecha ↑");
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            lista_tareas_diarias=new ArrayList<>();
+                            for(DataSnapshot datasnapshot:dataSnapshot.getChildren())
+                            {
+
+                                lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
+
+                            }
+                            adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(data_task data, int position) {
+                                    Intent intent_detalle_tareas=new Intent(Trabajos_Diarios.this,Detalle_tareas_diarias.class);
+                                    String id=data.getId();
+                                    intent_detalle_tareas.putExtra("Id",id);
+                                    startActivity(intent_detalle_tareas);
+
+                                }
+                            },Trabajos_Diarios.this);
+                            recyclerViewTDailyTask.setAdapter(adaptador);
+                            // This method is called once with the initial value and again
+
+                            // whenever data at this location is updated.
+
+
+                        }
+
+
+
+                        @Override
+
+                        public void onCancelled(DatabaseError error) {
+
+                            // Failed to read value
+
+
+
+                        }
+
+                    });
                     click_text_date=0;
                 }
+
             }
         });
         textViewState.setOnClickListener(new View.OnClickListener() {
@@ -113,15 +201,101 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 if(click_text_state==1)
                 {
                     textViewState.setText("Estado ↓");
-                }
+                    orden_estado.addValueEventListener(new ValueEventListener() {
 
-                if(click_text_state==2)
-                {
-                    textViewState.setText("Estado ↑");
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            lista_tareas_diarias=new ArrayList<>();
+                            for(DataSnapshot datasnapshot:dataSnapshot.getChildren())
+                            {
+
+                                lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
+
+                            }
+                            adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(data_task data, int position) {
+                                    Intent intent_detalle_tareas=new Intent(Trabajos_Diarios.this,Detalle_tareas_diarias.class);
+                                    String id=data.getId();
+                                    intent_detalle_tareas.putExtra("Id",id);
+                                    startActivity(intent_detalle_tareas);
+
+                                }
+                            },Trabajos_Diarios.this);
+                            recyclerViewTDailyTask.setAdapter(adaptador);
+                            // This method is called once with the initial value and again
+
+                            // whenever data at this location is updated.
+
+
+                        }
+
+
+
+                        @Override
+
+                        public void onCancelled(DatabaseError error) {
+
+                            // Failed to read value
+
+
+
+                        }
+
+                    });
                     click_text_state=0;
                 }
+
+
             }
         });
+        if(click_text_type==0 && click_text_date==0 && click_text_state==0)
+        {
+            task.addValueEventListener(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    lista_tareas_diarias=new ArrayList<>();
+                    for(DataSnapshot datasnapshot:dataSnapshot.getChildren())
+                    {
+
+                        lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
+
+                    }
+                    adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(data_task data, int position) {
+                            Intent intent_detalle_tareas=new Intent(Trabajos_Diarios.this,Detalle_tareas_diarias.class);
+                            String id=data.getId();
+                            intent_detalle_tareas.putExtra("Id",id);
+                            startActivity(intent_detalle_tareas);
+
+                        }
+                    },Trabajos_Diarios.this);
+                    recyclerViewTDailyTask.setAdapter(adaptador);
+                    // This method is called once with the initial value and again
+
+                    // whenever data at this location is updated.
+
+
+                }
+
+
+
+                @Override
+
+                public void onCancelled(DatabaseError error) {
+
+                    // Failed to read value
+
+
+
+                }
+
+            });
+        }
         relativeLayout.setOnTouchListener(new OnSwipeTouchListener(Trabajos_Diarios.this) {
             public void onSwipeRight() {
                 Intent intent=new Intent(Trabajos_Diarios.this,Menu_Principal.class);
@@ -129,52 +303,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
 
             }
         });
-        task.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                lista_tareas_diarias=new ArrayList<>();
-                for(DataSnapshot datasnapshot:dataSnapshot.getChildren())
-                {
-
-                    lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
-
-                }
-                adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(data_task data, int position) {
-                        Intent intent_detalle_tareas=new Intent(Trabajos_Diarios.this,Detalle_tareas_diarias.class);
-
-                        String id=data.getId();
-                        intent_detalle_tareas.putExtra("Id",id);
-
-                        Toast.makeText(Trabajos_Diarios.this,id,Toast.LENGTH_SHORT).show();
-                        startActivity(intent_detalle_tareas);
-
-                    }
-                });
-                recyclerViewTDailyTask.setAdapter(adaptador);
-                // This method is called once with the initial value and again
-
-                // whenever data at this location is updated.
 
 
-            }
-
-
-
-            @Override
-
-            public void onCancelled(DatabaseError error) {
-
-                // Failed to read value
-
-
-
-            }
-
-        });
         floatingActionButtonAddDailyTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

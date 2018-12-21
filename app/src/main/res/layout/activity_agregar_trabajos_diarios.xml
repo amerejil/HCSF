@@ -45,11 +45,12 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="0.3"
                     android:text="@string/Tipo"
-                    android:layout_gravity="center"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/spinner1"
@@ -70,11 +71,12 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="0.3"
                     android:text="@string/Ubicacion"
-                    android:layout_gravity="center"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/spinner2"
@@ -95,11 +97,12 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="0.3"
                     android:text="@string/Piso"
-                    android:layout_gravity="center"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/spinner3"
@@ -118,13 +121,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="0.3"
                     android:text="@string/Area"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextArea"
@@ -151,11 +155,12 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="0.3"
                     android:text="@string/Subarea"
-                    android:layout_gravity="center"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextSubrea"
@@ -183,11 +188,12 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="0.3"
                     android:text="@string/Atencion"
-                    android:layout_gravity="center"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/spinner4"
@@ -206,6 +212,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
