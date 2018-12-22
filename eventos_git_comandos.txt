@@ -1,0 +1,58 @@
+Microsoft Windows [Versión 10.0.17763.195]
+(c) 2018 Microsoft Corporation. Todos los derechos reservados.
+
+C:\Users\PC-01\OneDrive\Escritorio\HCSF>
+
+
+
+
+
+
+
+
+
+
+
+C:\Users\PC-01\OneDrive\Escritorio\HCSF>git branch mario_mod1
+
+C:\Users\PC-01\OneDrive\Escritorio\HCSF>git checkout mario_mod1
+Switched to branch 'mario_mod1'
+M       .idea/gradle.xml
+M       .idea/misc.xml
+M       .idea/runConfigurations.xml
+M       .idea/vcs.xml
+
+C:\Users\PC-01\OneDrive\Escritorio\HCSF>git add .
+warning: LF will be replaced by CRLF in .idea/gradle.xml.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in .idea/misc.xml.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in .idea/runConfigurations.xml.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in .idea/vcs.xml.
+The file will have its original line endings in your working directory
+
+C:\Users\PC-01\OneDrive\Escritorio\HCSF>git commit -m "modifique el activity trabajos diarios a mensuales "
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'PC-01@DESKTOP-015ELLI.(none)')
+
+C:\Users\PC-01\OneDrive\Escritorio\HCSF>git config --global user.email "mario0barzola@gmail.com"
+
+C:\Users\PC-01\OneDrive\Escritorio\HCSF>git config --global user.name "Mario Andres Barzola"
+
+C:\Users\PC-01\OneDrive\Escritorio\HCSF>git commit -m "modifique el activity trabajos diarios a mensuales "
+[mario_mod1 e14d827] modifique el activity trabajos diarios a mensuales
+ 6 files changed, 331 insertions(+), 65 deletions(-)
+ rewrite .idea/misc.xml (87%)
+
+C:\Users\PC-01\OneDrive\Escritorio\HCSF>

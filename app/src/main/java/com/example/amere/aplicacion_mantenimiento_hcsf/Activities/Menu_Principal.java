@@ -70,7 +70,7 @@ public class Menu_Principal extends AppCompatActivity {
                 if(position==0)
                 {
 
-                    Intent intent=new Intent(Menu_Principal.this,Trabajos_Mensuales.class);
+                    Intent intent=new Intent(Menu_Principal.this,Trabajos_Diarios.class);
                     startActivity(intent);
                 }
                 if(position==1)

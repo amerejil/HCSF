@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.Trabajos_Mensuales"
+            android:name=".Activities.Trabajos_Diarios"
             android:parentActivityName=".Activities.Menu_Principal">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

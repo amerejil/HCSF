@@ -100,13 +100,13 @@ public class Trabajos_Diarios extends AppCompatActivity {
                                 adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(data_task data, int position) {
-                                        Intent intent_detalle_tareas=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
+                                        Intent intent_detalle_tareas=new Intent(Trabajos_Diarios.this,Detalle_tareas_diarias.class);
                                         String id=data.getId();
                                         intent_detalle_tareas.putExtra("Id",id);
                                         startActivity(intent_detalle_tareas);
 
                                     }
-                                },Trabajos_Mensuales.this);
+                                },Trabajos_Diarios.this);
                                 recyclerViewTDailyTask.setAdapter(adaptador);
                                 // This method is called once with the initial value and again
 
@@ -159,13 +159,13 @@ public class Trabajos_Diarios extends AppCompatActivity {
                             adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(data_task data, int position) {
-                                    Intent intent_detalle_tareas=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
+                                    Intent intent_detalle_tareas=new Intent(Trabajos_Diarios.this,Detalle_tareas_diarias.class);
                                     String id=data.getId();
                                     intent_detalle_tareas.putExtra("Id",id);
                                     startActivity(intent_detalle_tareas);
 
                                 }
-                            },Trabajos_Mensuales.this);
+                            },Trabajos_Diarios.this);
                             recyclerViewTDailyTask.setAdapter(adaptador);
                             // This method is called once with the initial value and again
 
@@ -216,13 +216,13 @@ public class Trabajos_Diarios extends AppCompatActivity {
                             adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(data_task data, int position) {
-                                    Intent intent_detalle_tareas=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
+                                    Intent intent_detalle_tareas=new Intent(Trabajos_Diarios.this,Detalle_tareas_diarias.class);
                                     String id=data.getId();
                                     intent_detalle_tareas.putExtra("Id",id);
                                     startActivity(intent_detalle_tareas);
 
                                 }
-                            },Trabajos_Mensuales.this);
+                            },Trabajos_Diarios.this);
                             recyclerViewTDailyTask.setAdapter(adaptador);
                             // This method is called once with the initial value and again
 
@@ -267,13 +267,13 @@ public class Trabajos_Diarios extends AppCompatActivity {
                     adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                         @Override
                         public void onItemClick(data_task data, int position) {
-                            Intent intent_detalle_tareas=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
+                            Intent intent_detalle_tareas=new Intent(Trabajos_Diarios.this,Detalle_tareas_diarias.class);
                             String id=data.getId();
                             intent_detalle_tareas.putExtra("Id",id);
                             startActivity(intent_detalle_tareas);
 
                         }
-                    },Trabajos_Mensuales.this);
+                    },Trabajos_Diarios.this);
                     recyclerViewTDailyTask.setAdapter(adaptador);
                     // This method is called once with the initial value and again
 
@@ -296,9 +296,9 @@ public class Trabajos_Diarios extends AppCompatActivity {
 
             });
         }
-        relativeLayout.setOnTouchListener(new OnSwipeTouchListener(Trabajos_Mensuales.this) {
+        relativeLayout.setOnTouchListener(new OnSwipeTouchListener(Trabajos_Diarios.this) {
             public void onSwipeRight() {
-                Intent intent=new Intent(Trabajos_Mensuales.this,Menu_Principal.class);
+                Intent intent=new Intent(Trabajos_Diarios.this,Menu_Principal.class);
                 startActivity(intent);
 
             }
@@ -311,7 +311,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
                /* String value=task.push().getKey();
 
                 task.child(value).setValue(new data_task(value,"H","o","l","a","c","a","r","a") );*/
-                Intent intent_añadir_trabajo=new Intent(Trabajos_Mensuales.this,Agregar_trabajos_diarios.class);
+                Intent intent_añadir_trabajo=new Intent(Trabajos_Diarios.this,Agregar_trabajos_diarios.class);
                 startActivity(intent_añadir_trabajo);
 
             }

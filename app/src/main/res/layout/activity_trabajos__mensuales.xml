@@ -4,7 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayoutTrabajosMensuales"
     tools:context=".Activities.Trabajos_Mensuales">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/LinearLayoutMonthlyTask"
+        android:id="@+id/recyclerViewMonthlyTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 
     <TextView
         android:id="@+id/textViewMonthlyWork"
@@ -19,6 +28,7 @@
         android:textSize="22sp"
         android:textStyle="bold"/>
     <LinearLayout
+        android:id="@+id/LinearLayoutMonthlyTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewMonthlyWork"

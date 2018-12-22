@@ -30,11 +30,11 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 public class Trabajos_Mensuales extends AppCompatActivity {
     private FirebaseDatabase database_hcsf;
     private ArrayList<data_task> lista_tareas_diarias;
-    private RecyclerView recyclerViewTDailyTask;
+    private RecyclerView recyclerViewTMonthlyTask;
     private Adapter_for_task_list adaptador;
     private administrador_notificaciones administradorNotificaciones;
     private DatabaseReference task;
-    private LinearLayoutManager linearLayoutManager_daily_task;
+    private LinearLayoutManager linearLayoutManager_montly_task;
     private TextView textViewType;
     private TextView textViewDate;
     private TextView textViewState;
@@ -52,19 +52,19 @@ public class Trabajos_Mensuales extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trabajos__diarios);
+        setContentView(R.layout.activity_trabajos__mensuales);
         database_hcsf = Utils.getDatabase();
-        task = database_hcsf.getReference("Tareas");
+        task = database_hcsf.getReference("Tareas_Mensuales");
         lista_tareas_diarias=new ArrayList<>();
-        recyclerViewTDailyTask=findViewById(R.id.recyclerViewDailyTask);
-        linearLayoutManager_daily_task=new LinearLayoutManager(this);
-        linearLayoutManager_daily_task.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerViewTDailyTask.setLayoutManager(linearLayoutManager_daily_task);
-        textViewType=findViewById(R.id.textViewType);
-        textViewDate=findViewById(R.id.textViewDate);
-        textViewState=findViewById(R.id.textViewState);
-        relativeLayout=findViewById(R.id.relativeLayout);
-        floatingActionButtonAddDailyTask=findViewById(R.id.floatingActionButton);
+        recyclerViewTMonthlyTask =findViewById(R.id.recyclerViewMonthlyTask);
+        linearLayoutManager_montly_task =new LinearLayoutManager(this);
+        linearLayoutManager_montly_task.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewTMonthlyTask.setLayoutManager(linearLayoutManager_montly_task);
+        textViewType=findViewById(R.id.textViewTypeMonthlyTask);
+        textViewDate=findViewById(R.id.textViewDateMonthlyTask);
+        textViewState=findViewById(R.id.textViewStateMonthlyTask);
+        relativeLayout=findViewById(R.id.relativeLayoutTrabajosMensuales);
+        floatingActionButtonAddDailyTask=findViewById(R.id.floatingActionButton_Add_MonthlyTask);
         administradorNotificaciones=new administrador_notificaciones(this);
         click_text_type=0;
         click_text_state=0;
@@ -100,14 +100,14 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                             adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(data_task data, int position) {
-                                    Intent intent_detalle_tareas=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
+                                    Intent intent_detalle_tareas_mensuales=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
                                     String id=data.getId();
-                                    intent_detalle_tareas.putExtra("Id",id);
-                                    startActivity(intent_detalle_tareas);
+                                    intent_detalle_tareas_mensuales.putExtra("Id_mensuales",id);
+                                    startActivity(intent_detalle_tareas_mensuales);
 
                                 }
                             },Trabajos_Mensuales.this);
-                            recyclerViewTDailyTask.setAdapter(adaptador);
+                            recyclerViewTMonthlyTask.setAdapter(adaptador);
                             // This method is called once with the initial value and again
 
                             // whenever data at this location is updated.
@@ -159,14 +159,14 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                             adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(data_task data, int position) {
-                                    Intent intent_detalle_tareas=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
+                                    Intent intent_detalle_tareas_mensuales=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
                                     String id=data.getId();
-                                    intent_detalle_tareas.putExtra("Id",id);
-                                    startActivity(intent_detalle_tareas);
+                                    intent_detalle_tareas_mensuales.putExtra("Id_mensuales",id);
+                                    startActivity(intent_detalle_tareas_mensuales);
 
                                 }
                             },Trabajos_Mensuales.this);
-                            recyclerViewTDailyTask.setAdapter(adaptador);
+                            recyclerViewTMonthlyTask.setAdapter(adaptador);
                             // This method is called once with the initial value and again
 
                             // whenever data at this location is updated.
@@ -216,14 +216,14 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                             adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(data_task data, int position) {
-                                    Intent intent_detalle_tareas=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
+                                    Intent intent_detalle_tareas_mensuales=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
                                     String id=data.getId();
-                                    intent_detalle_tareas.putExtra("Id",id);
-                                    startActivity(intent_detalle_tareas);
+                                    intent_detalle_tareas_mensuales.putExtra("Id_mensuales",id);
+                                    startActivity(intent_detalle_tareas_mensuales);
 
                                 }
                             },Trabajos_Mensuales.this);
-                            recyclerViewTDailyTask.setAdapter(adaptador);
+                            recyclerViewTMonthlyTask.setAdapter(adaptador);
                             // This method is called once with the initial value and again
 
                             // whenever data at this location is updated.
@@ -267,14 +267,14 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                     adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                         @Override
                         public void onItemClick(data_task data, int position) {
-                            Intent intent_detalle_tareas=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
+                            Intent intent_detalle_tareas_mensuales=new Intent(Trabajos_Mensuales.this,Detalle_tareas_diarias.class);
                             String id=data.getId();
-                            intent_detalle_tareas.putExtra("Id",id);
-                            startActivity(intent_detalle_tareas);
+                            intent_detalle_tareas_mensuales.putExtra("Id_mensuales",id);
+                            startActivity(intent_detalle_tareas_mensuales);
 
                         }
                     },Trabajos_Mensuales.this);
-                    recyclerViewTDailyTask.setAdapter(adaptador);
+                    recyclerViewTMonthlyTask.setAdapter(adaptador);
                     // This method is called once with the initial value and again
 
                     // whenever data at this location is updated.
