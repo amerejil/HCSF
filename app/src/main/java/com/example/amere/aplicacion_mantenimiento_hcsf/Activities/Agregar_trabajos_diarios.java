@@ -129,7 +129,7 @@ public class Agregar_trabajos_diarios extends AppCompatActivity {
                 String value=task.push().getKey();
                 Toast.makeText(Agregar_trabajos_diarios.this,stringFecha_inicio,Toast.LENGTH_SHORT).show();
                 task.child(value).setValue(new data_task(value,stringTipo,stringUbicacion,stringPiso,stringArea,
-                        stringSubarea,stringAtencion,stringSolicitante,stringTrabajoSolicitado,stringFecha_inicio,getStringFecha_inicio_entero,"","",stringEstado,"Desconocido") );
+                        stringSubarea,stringAtencion,stringSolicitante,stringTrabajoSolicitado,stringFecha_inicio,getStringFecha_inicio_entero,"","",stringEstado,"Desconocido","") );
             }
         });
     }

@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/delete_task"
-        android:title="@string/eleminar_tarea"
+        android:title="@string/eliminar_tarea"
         />
     <item
         android:id="@+id/change_state_iniciado"
         android:title="@string/cambiar_estado_iniciar"/>
     <item
-        android:id="@+id/change_state_finalizado"
-        android:title="@string/cambiar_estado_finalizar"
+        android:id="@+id/change_state_pausado"
+        android:title="@string/cambiar_estado_pausado"
         />
 </menu>

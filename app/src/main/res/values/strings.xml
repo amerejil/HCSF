@@ -42,12 +42,15 @@
     <string-array name="piso">
         <item>Sótano</item>
         <item>Piso 1</item>
-        <item>Psio 2</item>
+        <item>Piso 2</item>
         <item>Piso 3</item>
         <item>Piso 4</item>
         <item>Terraza</item>
     </string-array>
-    <string name="eleminar_tarea">Elminar tarea</string>
+    <string name="eliminar_tarea">Eliminar tarea</string>
     <string name="cambiar_estado_iniciar">Iniciar tarea</string>
     <string name="cambiar_estado_finalizar">Finalizar tarea</string>
+    <string name="cambiar_estado_pausado">Pausar tarea</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
 </resources>

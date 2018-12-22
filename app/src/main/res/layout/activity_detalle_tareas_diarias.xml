@@ -65,7 +65,7 @@
                     android:layout_weight="0.5"
                     android:text="@string/Ubicacion"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/textViewDetalleUbicacion"
@@ -75,6 +75,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.7"
                     android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -91,7 +92,7 @@
                     android:layout_weight="0.5"
                     android:text="@string/Piso"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/textViewDetallePiso"
@@ -101,6 +102,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.7"
                     android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -117,7 +119,7 @@
                     android:layout_weight="0.5"
                     android:text="@string/Area"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/textViewDetalleArea"
@@ -127,6 +129,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.7"
                     android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -143,7 +146,7 @@
                     android:layout_weight="0.5"
                     android:text="@string/Subarea"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/textViewDetalleSubarea"
@@ -153,6 +156,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.7"
                     android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -169,7 +173,7 @@
                     android:layout_weight="0.5"
                     android:text="@string/Solicitante"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/textViewDetalleSolicitante"
@@ -179,12 +183,13 @@
                     android:layout_margin="5dp"
                     android:layout_weight="0.7"
                     android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/editText"
+                android:id="@+id/editTextTrabajoSolicitdoDiario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -197,5 +202,32 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/buttonFinalizarTarea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:padding="15dp"
+        app:cardBackgroundColor="@color/colorAccent" >
+        <TextView
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="5dp"
+
+            android:layout_gravity="center"
+            android:textColor="@color/text_button_color"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/cambiar_estado_finalizar"/>
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>

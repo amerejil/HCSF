@@ -102,12 +102,19 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         public boolean onMenuItemClick(MenuItem item) {
             database_hcsf=Utils.getDatabase();
             task = database_hcsf.getReference("Tareas");
+            String id=item_menus.get(this.getAdapterPosition()).getId();
             switch(item.getItemId()){
                 case R.id.change_state_iniciado:
-                    String id=item_menus.get(this.getAdapterPosition()).getId();
+
                     task.child(id).child("estado").setValue("En proceso");
 
             return true;
+                case R.id.delete_task:
+                    task.child(id).removeValue();
+                    return true;
+                case R.id.change_state_pausado:
+                    task.child(id).child("estado").setValue("Pausado");
+                    return true;
             default:
                 return false;
             }

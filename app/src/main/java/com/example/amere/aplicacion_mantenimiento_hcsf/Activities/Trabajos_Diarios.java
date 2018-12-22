@@ -74,7 +74,6 @@ public class Trabajos_Diarios extends AppCompatActivity {
         final Query orden_tipo=task.orderByChild("tipo");
         final Query orden_fecha=task.orderByChild("fecha_inicio_entero");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        recyclerViewTDailyTask.setAdapter(adaptador);
 
         textViewType.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +84,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 if(click_text_type==1)
                 {
                     textViewType.setText("Tipo ↓");
-                        orden_tipo.addValueEventListener(new ValueEventListener() {
+
+                    orden_tipo.addValueEventListener(new ValueEventListener() {
 
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -94,7 +94,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
                                 for(DataSnapshot datasnapshot:dataSnapshot.getChildren())
                                 {
 
-                                    lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
+                                    if(!datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado"))
+                                        lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
 
                                 }
                                 adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
@@ -152,8 +153,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
                             lista_tareas_diarias=new ArrayList<>();
                             for(DataSnapshot datasnapshot:dataSnapshot.getChildren())
                             {
-
-                                lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
+                                if(!datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado"))
+                                    lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
 
                             }
                             adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
@@ -209,8 +210,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
                             lista_tareas_diarias=new ArrayList<>();
                             for(DataSnapshot datasnapshot:dataSnapshot.getChildren())
                             {
-
-                                lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
+                                if(!datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado"))
+                                    lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
 
                             }
                             adaptador =new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
@@ -260,7 +261,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
                     lista_tareas_diarias=new ArrayList<>();
                     for(DataSnapshot datasnapshot:dataSnapshot.getChildren())
                     {
-
+                        if(!datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado"))
                         lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
 
                     }

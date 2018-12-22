@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#FF1591CB</color>
+    <color name="colorPrimaryDark">#1591cb</color>
     <color name="colorAccent">#03A9F4</color>
-    <color name="colorCardView_Menu">#FF11A7C3</color>
+    <color name="colorCardView_Menu">#11a7c3</color>
     <color name="text_button_color">#FFFFFF</color>
-    <color name="prioridad_alta">#FF5252</color>
-    <color name="prioridad_bajo">#388e3c</color>
+    <color name="prioridad_alta">#d32f2f</color>
+    <color name="prioridad_bajo">#43A047</color>
 </resources>
