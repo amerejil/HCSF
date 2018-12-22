@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:id="@+id/relativeLayout"
-    tools:context=".Activities.Trabajos_Diarios">
+    tools:context=".Activities.Trabajos_Mensuales">
 
     <TextView
         android:padding="5dp"

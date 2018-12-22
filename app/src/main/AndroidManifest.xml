@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.Trabajos_Diarios"
+            android:name=".Activities.Trabajos_Mensuales"
             android:parentActivityName=".Activities.Menu_Principal">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -49,11 +49,11 @@
         <activity
             android:name=".Activities.Agregar_trabajos_diarios"
             android:configChanges="screenSize|orientation"
-            android:parentActivityName=".Activities.Trabajos_Diarios"
+            android:parentActivityName=".Activities.Trabajos_Mensuales"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.Trabajos_Diarios" />
+                android:value=".Activities.Trabajos_Mensuales" />
         </activity>
 
         <service android:name=".NotificationService">
@@ -64,11 +64,11 @@
 
         <activity
             android:name=".Activities.Detalle_tareas_diarias"
-            android:parentActivityName=".Activities.Trabajos_Diarios"
+            android:parentActivityName=".Activities.Trabajos_Mensuales"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.Trabajos_Diarios" />
+                android:value=".Activities.Trabajos_Mensuales" />
         </activity>
     </application>
 

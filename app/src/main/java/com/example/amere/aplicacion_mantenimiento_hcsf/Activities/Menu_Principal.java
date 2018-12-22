@@ -13,11 +13,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adaptader_for_principal_menu;
-import com.example.amere.aplicacion_mantenimiento_hcsf.NotificationService;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_cardView_item;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.ArrayList;
 public class Menu_Principal extends AppCompatActivity {
@@ -72,7 +70,7 @@ public class Menu_Principal extends AppCompatActivity {
                 if(position==0)
                 {
 
-                    Intent intent=new Intent(Menu_Principal.this,Trabajos_Diarios.class);
+                    Intent intent=new Intent(Menu_Principal.this,Trabajos_Mensuales.class);
                     startActivity(intent);
                 }
                 if(position==1)
