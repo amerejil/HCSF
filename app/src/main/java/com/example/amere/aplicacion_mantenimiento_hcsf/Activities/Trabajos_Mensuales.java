@@ -1,7 +1,9 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
         import android.annotation.SuppressLint;
+        import android.content.Context;
         import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.content.pm.ActivityInfo;
         import android.support.design.widget.FloatingActionButton;
         import android.support.v7.app.AppCompatActivity;
@@ -43,7 +45,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
     private int click_text_type;
     private int click_text_date;
     private int click_text_state;
-
+    private SharedPreferences preferences;
 
     @SuppressLint("ClickableViewAccessibility")
 
@@ -53,6 +55,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajos__mensuales);
+        preferences=getSharedPreferences("tipo",Context.MODE_PRIVATE);
         database_hcsf = Utils.getDatabase();
         task = database_hcsf.getReference("Tareas_Mensuales");
         lista_tareas_diarias=new ArrayList<>();
@@ -106,7 +109,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                                     startActivity(intent_detalle_tareas_mensuales);
 
                                 }
-                            },Trabajos_Mensuales.this);
+                            },Trabajos_Mensuales.this,preferences);
                             recyclerViewTMonthlyTask.setAdapter(adaptador);
                             // This method is called once with the initial value and again
 
@@ -165,7 +168,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                                     startActivity(intent_detalle_tareas_mensuales);
 
                                 }
-                            },Trabajos_Mensuales.this);
+                            },Trabajos_Mensuales.this,preferences);
                             recyclerViewTMonthlyTask.setAdapter(adaptador);
                             // This method is called once with the initial value and again
 
@@ -222,7 +225,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                                     startActivity(intent_detalle_tareas_mensuales);
 
                                 }
-                            },Trabajos_Mensuales.this);
+                            },Trabajos_Mensuales.this,preferences);
                             recyclerViewTMonthlyTask.setAdapter(adaptador);
                             // This method is called once with the initial value and again
 
@@ -273,7 +276,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                             startActivity(intent_detalle_tareas_mensuales);
 
                         }
-                    },Trabajos_Mensuales.this);
+                    },Trabajos_Mensuales.this,preferences);
                     recyclerViewTMonthlyTask.setAdapter(adaptador);
                     // This method is called once with the initial value and again
 

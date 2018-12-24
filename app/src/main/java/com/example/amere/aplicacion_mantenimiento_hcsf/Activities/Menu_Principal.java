@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adaptader_for_principal_menu;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_cardView_item;
@@ -99,11 +98,19 @@ public class Menu_Principal extends AppCompatActivity {
                 {
                     FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
                     FirebaseMessaging.getInstance().subscribeToTopic("administrador");
-                    Toast.makeText(Menu_Principal.this, "Admisnistrador", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Menu_Principal.this, "Administrador", Toast.LENGTH_SHORT).show();
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("administrador","administrador");
                     editor.apply();
 
+                }
+                if(cont==10)
+                {
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador");
+                    FirebaseMessaging.getInstance().subscribeToTopic("usuario");
+                    SharedPreferences.Editor editor=preferences.edit();
+                    editor.putString("administrador","usuario");
+                    editor.apply();
                 }
             }
         });

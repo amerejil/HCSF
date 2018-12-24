@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Departamento de Mantenimiento</string>
+    <string name="app_name">Dto. de Mantenimiento</string>
     <string name="type">Tipo</string>
     <string name="date">Fecha</string>
     <string name="state">Estado</string>
@@ -53,4 +53,9 @@
     <string name="cambiar_estado_pausado">Pausar tarea</string>
     <string name="si">Si</string>
     <string name="no">No</string>
+    <string name="operativo">Operativo</string>
+    <string name="de_baja">De baja</string>
+    <string name="fecha_inicio">Fecha de inicio</string>
+    <string name="fecha_finalizacion">Fecha de finalizacion</string>
+    <string name="nota">Nota</string>
 </resources>

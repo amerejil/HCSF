@@ -4,7 +4,6 @@ import android.content.pm.ActivityInfo;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,7 +28,7 @@ public class Agregar_trabajos_diarios extends AppCompatActivity {
     private String stringSolicitante;
     private String stringSubarea;
     private String stringTrabajoSolicitado;
-    private String getStringFecha_inicio_entero;
+    private String stringFecha_inicio_entero;
     private EditText area;
     private EditText subarea;
     private EditText solicitante;
@@ -120,7 +119,7 @@ public class Agregar_trabajos_diarios extends AppCompatActivity {
                 stringEstado="No iniciado";
                 SimpleDateFormat f_date=new SimpleDateFormat("dd/MM/yyyy");
                 SimpleDateFormat f_date_entero=new SimpleDateFormat("ddMMyyyy");
-                getStringFecha_inicio_entero=f_date_entero.format(date);
+                stringFecha_inicio_entero =f_date_entero.format(date);
                 stringFecha_inicio=f_date.format(date);
                 stringSubarea=subarea.getText().toString();
                 stringSolicitante=solicitante.getText().toString();
@@ -129,7 +128,7 @@ public class Agregar_trabajos_diarios extends AppCompatActivity {
                 String value=task.push().getKey();
                 Toast.makeText(Agregar_trabajos_diarios.this,stringFecha_inicio,Toast.LENGTH_SHORT).show();
                 task.child(value).setValue(new data_task(value,stringTipo,stringUbicacion,stringPiso,stringArea,
-                        stringSubarea,stringAtencion,stringSolicitante,stringTrabajoSolicitado,stringFecha_inicio,getStringFecha_inicio_entero,"","",stringEstado,"Desconocido","") );
+                        stringSubarea,stringAtencion,stringSolicitante,stringTrabajoSolicitado,stringFecha_inicio, stringFecha_inicio_entero,"","",stringEstado,"Desconocido","") );
             }
         });
     }

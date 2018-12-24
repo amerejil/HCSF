@@ -65,6 +65,17 @@
         <activity
             android:name=".Activities.Detalle_tareas_diarias"
             android:parentActivityName=".Activities.Trabajos_Mensuales"
+            android:configChanges="screenSize|orientation"
+            android:windowSoftInputMode="stateHidden"
+
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.Trabajos_Mensuales" />
+        </activity>
+        <activity
+            android:name=".Activities.Detalle_tareas_diarias_finalizadas"
+            android:parentActivityName=".Activities.Trabajos_Diarios_Finalizados"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

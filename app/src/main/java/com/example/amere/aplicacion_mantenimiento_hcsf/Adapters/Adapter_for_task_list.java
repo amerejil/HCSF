@@ -1,6 +1,8 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Adapters;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -26,11 +28,12 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
     private ArrayList<data_task> item_menus;
     private OnItemClickListener listener;
     private Activity activity;
-
-    public Adapter_for_task_list(ArrayList<data_task> item_menus, OnItemClickListener listener,Activity activity) {
+    private SharedPreferences preferences;
+    public Adapter_for_task_list(ArrayList<data_task> item_menus, OnItemClickListener listener,Activity activity,SharedPreferences preferences) {
         this.item_menus = item_menus;
         this.listener = listener;
         this.activity=activity;
+        this.preferences=preferences;
     }
 
 
@@ -109,7 +112,7 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
                     task.child(id).child("estado").setValue("En proceso");
 
             return true;
-                case R.id.delete_task:
+                case R.id.delete_task_administrador:
                     task.child(id).removeValue();
                     return true;
                 case R.id.change_state_pausado:
@@ -119,11 +122,14 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
                 return false;
             }
         }
-
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            String tipo=preferences.getString("administrador","usuario");
             MenuInflater inflater=activity.getMenuInflater();
-            inflater.inflate(R.menu.contex_menu_tareas_diarias,menu);
+            if(tipo.equals("usuario"))
+            inflater.inflate(R.menu.contex_menu_tareas_diarias_usuario,menu);
+            if(tipo.equals("administrador"))
+                inflater.inflate(R.menu.context_menu_tareas_diarias_administrador,menu);
             for(int i=0;i<menu.size();i++)
                 menu.getItem(i).setOnMenuItemClickListener(this);
 
