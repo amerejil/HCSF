@@ -23,7 +23,7 @@
     />
 
     <LinearLayout
-        android:id="@+id/linearLayoutDailyTaskFinished"
+        android:id="@+id/linearLayoutDailyTaskFinished3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewDailyWork"
@@ -61,7 +61,7 @@
             android:text="@string/state" />
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/linearLayoutDailyTaskFinished"
+        android:layout_below="@+id/linearLayoutDailyTaskFinished3"
         android:id="@+id/recyclerViewDailyTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
