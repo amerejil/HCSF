@@ -173,7 +173,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
 
                 task.child(value).setValue(new data_task(value,"H","o","l","a","c","a","r","a") );*/
                 Intent intent_añadir_trabajo = new Intent(Trabajos_Mensuales.this, Agregar_trabajos.class);
-                intent_añadir_trabajo.putExtra("Trabajo", "mensuales");
+                intent_añadir_trabajo.putExtra("trabajos", "mensuales");
                 startActivity(intent_añadir_trabajo);
 
             }

@@ -117,8 +117,15 @@ public class Detalle_tareas extends AppCompatActivity {
                 task.child(Id).child("fecha_finalizacion").setValue(stringFecha_finalizacion);
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
                 task.child(Id).child("fecha_finalizacion_entero").setValue(stringFecha_finalizacion_entero);
-                Intent intent = new Intent(Detalle_tareas.this, Trabajos_Diarios.class);
-                startActivity(intent);
+                if (tipo_tarea.equals("diarios")) {
+                    Intent intent = new Intent(Detalle_tareas.this, Trabajos_Diarios.class);
+
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(Detalle_tareas.this, Trabajos_Mensuales.class);
+
+                    startActivity(intent);
+                }
 
             }
         });

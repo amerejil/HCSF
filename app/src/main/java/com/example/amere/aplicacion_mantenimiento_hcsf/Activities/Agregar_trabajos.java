@@ -72,7 +72,7 @@ public class Agregar_trabajos extends AppCompatActivity {
         tipo.setAdapter(adapterTipo);
         piso.setAdapter(adapterPiso);
         atencion.setAdapter(adapterAtemcion);
-        final String tipo_trabajo = getIntent().getExtras().get("Trabajo").toString();
+        final String tipo_trabajo = getIntent().getExtras().get("trabajos").toString();
         if (!tipo_trabajo.equals("diarios")) {
             textViewTipo.setText(R.string.new_monthly_task);
         }
