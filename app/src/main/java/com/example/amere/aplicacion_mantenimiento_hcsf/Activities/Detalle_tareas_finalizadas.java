@@ -15,7 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Detalle_tareas_diarias_finalizadas extends AppCompatActivity {
+public class Detalle_tareas_finalizadas extends AppCompatActivity {
+    private TextView textViewTipoTarea;
     private TextView textViewTipo;
     private TextView textViewUbicacion;
     private TextView textViewPiso;
@@ -32,7 +33,8 @@ public class Detalle_tareas_diarias_finalizadas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalle_tareas_diarias_finalizadas);
+        setContentView(R.layout.activity_detalle_tareas_finalizadas);
+        textViewTipoTarea=findViewById(R.id.textViewWorkFinished);
         textViewTipo = findViewById(R.id.textViewDetalleTipoFinalizdo);
         textViewUbicacion=findViewById(R.id.textViewDetalleUbicacionFinalizado);
         textViewPiso=findViewById(R.id.textViewDetallePisoFinalizado);
@@ -45,7 +47,15 @@ public class Detalle_tareas_diarias_finalizadas extends AppCompatActivity {
         cardViewEstadoEquipo=findViewById(R.id.cardViewEstadoEquipo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         database_hcsf = Utils.getDatabase();
-        task = database_hcsf.getReference("Tareas");
+        String tipo=getIntent().getExtras().get("trabajos").toString();
+        if(tipo.equals("diarios")) {
+            task = database_hcsf.getReference("Tareas");
+        }
+        else
+        {
+            task = database_hcsf.getReference("Tareas_Mensuales");
+            textViewTipoTarea.setText(R.string.submenu_monthly_work_finished);
+        }
         task.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

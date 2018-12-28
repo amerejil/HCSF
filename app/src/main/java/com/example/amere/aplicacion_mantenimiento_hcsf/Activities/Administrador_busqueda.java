@@ -11,8 +11,9 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_finished;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_list;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
@@ -27,29 +28,60 @@ import java.util.ArrayList;
 
 public class Administrador_busqueda extends AppCompatActivity {
     private FirebaseDatabase database_hcsf;
+    private TextView textView1;
+    private TextView textView2;
+    private TextView textView3;
     private ArrayList<data_task> lista_tareas_diarias;
     private RecyclerView recyclerViewTDailyTask;
     private Adapter_for_task_list adaptador;
+    private Adapter_for_task_finished adapter;
     private DatabaseReference task;
+    private TextView textViewTipo;
     private LinearLayoutManager linearLayoutManager_daily_task;
     private SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrador_busqueda);
+        textView1=findViewById(R.id.textViewTypeSearch);
+        textView2=findViewById(R.id.textViewDateSearch);
+        textView3=findViewById(R.id.textViewStateSearch);
+        textViewTipo = findViewById(R.id.textViewDailyWork3);
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         database_hcsf = Utils.getDatabase();
-        task = database_hcsf.getReference("Tareas");
+        String estado = getIntent().getExtras().get("estado").toString();
+        String tipo = getIntent().getExtras().get("trabajos").toString();
+        if (tipo.equals("diarios")) {
+            task = database_hcsf.getReference("Tareas");
+            if(estado.equals("finalizado"))
+            {
+                textViewTipo.setText(R.string.submenu_daily_work_finished);
+                textView2.setText(R.string.fecha_inicio);
+                textView3.setText(R.string.fecha_finalizacion);
+            }
+        } else {
+            task = database_hcsf.getReference("Tareas_Mensuales");
+            textViewTipo.setText(R.string.submenu_monthly_work);
+            if(estado.equals("finalizado"))
+            {
+                textViewTipo.setText(R.string.submenu_monthly_work_finished);
+                textView2.setText(R.string.fecha_inicio);
+                textView3.setText(R.string.fecha_finalizacion);
+            }
+
+        }
         lista_tareas_diarias = new ArrayList<>();
         recyclerViewTDailyTask = findViewById(R.id.recyclerViewDailyTask3);
         linearLayoutManager_daily_task = new LinearLayoutManager(this);
         linearLayoutManager_daily_task.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewTDailyTask.setLayoutManager(linearLayoutManager_daily_task);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.search_menu,menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
         menu.findItem(R.id.item_search).expandActionView();
         SearchView search = (SearchView) menu.findItem(R.id.item_search).getActionView();
         menu.findItem(R.id.item_search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
@@ -60,8 +92,25 @@ public class Administrador_busqueda extends AppCompatActivity {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Diarios.class);
-                startActivity(intent);
+                String estado = getIntent().getExtras().get("estado").toString();
+                String tipo = getIntent().getExtras().get("trabajos").toString();
+                if (tipo.equals("diarios")&& estado.isEmpty()) {
+                    Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Diarios.class);
+                    startActivity(intent);
+                } else if(!tipo.equals("diarios")&& estado.isEmpty()) {
+                    Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Mensuales.class);
+                    startActivity(intent);
+                }
+                if(estado.equals("finalizado")&&tipo.equals("diarios"))
+                {
+                    Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Diarios_Finalizados.class);
+                    startActivity(intent);
+                }
+                else if(estado.equals("finalizado")&&!tipo.equals("diarios"))
+                {
+                    Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Mensuales_Finalizados.class);
+                    startActivity(intent);
+                }
                 return false;
             }
         });
@@ -73,39 +122,91 @@ public class Administrador_busqueda extends AppCompatActivity {
             }
 
             @Override
-            public boolean onQueryTextChange(final String  newText) {
-                final String uper=ucFirst(newText);
-                ValueEventListener valueEventListener=new ValueEventListener() {
+            public boolean onQueryTextChange(final String newText) {
+                final String uper = ucFirst(newText);
+                final String estado = getIntent().getExtras().get("estado").toString();
+                final String tipo = getIntent().getExtras().get("trabajos").toString();
+                ValueEventListener valueEventListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         lista_tareas_diarias = new ArrayList<>();
                         for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
-                            if (!datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado")) {
-                                if (    datasnapshot.getValue(data_task.class).getEstado_equipo().contains(newText)||datasnapshot.getValue(data_task.class).getEstado_equipo().contains(uper)||
-                                        datasnapshot.getValue(data_task.class).getTrabajo_solicitado().contains(newText)||datasnapshot.getValue(data_task.class).getTrabajo_solicitado().contains(uper)||
-                                        datasnapshot.getValue(data_task.class).getNota().contains(newText)||datasnapshot.getValue(data_task.class).getNota().contains(uper)||
-                                        datasnapshot.getValue(data_task.class).getArea().contains(newText)||datasnapshot.getValue(data_task.class).getArea().contains(uper)||
-                                        datasnapshot.getValue(data_task.class).getSolicitante().contains(newText)||datasnapshot.getValue(data_task.class).getSolicitante().contains(uper)||
-                                        datasnapshot.getValue(data_task.class).getSubarea().contains(newText)||datasnapshot.getValue(data_task.class).getSubarea().contains(uper)||
-                                        datasnapshot.getValue(data_task.class).getTipo().contains(newText)||datasnapshot.getValue(data_task.class).getTipo().contains(uper)||
-                                        datasnapshot.getValue(data_task.class).getPiso().contains(newText)||datasnapshot.getValue(data_task.class).getPiso().contains(uper)||
-                                        datasnapshot.getValue(data_task.class).getUbicacion().contains(newText)||datasnapshot.getValue(data_task.class).getUbicacion().contains(uper))
-                                    lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
-                            }
+                            if (estado.isEmpty()) {
+                                if (!datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado")) {
+                                    if (datasnapshot.getValue(data_task.class).getEstado_equipo().contains(newText) || datasnapshot.getValue(data_task.class).getEstado_equipo().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getTrabajo_solicitado().contains(newText) || datasnapshot.getValue(data_task.class).getTrabajo_solicitado().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getNota().contains(newText) || datasnapshot.getValue(data_task.class).getNota().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getArea().contains(newText) || datasnapshot.getValue(data_task.class).getArea().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getSolicitante().contains(newText) || datasnapshot.getValue(data_task.class).getSolicitante().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getSubarea().contains(newText) || datasnapshot.getValue(data_task.class).getSubarea().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getTipo().contains(newText) || datasnapshot.getValue(data_task.class).getTipo().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getPiso().contains(newText) || datasnapshot.getValue(data_task.class).getPiso().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getUbicacion().contains(newText) || datasnapshot.getValue(data_task.class).getUbicacion().contains(uper))
+                                        lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
+                                }
 
+
+                            }
+                            else
+                            {
+                                if (datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado")) {
+                                    if (datasnapshot.getValue(data_task.class).getEstado_equipo().contains(newText) || datasnapshot.getValue(data_task.class).getEstado_equipo().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getTrabajo_solicitado().contains(newText) || datasnapshot.getValue(data_task.class).getTrabajo_solicitado().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getNota().contains(newText) || datasnapshot.getValue(data_task.class).getNota().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getArea().contains(newText) || datasnapshot.getValue(data_task.class).getArea().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getSolicitante().contains(newText) || datasnapshot.getValue(data_task.class).getSolicitante().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getSubarea().contains(newText) || datasnapshot.getValue(data_task.class).getSubarea().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getTipo().contains(newText) || datasnapshot.getValue(data_task.class).getTipo().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getPiso().contains(newText) || datasnapshot.getValue(data_task.class).getPiso().contains(uper) ||
+                                            datasnapshot.getValue(data_task.class).getUbicacion().contains(newText) || datasnapshot.getValue(data_task.class).getUbicacion().contains(uper))
+                                        lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
+                                }
+
+                            }
                         }
-                        adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(data_task data, int position) {
-                                Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas_diarias.class);
-                                String id = data.getId();
-                                intent_detalle_tareas.putExtra("Id", id);
-                                startActivity(intent_detalle_tareas);
+                        if(estado.isEmpty()) {
+                            adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(data_task data, int position) {
+                                    Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas.class);
+                                    String id = data.getId();
+                                    intent_detalle_tareas.putExtra("Id", id);
+                                    if(tipo.equals("diarios")) {
+                                        intent_detalle_tareas.putExtra("trabajos", "diarios");
+                                        startActivity(intent_detalle_tareas);
+                                    }
+                                    else
+                                    {
+                                        intent_detalle_tareas.putExtra("trabajos", "mensuales");
+                                        startActivity(intent_detalle_tareas);
+                                    }
 
-                            }
-                        }, Administrador_busqueda.this, preferences);
-                        recyclerViewTDailyTask.setAdapter(adaptador);
+                                }
+                            }, Administrador_busqueda.this, preferences, "");
+                            recyclerViewTDailyTask.setAdapter(adaptador);
+                        }
+                        else
+                        {
+                            adapter=new Adapter_for_task_finished(lista_tareas_diarias, new Adapter_for_task_finished.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(data_task data, int position) {
+                                    Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas_finalizadas.class);
+                                    String id = data.getId();
+                                    intent_detalle_tareas.putExtra("Id", id);
+                                    if(tipo.equals("diarios")) {
+                                        intent_detalle_tareas.putExtra("trabajos", "diarios");
+                                        startActivity(intent_detalle_tareas);
+                                    }
+                                    else
+                                    {
+                                        intent_detalle_tareas.putExtra("trabajos", "mensuales");
+                                        startActivity(intent_detalle_tareas);
+                                    }
 
+                                }
+                            },Administrador_busqueda.this);
+                            recyclerViewTDailyTask.setAdapter(adapter);
+                        }
 
                     }
 
@@ -115,26 +216,23 @@ public class Administrador_busqueda extends AppCompatActivity {
                     }
                 };
                 task.removeEventListener(valueEventListener);
-                if(newText.isEmpty()||newText==null)
-                {
+                if (newText.isEmpty() || newText == null) {
 
                     lista_tareas_diarias = new ArrayList<>();
                     adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                         @Override
                         public void onItemClick(data_task data, int position) {
-                            Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas_diarias.class);
+                            Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas.class);
                             String id = data.getId();
                             intent_detalle_tareas.putExtra("Id", id);
                             startActivity(intent_detalle_tareas);
 
                         }
-                    }, Administrador_busqueda.this, preferences);
+                    }, Administrador_busqueda.this, preferences, "");
                     recyclerViewTDailyTask.setAdapter(adaptador);
-                }
-                else
-                {
+                } else {
 
-                task.addValueEventListener(valueEventListener);
+                    task.addValueEventListener(valueEventListener);
                 }
 
                 return true;
@@ -143,6 +241,7 @@ public class Administrador_busqueda extends AppCompatActivity {
 
         return true;
     }
+
     public static String ucFirst(String str) {
         if (str == null || str.isEmpty()) {
             return str;

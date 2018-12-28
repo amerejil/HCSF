@@ -1,7 +1,6 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -29,11 +28,13 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
     private OnItemClickListener listener;
     private Activity activity;
     private SharedPreferences preferences;
-    public Adapter_for_task_list(ArrayList<data_task> item_menus, OnItemClickListener listener,Activity activity,SharedPreferences preferences) {
+    private String tipo_tarea;
+    public Adapter_for_task_list(ArrayList<data_task> item_menus, OnItemClickListener listener,Activity activity,SharedPreferences preferences, String tipo_tarea) {
         this.item_menus = item_menus;
         this.listener = listener;
         this.activity=activity;
         this.preferences=preferences;
+        this.tipo_tarea=tipo_tarea;
     }
 
 
@@ -62,7 +63,8 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         public TextView textViewDate;
         public TextView textViewState;
         public CardView cardView;
-        private DatabaseReference task;
+        private DatabaseReference daily_task;
+        private DatabaseReference monthly_task;
         private FirebaseDatabase database_hcsf;
         public ViewHolder(View itemView)
         {
@@ -104,19 +106,31 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             database_hcsf=Utils.getDatabase();
-            task = database_hcsf.getReference("Tareas");
+            daily_task = database_hcsf.getReference("Tareas");
+            monthly_task=database_hcsf.getReference("Tareas_Mensuales");
             String id=item_menus.get(this.getAdapterPosition()).getId();
             switch(item.getItemId()){
-                case R.id.change_state_iniciado:
+                case R.id.change_state_iniciado: {
+                    if(tipo_tarea.equals("diario"))
 
-                    task.child(id).child("estado").setValue("En proceso");
-
+                    daily_task.child(id).child("estado").setValue("En proceso");
+                    else
+                        monthly_task.child(id).child("estado").setValue("En proceso");
+                }
             return true;
-                case R.id.delete_task_administrador:
-                    task.child(id).removeValue();
+                case R.id.delete_task_administrador:{
+                    if(tipo_tarea.equals("diario"))
+                    daily_task.child(id).removeValue();
+                    else
+                        monthly_task.child(id).removeValue();
+                }
                     return true;
-                case R.id.change_state_pausado:
-                    task.child(id).child("estado").setValue("Pausado");
+                case R.id.change_state_pausado: {
+                    if(tipo_tarea.equals("diario"))
+                    daily_task.child(id).child("estado").setValue("Pausado");
+                    else
+                        monthly_task.child(id).child("estado").setValue("Pausado");
+                }
                     return true;
             default:
                 return false;

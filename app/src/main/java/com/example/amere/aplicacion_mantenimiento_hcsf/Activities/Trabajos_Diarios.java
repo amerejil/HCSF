@@ -94,13 +94,14 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                     @Override
                     public void onItemClick(data_task data, int position) {
-                        Intent intent_detalle_tareas = new Intent(Trabajos_Diarios.this, Detalle_tareas_diarias.class);
+                        Intent intent_detalle_tareas = new Intent(Trabajos_Diarios.this, Detalle_tareas.class);
                         String id = data.getId();
                         intent_detalle_tareas.putExtra("Id", id);
+                        intent_detalle_tareas.putExtra("trabajos","diarios");
                         startActivity(intent_detalle_tareas);
 
                     }
-                }, Trabajos_Diarios.this, preferences);
+                }, Trabajos_Diarios.this, preferences,"diario");
                 recyclerViewTDailyTask.setAdapter(adaptador);
                 // This method is called once with the initial value and again
 
@@ -175,7 +176,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
                /* String value=task.push().getKey();
 
                 task.child(value).setValue(new data_task(value,"H","o","l","a","c","a","r","a") );*/
-                Intent intent_añadir_trabajo = new Intent(Trabajos_Diarios.this, Agregar_trabajos_diarios.class);
+                Intent intent_añadir_trabajo = new Intent(Trabajos_Diarios.this, Agregar_trabajos.class);
+                intent_añadir_trabajo.putExtra("trabajos","diarios");
                 startActivity(intent_añadir_trabajo);
 
             }
@@ -198,6 +200,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.item_search_icon: {
                 Intent intent = new Intent(Trabajos_Diarios.this, Administrador_busqueda.class);
+                intent.putExtra("trabajos","diarios");
+                intent.putExtra("estado","");
                 startActivity(intent);
 
                 return true;

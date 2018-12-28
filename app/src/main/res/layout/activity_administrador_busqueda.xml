@@ -20,13 +20,13 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutDailyTaskFinished3"
+        android:id="@+id/linearLayoutMonthlyTaskFinished3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewDailyWork3">
 
         <TextView
-            android:id="@+id/textViewType"
+            android:id="@+id/textViewTypeSearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.35"
@@ -37,7 +37,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewDate"
+            android:id="@+id/textViewDateSearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.30"
@@ -48,7 +48,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewState"
+            android:id="@+id/textViewStateSearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.35"
@@ -63,7 +63,7 @@
         android:id="@+id/recyclerViewDailyTask3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayoutDailyTaskFinished3">
+        android:layout_below="@+id/linearLayoutMonthlyTaskFinished3">
 
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

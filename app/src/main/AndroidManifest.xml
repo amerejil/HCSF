@@ -20,10 +20,7 @@
         </activity>
         <activity
             android:name=".Activities.Trabajos_Diarios"
-            android:parentActivityName=".Activities.Menu_Principal"
-            >
-
-
+            android:parentActivityName=".Activities.Menu_Principal">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.Menu_Principal" />
@@ -50,7 +47,7 @@
                 android:value=".Activities.Menu_Principal" />
         </activity>
         <activity
-            android:name=".Activities.Agregar_trabajos_diarios"
+            android:name=".Activities.Agregar_trabajos"
             android:configChanges="screenSize|orientation"
             android:parentActivityName=".Activities.Trabajos_Mensuales"
             android:windowSoftInputMode="stateHidden">
@@ -66,7 +63,7 @@
         </service>
 
         <activity
-            android:name=".Activities.Detalle_tareas_diarias"
+            android:name=".Activities.Detalle_tareas"
             android:configChanges="screenSize|orientation"
             android:parentActivityName=".Activities.Trabajos_Mensuales"
             android:windowSoftInputMode="stateHidden">
@@ -75,17 +72,13 @@
                 android:value=".Activities.Trabajos_Mensuales" />
         </activity>
         <activity
-            android:name=".Activities.Detalle_tareas_diarias_finalizadas"
+            android:name=".Activities.Detalle_tareas_finalizadas"
             android:parentActivityName=".Activities.Trabajos_Diarios_Finalizados">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.Trabajos_Mensuales" />
         </activity>
-        <activity android:name=".Activities.Administrador_busqueda"
-           >
-
-
-            </activity>
+        <activity android:name=".Activities.Administrador_busqueda"></activity>
     </application>
 
 </manifest>

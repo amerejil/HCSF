@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Activities.Detalle_tareas_diarias">
+    tools:context=".Activities.Detalle_tareas">
 
     <TextView
         android:id="@+id/textViewDailyWork2"

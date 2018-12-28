@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 
-public class Detalle_tareas_diarias extends AppCompatActivity {
+public class Detalle_tareas extends AppCompatActivity {
     private TextView textViewTipo;
     private TextView textViewUbicacion;
     private TextView textViewPiso;
@@ -36,6 +36,7 @@ public class Detalle_tareas_diarias extends AppCompatActivity {
     private TextView textViewTrabajoSolicitado;
     private EditText editTextNota;
     private CardView cardViewNota;
+    private TextView textViewTipo_Tarea;
     private CardView buttonFinalizarTarea;
     private String stringFecha_finalizacion_entero;
     private String stringFecha_finalizacion;
@@ -50,6 +51,7 @@ public class Detalle_tareas_diarias extends AppCompatActivity {
         preferences=getSharedPreferences("tipo",Context.MODE_PRIVATE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_detalle_tareas_diarias);
+        textViewTipo_Tarea=findViewById(R.id.textViewDailyWork2);
         textViewTipo = findViewById(R.id.textViewDetalleTipo);
         textViewUbicacion=findViewById(R.id.textViewDetalleUbicacion);
         textViewPiso=findViewById(R.id.textViewDetallePiso);
@@ -63,7 +65,16 @@ public class Detalle_tareas_diarias extends AppCompatActivity {
         tipo=preferences.getString("administrador","usuario");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         database_hcsf = Utils.getDatabase();
-        task = database_hcsf.getReference("Tareas");
+        final String tipo_tarea=getIntent().getExtras().get("trabajos").toString();
+        if(tipo_tarea.equals("diarios")) {
+            task = database_hcsf.getReference("Tareas");
+
+        }
+        else
+        {
+            task=database_hcsf.getReference("Tareas_Mensuales");
+            textViewTipo_Tarea.setText(R.string.submenu_monthly_work);
+        }
         task.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -107,7 +118,7 @@ public class Detalle_tareas_diarias extends AppCompatActivity {
                 task.child(Id).child("fecha_finalizacion").setValue(stringFecha_finalizacion);
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
                 task.child(Id).child("fecha_finalizacion_entero").setValue(stringFecha_finalizacion_entero);
-                Intent intent=new Intent(Detalle_tareas_diarias.this,Trabajos_Diarios.class);
+                Intent intent=new Intent(Detalle_tareas.this,Trabajos_Diarios.class);
                 startActivity(intent);
 
             }
@@ -126,8 +137,17 @@ public class Detalle_tareas_diarias extends AppCompatActivity {
                 task.child(Id).child("fecha_finalizacion").setValue(stringFecha_finalizacion);
                 task.child(Id).child("fecha_finalizacion_entero").setValue(stringFecha_finalizacion_entero);
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
-                Intent intent=new Intent(Detalle_tareas_diarias.this,Trabajos_Diarios.class);
-                startActivity(intent);
+                if(tipo_tarea.equals("diarios")) {
+                    Intent intent = new Intent(Detalle_tareas.this, Trabajos_Diarios.class);
+
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(Detalle_tareas.this, Trabajos_Mensuales.class);
+
+                    startActivity(intent);
+                }
             }
         });
         final AlertDialog.Builder confirmar_finalizar_tarea = new AlertDialog.Builder(this);
