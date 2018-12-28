@@ -2,9 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/change_state_iniciado"
-        android:title="@string/cambiar_estado_iniciar"/>
+        android:title="@string/cambiar_estado_iniciar" />
     <item
         android:id="@+id/change_state_pausado"
-        android:title="@string/cambiar_estado_pausado"
-        />
+        android:title="@string/cambiar_estado_pausado" />
 </menu>

@@ -35,6 +35,7 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
     private TextView textViewType;
     private TextView textViewDateStart;
     private TextView textViewDateFinished;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,37 +47,36 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
         textViewDateFinished = findViewById(R.id.textViewDateFinished);
         database_hcsf = Utils.getDatabase();
         task = database_hcsf.getReference("Tareas");
-        lista_tareas_diarias=new ArrayList<>();
-        recyclerViewTDailyTask=findViewById(R.id.recyclerViewDailyTaskFinished);
-        linearLayoutManager_daily_task=new LinearLayoutManager(this);
+        lista_tareas_diarias = new ArrayList<>();
+        recyclerViewTDailyTask = findViewById(R.id.recyclerViewDailyTaskFinished);
+        linearLayoutManager_daily_task = new LinearLayoutManager(this);
         linearLayoutManager_daily_task.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewTDailyTask.setLayoutManager(linearLayoutManager_daily_task);
         final Query orden_fecha_inicio = task.orderByChild("fecha_inicio_entero");
         final Query orden_tipo = task.orderByChild("tipo");
         final Query orden_fecha_finalizacion = task.orderByChild("fecha_finalizacion_entero");
-        final ValueEventListener listener=new ValueEventListener() {
+        final ValueEventListener listener = new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                lista_tareas_diarias=new ArrayList<>();
-                for(DataSnapshot datasnapshot:dataSnapshot.getChildren())
-                {
-                    if(datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado"))
+                lista_tareas_diarias = new ArrayList<>();
+                for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
+                    if (datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado"))
                         lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
 
                 }
-                adaptador =new Adapter_for_task_finished(lista_tareas_diarias, new Adapter_for_task_finished.OnItemClickListener() {
+                adaptador = new Adapter_for_task_finished(lista_tareas_diarias, new Adapter_for_task_finished.OnItemClickListener() {
                     @Override
                     public void onItemClick(data_task data, int position) {
-                        Intent intent_detalle_tareas=new Intent(Trabajos_Diarios_Finalizados.this,Detalle_tareas_finalizadas.class);
-                        String id=data.getId();
-                        intent_detalle_tareas.putExtra("Id",id);
-                        intent_detalle_tareas.putExtra("trabajos","diarios");
+                        Intent intent_detalle_tareas = new Intent(Trabajos_Diarios_Finalizados.this, Detalle_tareas_finalizadas.class);
+                        String id = data.getId();
+                        intent_detalle_tareas.putExtra("Id", id);
+                        intent_detalle_tareas.putExtra("trabajos", "diarios");
                         startActivity(intent_detalle_tareas);
 
                     }
-                },Trabajos_Diarios_Finalizados.this);
+                }, Trabajos_Diarios_Finalizados.this);
                 recyclerViewTDailyTask.setAdapter(adaptador);
 
             }
@@ -89,7 +89,7 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
             }
 
         };
-        task.addValueEventListener(listener );
+        task.addValueEventListener(listener);
 
         textViewType.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +130,7 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
         });
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -143,8 +144,8 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.item_search_icon: {
                 Intent intent = new Intent(Trabajos_Diarios_Finalizados.this, Administrador_busqueda.class);
-                intent.putExtra("trabajos","diarios");
-                intent.putExtra("estado","finalizado");
+                intent.putExtra("trabajos", "diarios");
+                intent.putExtra("estado", "finalizado");
                 startActivity(intent);
 
                 return true;

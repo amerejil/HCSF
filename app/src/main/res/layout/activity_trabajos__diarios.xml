@@ -19,15 +19,13 @@
         android:text="@string/submenu_daily_work"
         android:textColor="@color/colorPrimary"
         android:textSize="22sp"
-        android:textStyle="bold"
-    />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/linearLayoutMonthlyTaskFinished3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewDailyWork"
-        >
+        android:layout_below="@+id/textViewDailyWork">
 
         <TextView
             android:id="@+id/textViewType"
@@ -39,6 +37,7 @@
             android:textStyle="bold"
             android:layout_height="wrap_content"
             android:text="@string/type" />
+
         <TextView
             android:id="@+id/textViewDate"
             android:padding="5dp"
@@ -49,6 +48,7 @@
             android:textSize="18sp"
             android:layout_height="wrap_content"
             android:text="@string/date" />
+
         <TextView
             android:padding="5dp"
             android:id="@+id/textViewState"
@@ -60,6 +60,7 @@
             android:layout_height="wrap_content"
             android:text="@string/state" />
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/linearLayoutMonthlyTaskFinished3"
         android:id="@+id/recyclerViewDailyTask"

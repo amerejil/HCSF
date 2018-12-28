@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    android:id="@+id/cardView_menu_principal_item"
+<android.support.v7.widget.CardView android:id="@+id/cardView_menu_principal_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/colorAccent"
@@ -14,35 +13,34 @@
     android:layout_margin="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-        <RelativeLayout
-            android:layout_width="match_parent"
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/imageView_task"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:padding="6dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/imageView_task"
+            android:id="@+id/textViewTask"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            >
-
-            <ImageView
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentTop="true"
-                android:id="@+id/imageView_task"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:padding="6dp"
-                android:scaleType="fitXY"
-                android:layout_gravity="center_horizontal|center_vertical"
-                />
-
-            <TextView
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_below="@id/imageView_task"
-                android:id="@+id/textViewTask"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="4dp"
-                android:textColor="@color/text_button_color"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="4dp"
+            android:textColor="@color/text_button_color"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

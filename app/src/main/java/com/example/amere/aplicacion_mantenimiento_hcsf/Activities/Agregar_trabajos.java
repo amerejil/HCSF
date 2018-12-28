@@ -44,42 +44,42 @@ public class Agregar_trabajos extends AppCompatActivity {
     private FirebaseDatabase database_hcsf;
     private String stringFecha_inicio;
     private String stringEstado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_agregar_trabajos);
-        area=findViewById(R.id.editTextArea);
-        subarea=findViewById(R.id.editTextSubrea);
-        solicitante=findViewById(R.id.editTextSolicitante);
-        trabajo_solicitado=findViewById(R.id.editText);
-        tipo=findViewById(R.id.spinner1);
-        ubicacion=findViewById(R.id.spinner2);
-        textViewTipo=findViewById(R.id.textViewAddDailyTask);
-        piso=findViewById(R.id.spinner3);
-        atencion=findViewById(R.id.spinner4);
-        enviarTarea=findViewById(R.id.floatingActionButton1);
-        database_hcsf= FirebaseDatabase.getInstance();
-        daily_task =database_hcsf.getReference("Tareas");
-        monthly_task=database_hcsf.getReference("Tareas_Mensuales");
-        ArrayAdapter<CharSequence> adapterTipo=ArrayAdapter.createFromResource(this,R.array.tipo,R.layout.spinner_item);
-        ArrayAdapter<CharSequence> adapterUbicacion=ArrayAdapter.createFromResource(this,R.array.ubicacion,R.layout.spinner_item);
-        ArrayAdapter<CharSequence> adapterPiso=ArrayAdapter.createFromResource(this,R.array.piso,R.layout.spinner_item);
-        ArrayAdapter<CharSequence> adapterAtemcion=ArrayAdapter.createFromResource(this,R.array.atencion,R.layout.spinner_item);
+        area = findViewById(R.id.editTextArea);
+        subarea = findViewById(R.id.editTextSubrea);
+        solicitante = findViewById(R.id.editTextSolicitante);
+        trabajo_solicitado = findViewById(R.id.editText);
+        tipo = findViewById(R.id.spinner1);
+        ubicacion = findViewById(R.id.spinner2);
+        textViewTipo = findViewById(R.id.textViewAddDailyTask);
+        piso = findViewById(R.id.spinner3);
+        atencion = findViewById(R.id.spinner4);
+        enviarTarea = findViewById(R.id.floatingActionButton1);
+        database_hcsf = FirebaseDatabase.getInstance();
+        daily_task = database_hcsf.getReference("Tareas");
+        monthly_task = database_hcsf.getReference("Tareas_Mensuales");
+        ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(this, R.array.tipo, R.layout.spinner_item);
+        ArrayAdapter<CharSequence> adapterUbicacion = ArrayAdapter.createFromResource(this, R.array.ubicacion, R.layout.spinner_item);
+        ArrayAdapter<CharSequence> adapterPiso = ArrayAdapter.createFromResource(this, R.array.piso, R.layout.spinner_item);
+        ArrayAdapter<CharSequence> adapterAtemcion = ArrayAdapter.createFromResource(this, R.array.atencion, R.layout.spinner_item);
         ubicacion.setAdapter(adapterUbicacion);
         tipo.setAdapter(adapterTipo);
         piso.setAdapter(adapterPiso);
         atencion.setAdapter(adapterAtemcion);
-        final String tipo_trabajo=getIntent().getExtras().get("Trabajo").toString();
-        if(!tipo_trabajo.equals("diarios"))
-        {
+        final String tipo_trabajo = getIntent().getExtras().get("Trabajo").toString();
+        if (!tipo_trabajo.equals("diarios")) {
             textViewTipo.setText(R.string.new_monthly_task);
         }
         tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                stringTipo= parent.getItemAtPosition(position).toString();
+                stringTipo = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -90,7 +90,7 @@ public class Agregar_trabajos extends AppCompatActivity {
         ubicacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                stringUbicacion=parent.getItemAtPosition(position).toString();
+                stringUbicacion = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -101,7 +101,7 @@ public class Agregar_trabajos extends AppCompatActivity {
         piso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                stringPiso=parent.getItemAtPosition(position).toString();
+                stringPiso = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -112,7 +112,7 @@ public class Agregar_trabajos extends AppCompatActivity {
         atencion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                stringAtencion=parent.getItemAtPosition(position).toString();
+                stringAtencion = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -125,24 +125,24 @@ public class Agregar_trabajos extends AppCompatActivity {
         enviarTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long date=System.currentTimeMillis();
-                stringEstado="No iniciado";
-                SimpleDateFormat f_date=new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat f_date_entero=new SimpleDateFormat("ddMMyyyy");
-                stringFecha_inicio_entero =f_date_entero.format(date);
-                stringFecha_inicio=f_date.format(date);
-                stringSubarea=subarea.getText().toString();
-                stringSolicitante=solicitante.getText().toString();
-                stringTrabajoSolicitado=trabajo_solicitado.getText().toString();
-                stringArea=area.getText().toString();
-                String value= daily_task.push().getKey();
-                Toast.makeText(Agregar_trabajos.this,stringFecha_inicio,Toast.LENGTH_SHORT).show();
-                if(tipo_trabajo.equals("diarios"))
-                daily_task.child(value).setValue(new data_task(value,stringTipo,stringUbicacion,stringPiso,stringArea,
-                        stringSubarea,stringAtencion,stringSolicitante,stringTrabajoSolicitado,stringFecha_inicio, stringFecha_inicio_entero,"","",stringEstado,"Desconocido","") );
+                long date = System.currentTimeMillis();
+                stringEstado = "No iniciado";
+                SimpleDateFormat f_date = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat f_date_entero = new SimpleDateFormat("ddMMyyyy");
+                stringFecha_inicio_entero = f_date_entero.format(date);
+                stringFecha_inicio = f_date.format(date);
+                stringSubarea = subarea.getText().toString();
+                stringSolicitante = solicitante.getText().toString();
+                stringTrabajoSolicitado = trabajo_solicitado.getText().toString();
+                stringArea = area.getText().toString();
+                String value = daily_task.push().getKey();
+                Toast.makeText(Agregar_trabajos.this, stringFecha_inicio, Toast.LENGTH_SHORT).show();
+                if (tipo_trabajo.equals("diarios"))
+                    daily_task.child(value).setValue(new data_task(value, stringTipo, stringUbicacion, stringPiso, stringArea,
+                            stringSubarea, stringAtencion, stringSolicitante, stringTrabajoSolicitado, stringFecha_inicio, stringFecha_inicio_entero, "", "", stringEstado, "Desconocido", ""));
                 else
-                    monthly_task.child(value).setValue(new data_task(value,stringTipo,stringUbicacion,stringPiso,stringArea,
-                            stringSubarea,stringAtencion,stringSolicitante,stringTrabajoSolicitado,stringFecha_inicio, stringFecha_inicio_entero,"","",stringEstado,"Desconocido","") );
+                    monthly_task.child(value).setValue(new data_task(value, stringTipo, stringUbicacion, stringPiso, stringArea,
+                            stringSubarea, stringAtencion, stringSolicitante, stringTrabajoSolicitado, stringFecha_inicio, stringFecha_inicio_entero, "", "", stringEstado, "Desconocido", ""));
             }
         });
     }

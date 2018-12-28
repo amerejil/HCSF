@@ -16,8 +16,7 @@
         android:padding="5dp"
         android:textColor="@color/colorPrimary"
         android:textSize="22sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/linearLayoutMonthlyTaskFinished3"

@@ -2,10 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/si_finalizar_tarea"
-        android:title="@string/si"
-        />
+        android:title="@string/si" />
     <item
         android:id="@+id/no_finalizar_tarea"
-        android:title="@string/no"
-        />
+        android:title="@string/no" />
 </menu>

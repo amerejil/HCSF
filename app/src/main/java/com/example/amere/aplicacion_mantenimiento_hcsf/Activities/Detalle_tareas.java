@@ -45,43 +45,42 @@ public class Detalle_tareas extends AppCompatActivity {
     private DatabaseReference task;
     private SharedPreferences preferences;
     private String tipo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferences=getSharedPreferences("tipo",Context.MODE_PRIVATE);
+        preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_detalle_tareas_diarias);
-        textViewTipo_Tarea=findViewById(R.id.textViewDailyWork2);
+        textViewTipo_Tarea = findViewById(R.id.textViewDailyWork2);
         textViewTipo = findViewById(R.id.textViewDetalleTipo);
-        textViewUbicacion=findViewById(R.id.textViewDetalleUbicacion);
-        textViewPiso=findViewById(R.id.textViewDetallePiso);
-        textViewArea=findViewById(R.id.textViewDetalleArea);
-        textViewSubarea=findViewById(R.id.textViewDetalleSubarea);
-        textViewSolicitante=findViewById(R.id.textViewDetalleSolicitante);
-        editTextNota=findViewById(R.id.editTextNota);
-        cardViewNota =findViewById(R.id.cardViewNota);
-        textViewTrabajoSolicitado=findViewById(R.id.textViewDetalleTrabajoSolicitado);
-        buttonFinalizarTarea=findViewById(R.id.buttonFinalizarTarea);
-        tipo=preferences.getString("administrador","usuario");
+        textViewUbicacion = findViewById(R.id.textViewDetalleUbicacion);
+        textViewPiso = findViewById(R.id.textViewDetallePiso);
+        textViewArea = findViewById(R.id.textViewDetalleArea);
+        textViewSubarea = findViewById(R.id.textViewDetalleSubarea);
+        textViewSolicitante = findViewById(R.id.textViewDetalleSolicitante);
+        editTextNota = findViewById(R.id.editTextNota);
+        cardViewNota = findViewById(R.id.cardViewNota);
+        textViewTrabajoSolicitado = findViewById(R.id.textViewDetalleTrabajoSolicitado);
+        buttonFinalizarTarea = findViewById(R.id.buttonFinalizarTarea);
+        tipo = preferences.getString("administrador", "usuario");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         database_hcsf = Utils.getDatabase();
-        final String tipo_tarea=getIntent().getExtras().get("trabajos").toString();
-        if(tipo_tarea.equals("diarios")) {
+        final String tipo_tarea = getIntent().getExtras().get("trabajos").toString();
+        if (tipo_tarea.equals("diarios")) {
             task = database_hcsf.getReference("Tareas");
 
-        }
-        else
-        {
-            task=database_hcsf.getReference("Tareas_Mensuales");
+        } else {
+            task = database_hcsf.getReference("Tareas_Mensuales");
             textViewTipo_Tarea.setText(R.string.submenu_monthly_work);
         }
         task.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     String Id = getIntent().getExtras().get("Id").toString();
                     dataTask = dataSnapshot.child(Id).getValue(data_task.class);
-                    if(dataTask!=null) {
+                    if (dataTask != null) {
                         textViewTipo.setText(dataTask.getTipo());
                         if (dataTask.getAtencion().equals("Alta"))
                             textViewTipo.setTextColor(getResources().getColor(R.color.prioridad_alta));
@@ -92,7 +91,7 @@ public class Detalle_tareas extends AppCompatActivity {
                         textViewArea.setText(dataTask.getArea());
                         textViewSubarea.setText(dataTask.getSubarea());
                         textViewSolicitante.setText(dataTask.getSolicitante());
-                        textViewTrabajoSolicitado.setText("Trabajo solicitado: "+dataTask.getTrabajo_solicitado());
+                        textViewTrabajoSolicitado.setText("Trabajo solicitado: " + dataTask.getTrabajo_solicitado());
                     }
                 }
             }
@@ -107,18 +106,18 @@ public class Detalle_tareas extends AppCompatActivity {
         estado_dispositivo.setCancelable(false);
         estado_dispositivo.setPositiveButton("Operativo", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
-                long date=System.currentTimeMillis();
+                long date = System.currentTimeMillis();
                 String Id = getIntent().getExtras().get("Id").toString();
                 task.child(Id).child("estado_equipo").setValue("Operativo");
                 task.child(Id).child("estado").setValue("Finalizado");
-                SimpleDateFormat f_date=new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat f_date_entero=new SimpleDateFormat("ddMMyyyy");
-                stringFecha_finalizacion_entero =f_date_entero.format(date);
-                stringFecha_finalizacion =f_date.format(date);
+                SimpleDateFormat f_date = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat f_date_entero = new SimpleDateFormat("ddMMyyyy");
+                stringFecha_finalizacion_entero = f_date_entero.format(date);
+                stringFecha_finalizacion = f_date.format(date);
                 task.child(Id).child("fecha_finalizacion").setValue(stringFecha_finalizacion);
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
                 task.child(Id).child("fecha_finalizacion_entero").setValue(stringFecha_finalizacion_entero);
-                Intent intent=new Intent(Detalle_tareas.this,Trabajos_Diarios.class);
+                Intent intent = new Intent(Detalle_tareas.this, Trabajos_Diarios.class);
                 startActivity(intent);
 
             }
@@ -126,24 +125,22 @@ public class Detalle_tareas extends AppCompatActivity {
         estado_dispositivo.setNegativeButton("De baja", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                long date=System.currentTimeMillis();
-                SimpleDateFormat f_date=new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat f_date_entero=new SimpleDateFormat("ddMMyyyy");
-                stringFecha_finalizacion_entero =f_date_entero.format(date);
-                stringFecha_finalizacion =f_date.format(date);
+                long date = System.currentTimeMillis();
+                SimpleDateFormat f_date = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat f_date_entero = new SimpleDateFormat("ddMMyyyy");
+                stringFecha_finalizacion_entero = f_date_entero.format(date);
+                stringFecha_finalizacion = f_date.format(date);
                 String Id = getIntent().getExtras().get("Id").toString();
                 task.child(Id).child("estado_equipo").setValue("De baja");
                 task.child(Id).child("estado").setValue("Finalizado");
                 task.child(Id).child("fecha_finalizacion").setValue(stringFecha_finalizacion);
                 task.child(Id).child("fecha_finalizacion_entero").setValue(stringFecha_finalizacion_entero);
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
-                if(tipo_tarea.equals("diarios")) {
+                if (tipo_tarea.equals("diarios")) {
                     Intent intent = new Intent(Detalle_tareas.this, Trabajos_Diarios.class);
 
                     startActivity(intent);
-                }
-                else
-                {
+                } else {
                     Intent intent = new Intent(Detalle_tareas.this, Trabajos_Mensuales.class);
 
                     startActivity(intent);
@@ -165,9 +162,8 @@ public class Detalle_tareas extends AppCompatActivity {
             }
         });
 
-        if(tipo.equals("administrador"))
-        {
-            Toast.makeText(this,tipo,Toast.LENGTH_SHORT).show();
+        if (tipo.equals("administrador")) {
+            Toast.makeText(this, tipo, Toast.LENGTH_SHORT).show();
             buttonFinalizarTarea.setVisibility(View.GONE);
             cardViewNota.setVisibility(View.GONE);
 
@@ -181,9 +177,6 @@ public class Detalle_tareas extends AppCompatActivity {
         });
         //registerForContextMenu(buttonFinalizarTarea);
     }
-
-
-
 
 
 }

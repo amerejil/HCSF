@@ -22,31 +22,28 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class Adapter_for_task_finished extends RecyclerView.Adapter<Adapter_for_task_finished.ViewHolder>
-{
+public class Adapter_for_task_finished extends RecyclerView.Adapter<Adapter_for_task_finished.ViewHolder> {
     private ArrayList<data_task> item_menus;
     private OnItemClickListener listener;
     private Activity activity;
 
-    public Adapter_for_task_finished(ArrayList<data_task> item_menus, OnItemClickListener listener,Activity activity) {
+    public Adapter_for_task_finished(ArrayList<data_task> item_menus, OnItemClickListener listener, Activity activity) {
         this.item_menus = item_menus;
         this.listener = listener;
-        this.activity=activity;
+        this.activity = activity;
     }
 
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
-    {
-        View view=LayoutInflater.from(activity).inflate(R.layout.cardview_lista_trabajos_diarios,viewGroup,false);
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(activity).inflate(R.layout.cardview_lista_trabajos_diarios, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i)
-    {
-        viewHolder.bind(item_menus.get(i),listener);
+    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+        viewHolder.bind(item_menus.get(i), listener);
     }
 
     @Override
@@ -54,21 +51,20 @@ public class Adapter_for_task_finished extends RecyclerView.Adapter<Adapter_for_
         return item_menus.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewType;
         public TextView textViewDateStart;
         public TextView textViewDateFinished;
-        public ViewHolder(View itemView)
-        {
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            this.textViewType=itemView.findViewById(R.id.textViewTypeList);
-            this.textViewDateStart =itemView.findViewById(R.id.textViewDateList);
-            this.textViewDateFinished =itemView.findViewById(R.id.textViewStateList);
+            this.textViewType = itemView.findViewById(R.id.textViewTypeList);
+            this.textViewDateStart = itemView.findViewById(R.id.textViewDateList);
+            this.textViewDateFinished = itemView.findViewById(R.id.textViewStateList);
 
         }
-        public void bind(final data_task data,final OnItemClickListener listener)
-        {
+
+        public void bind(final data_task data, final OnItemClickListener listener) {
             this.textViewDateFinished.setText(data.getFecha_finalizacion());
             this.textViewDateStart.setText(data.getFecha_inicio());
             this.textViewType.setText(data.getTipo());
@@ -76,14 +72,14 @@ public class Adapter_for_task_finished extends RecyclerView.Adapter<Adapter_for_
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(data,getAdapterPosition());
+                    listener.onItemClick(data, getAdapterPosition());
                 }
             });
         }
 
     }
-    public interface OnItemClickListener
-    {
-        void onItemClick(data_task data,int position);
+
+    public interface OnItemClickListener {
+        void onItemClick(data_task data, int position);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf;
 
-public class data_task
-{
+public class data_task {
 
     private String tipo;
     private String id;
@@ -19,14 +18,15 @@ public class data_task
     private String fecha_inicio_entero;
     private String fecha_finalizacion_entero;
     private String nota;
-    public data_task()
-    {
+
+    public data_task() {
 
     }
+
     public data_task(String id, String tipo, String ubicacion, String piso, String area,
                      String subarea, String atencion, String solicitante, String trabajo_solicitado,
                      String fecha_inicio, String fecha_inicio_entero,
-                     String fecha_finalizacion,String fecha_finalizacion_entero,
+                     String fecha_finalizacion, String fecha_finalizacion_entero,
                      String estado, String estado_equipo, String nota) {
         this.tipo = tipo;
         this.ubicacion = ubicacion;
@@ -36,15 +36,16 @@ public class data_task
         this.atencion = atencion;
         this.solicitante = solicitante;
         this.trabajo_solicitado = trabajo_solicitado;
-        this.id=id;
+        this.id = id;
         this.fecha_inicio = fecha_inicio;
-        this.fecha_inicio_entero=fecha_inicio_entero;
-        this.fecha_finalizacion=fecha_finalizacion;
-        this.estado=estado;
-        this.estado_equipo=estado_equipo;
-        this.fecha_finalizacion_entero =fecha_finalizacion_entero;
-        this.nota=nota;
+        this.fecha_inicio_entero = fecha_inicio_entero;
+        this.fecha_finalizacion = fecha_finalizacion;
+        this.estado = estado;
+        this.estado_equipo = estado_equipo;
+        this.fecha_finalizacion_entero = fecha_finalizacion_entero;
+        this.nota = nota;
     }
+
     public String getTipo() {
         return tipo;
     }
@@ -76,27 +77,35 @@ public class data_task
     public String getTrabajo_solicitado() {
         return trabajo_solicitado;
     }
+
     public String getId() {
         return id;
     }
+
     public String getFecha_inicio() {
         return fecha_inicio;
     }
+
     public String getFecha_finalizacion() {
         return fecha_finalizacion;
     }
+
     public String getEstado() {
         return estado;
     }
+
     public String getEstado_equipo() {
         return estado_equipo;
     }
+
     public String getFecha_inicio_entero() {
         return fecha_inicio_entero;
     }
+
     public String getNota() {
         return nota;
     }
+
     public String getFecha_finalizacion_entero() {
         return fecha_finalizacion_entero;
     }

@@ -14,8 +14,7 @@ import com.example.amere.aplicacion_mantenimiento_hcsf.data_cardView_item;
 
 import java.util.ArrayList;
 
-public class Adaptader_for_principal_menu extends RecyclerView.Adapter<Adaptader_for_principal_menu.ViewHolder>
-{
+public class Adaptader_for_principal_menu extends RecyclerView.Adapter<Adaptader_for_principal_menu.ViewHolder> {
     private ArrayList<data_cardView_item> item_menus;
     private OnItemClickListener listener;
 
@@ -27,16 +26,14 @@ public class Adaptader_for_principal_menu extends RecyclerView.Adapter<Adaptader
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
-    {
-        View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_menu_principal_item,viewGroup,false);
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_menu_principal_item, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i)
-    {
-        viewHolder.bind(item_menus.get(i),listener);
+    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+        viewHolder.bind(item_menus.get(i), listener);
     }
 
     @Override
@@ -44,34 +41,33 @@ public class Adaptader_for_principal_menu extends RecyclerView.Adapter<Adaptader
         return item_menus.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView_Task;
         TextView textView_Task;
         CardView cardView_task;
-        public ViewHolder(View itemView)
-        {
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            this.imageView_Task=itemView.findViewById(R.id.imageView_task);
-            this.textView_Task=itemView.findViewById(R.id.textViewTask);
-            this.cardView_task=itemView.findViewById(R.id.cardView_menu_principal_item);
+            this.imageView_Task = itemView.findViewById(R.id.imageView_task);
+            this.textView_Task = itemView.findViewById(R.id.textViewTask);
+            this.cardView_task = itemView.findViewById(R.id.cardView_menu_principal_item);
 
         }
-        public void bind(final data_cardView_item data, final OnItemClickListener listener)
-        {
+
+        public void bind(final data_cardView_item data, final OnItemClickListener listener) {
             this.textView_Task.setText(data.getType_task());
             this.imageView_Task.setImageResource(data.getPicture_task());
             this.cardView_task.setCardBackgroundColor(data.getColor_cardView());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(data,getAdapterPosition());
+                    listener.onItemClick(data, getAdapterPosition());
                 }
             });
         }
     }
-    public interface OnItemClickListener
-    {
+
+    public interface OnItemClickListener {
         void onItemClick(data_cardView_item data, int position);
     }
 }

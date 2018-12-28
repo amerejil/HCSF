@@ -1,7 +1,6 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf;
 
-public class data_cardView_item
-{
+public class data_cardView_item {
     private int picture_task;
     private String type_task;
     private int color_cardView;
