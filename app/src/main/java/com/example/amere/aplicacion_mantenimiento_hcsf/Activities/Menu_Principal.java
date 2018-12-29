@@ -42,6 +42,9 @@ public class Menu_Principal extends AppCompatActivity {
 
         recyclerView_menu_principal.setLayoutManager(gridLayoutManager_menu_principal);
         FirebaseMessaging.getInstance().subscribeToTopic("usuario");
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("administrador", "administrador");
+        editor.apply();
         String tipo = preferences.getString("administrador", "usuario");
         if (tipo == "usuario") {
             FirebaseMessaging.getInstance().subscribeToTopic("usuario");
@@ -83,7 +86,7 @@ public class Menu_Principal extends AppCompatActivity {
                 }
             }
         });
-        logo.setOnClickListener(new View.OnClickListener() {
+      /*  logo.setOnClickListener(new View.OnClickListener() {
             int cont;
 
             @Override
@@ -106,7 +109,7 @@ public class Menu_Principal extends AppCompatActivity {
                     editor.apply();
                 }
             }
-        });
+        });*/
         recyclerView_menu_principal.setAdapter(adaptador);
 
     }

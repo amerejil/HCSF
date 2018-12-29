@@ -42,6 +42,7 @@
     </string-array>
     <string-array name="piso">
         <item>Sótano</item>
+        <item>Planta Baja</item>
         <item>Piso 1</item>
         <item>Piso 2</item>
         <item>Piso 3</item>
