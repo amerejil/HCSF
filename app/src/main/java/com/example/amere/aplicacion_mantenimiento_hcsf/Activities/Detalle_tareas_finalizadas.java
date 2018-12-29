@@ -50,9 +50,9 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
         database_hcsf = Utils.getDatabase();
         String tipo = getIntent().getExtras().get("trabajos").toString();
         if (tipo.equals("diarios")) {
-            task = database_hcsf.getReference("Tareas");
+            task = database_hcsf.getReference("Tareas_prueba");//cambio
         } else {
-            task = database_hcsf.getReference("Tareas_Mensuales");
+            task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
             textViewTipoTarea.setText(R.string.submenu_monthly_work_finished);
         }
         task.addValueEventListener(new ValueEventListener() {

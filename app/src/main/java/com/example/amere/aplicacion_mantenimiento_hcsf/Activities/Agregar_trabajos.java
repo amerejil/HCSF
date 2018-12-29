@@ -62,8 +62,8 @@ public class Agregar_trabajos extends AppCompatActivity {
         atencion = findViewById(R.id.spinner4);
         enviarTarea = findViewById(R.id.floatingActionButton1);
         database_hcsf = FirebaseDatabase.getInstance();
-        daily_task = database_hcsf.getReference("Tareas");
-        monthly_task = database_hcsf.getReference("Tareas_Mensuales");
+        daily_task = database_hcsf.getReference("Tareas_prueba"); //cambio
+        monthly_task = database_hcsf.getReference("Tareas_Mensuales_prueba"); //cambio
         ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(this, R.array.tipo, R.layout.spinner_item);
         ArrayAdapter<CharSequence> adapterUbicacion = ArrayAdapter.createFromResource(this, R.array.ubicacion, R.layout.spinner_item);
         ArrayAdapter<CharSequence> adapterPiso = ArrayAdapter.createFromResource(this, R.array.piso, R.layout.spinner_item);
