@@ -58,6 +58,6 @@
     <string name="operativo">Operativo</string>
     <string name="de_baja">De baja</string>
     <string name="fecha_inicio">Fecha de inicio</string>
-    <string name="fecha_finalizacion">Fecha de finalizacion</string>
+    <string name="fecha_finalizacion">Fecha de finalización</string>
     <string name="nota">Nota</string>
 </resources>

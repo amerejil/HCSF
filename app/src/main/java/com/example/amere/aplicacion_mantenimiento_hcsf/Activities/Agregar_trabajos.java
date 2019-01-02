@@ -39,7 +39,7 @@ public class Agregar_trabajos extends AppCompatActivity {
     private Spinner piso;
     private Spinner atencion;
     private FloatingActionButton enviarTarea;
-    private DatabaseReference daily_task;
+    private DatabaseReference task;
     private DatabaseReference monthly_task;
     private FirebaseDatabase database_hcsf;
     private String stringFecha_inicio;
@@ -62,8 +62,6 @@ public class Agregar_trabajos extends AppCompatActivity {
         atencion = findViewById(R.id.spinner4);
         enviarTarea = findViewById(R.id.floatingActionButton1);
         database_hcsf = FirebaseDatabase.getInstance();
-        daily_task = database_hcsf.getReference("Tareas_prueba"); //cambio
-        monthly_task = database_hcsf.getReference("Tareas_Mensuales_prueba"); //cambio
         ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(this, R.array.tipo, R.layout.spinner_item);
         ArrayAdapter<CharSequence> adapterUbicacion = ArrayAdapter.createFromResource(this, R.array.ubicacion, R.layout.spinner_item);
         ArrayAdapter<CharSequence> adapterPiso = ArrayAdapter.createFromResource(this, R.array.piso, R.layout.spinner_item);
@@ -75,6 +73,11 @@ public class Agregar_trabajos extends AppCompatActivity {
         final String tipo_trabajo = getIntent().getExtras().get("trabajos").toString();
         if (!tipo_trabajo.equals("diarios")) {
             textViewTipo.setText(R.string.new_monthly_task);
+            task=database_hcsf.getReference("Tareas_Mensuales_prueba");
+        }
+        else
+        {
+            task = database_hcsf.getReference("Tareas_prueba");
         }
         tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -135,14 +138,13 @@ public class Agregar_trabajos extends AppCompatActivity {
                 stringSolicitante = solicitante.getText().toString();
                 stringTrabajoSolicitado = trabajo_solicitado.getText().toString();
                 stringArea = area.getText().toString();
-                String value = daily_task.push().getKey();
+                String value = task.push().getKey();
                 Toast.makeText(Agregar_trabajos.this, stringFecha_inicio, Toast.LENGTH_SHORT).show();
-                if (tipo_trabajo.equals("diarios"))
-                    daily_task.child(value).setValue(new data_task(value, stringTipo, stringUbicacion, stringPiso, stringArea,
-                            stringSubarea, stringAtencion, stringSolicitante, stringTrabajoSolicitado, stringFecha_inicio, stringFecha_inicio_entero, "", "", stringEstado, "Desconocido", ""));
-                else
-                    monthly_task.child(value).setValue(new data_task(value, stringTipo, stringUbicacion, stringPiso, stringArea,
-                            stringSubarea, stringAtencion, stringSolicitante, stringTrabajoSolicitado, stringFecha_inicio, stringFecha_inicio_entero, "", "", stringEstado, "Desconocido", ""));
+                task.child(value).setValue(
+                        new data_task(value, stringTipo, stringUbicacion, stringPiso, stringArea,
+                        stringSubarea, stringAtencion, stringSolicitante, stringTrabajoSolicitado,
+                        stringFecha_inicio, stringFecha_inicio_entero, "", "",
+                        stringEstado, "Desconocido", ""));
             }
         });
     }

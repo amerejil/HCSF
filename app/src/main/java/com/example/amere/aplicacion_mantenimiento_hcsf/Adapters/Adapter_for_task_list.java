@@ -60,7 +60,7 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         public TextView textViewDate;
         public TextView textViewState;
         public CardView cardView;
-        private DatabaseReference daily_task;
+        private DatabaseReference task;
         private DatabaseReference monthly_task;
         private FirebaseDatabase database_hcsf;
 
@@ -101,30 +101,26 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             database_hcsf = Utils.getDatabase();
-            daily_task = database_hcsf.getReference("Tareas");
-            monthly_task = database_hcsf.getReference("Tareas_Mensuales");
+            if (tipo_tarea.equals("diario"))
+            {
+                task = database_hcsf.getReference("Tareas_prueba");
+            }
+            else {
+                task = database_hcsf.getReference("Tareas_Mensuales_prueba");
+            }
             String id = item_menus.get(this.getAdapterPosition()).getId();
             switch (item.getItemId()) {
                 case R.id.change_state_iniciado: {
-                    if (tipo_tarea.equals("diario"))
-
-                        daily_task.child(id).child("estado").setValue("En proceso");
-                    else
-                        monthly_task.child(id).child("estado").setValue("En proceso");
+                        task.child(id).child("estado").setValue("En proceso");
                 }
                 return true;
                 case R.id.delete_task_administrador: {
-                    if (tipo_tarea.equals("diario"))
-                        daily_task.child(id).removeValue();
-                    else
-                        monthly_task.child(id).removeValue();
+
+                        task.child(id).removeValue();
                 }
                 return true;
                 case R.id.change_state_pausado: {
-                    if (tipo_tarea.equals("diario"))
-                        daily_task.child(id).child("estado").setValue("Pausado");
-                    else
-                        monthly_task.child(id).child("estado").setValue("Pausado");
+                        task.child(id).child("estado").setValue("Pausado");
                 }
                 return true;
                 default:

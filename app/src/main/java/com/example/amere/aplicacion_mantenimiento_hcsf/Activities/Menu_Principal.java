@@ -41,16 +41,19 @@ public class Menu_Principal extends AppCompatActivity {
         //gridLayoutManager_menu_principal.setOrientation(LinearLayoutManager.VERTICAL);
 
         recyclerView_menu_principal.setLayoutManager(gridLayoutManager_menu_principal);
-        FirebaseMessaging.getInstance().subscribeToTopic("usuario");
+        //FirebaseMessaging.getInstance().subscribeToTopic("usuario");
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("administrador", "administrador");
         editor.apply();
         String tipo = preferences.getString("administrador", "usuario");
         if (tipo == "usuario") {
-            FirebaseMessaging.getInstance().subscribeToTopic("usuario");
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador_prueba");
+            FirebaseMessaging.getInstance().subscribeToTopic("usuario_prueba");
             Toast.makeText(Menu_Principal.this, "Usuario", Toast.LENGTH_SHORT).show();
         } else {
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
+
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario_prueba");
+            FirebaseMessaging.getInstance().subscribeToTopic("administrador_prueba");
             Toast.makeText(Menu_Principal.this, "adm", Toast.LENGTH_SHORT).show();
         }
 
