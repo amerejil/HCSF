@@ -10,10 +10,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
@@ -170,7 +170,6 @@ public class Detalle_tareas extends AppCompatActivity {
         });
 
         if (tipo.equals("administrador")) {
-            Toast.makeText(this, tipo, Toast.LENGTH_SHORT).show();
             buttonFinalizarTarea.setVisibility(View.GONE);
             cardViewNota.setVisibility(View.GONE);
 
@@ -184,6 +183,15 @@ public class Detalle_tareas extends AppCompatActivity {
         });
         //registerForContextMenu(buttonFinalizarTarea);
     }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+                default:
+                    return false;
+        }
 
+    }
 
 }

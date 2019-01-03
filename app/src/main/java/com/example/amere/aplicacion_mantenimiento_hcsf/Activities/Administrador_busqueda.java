@@ -3,6 +3,7 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,6 +45,7 @@ public class Administrador_busqueda extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrador_busqueda);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         textView1 = findViewById(R.id.textViewTypeSearch);
         textView2 = findViewById(R.id.textViewDateSearch);
         textView3 = findViewById(R.id.textViewStateSearch);
@@ -90,7 +92,8 @@ public class Administrador_busqueda extends AppCompatActivity {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                String estado = getIntent().getExtras().get("estado").toString();
+                finish();
+                /*String estado = getIntent().getExtras().get("estado").toString();
                 String tipo = getIntent().getExtras().get("trabajos").toString();
                 if (tipo.equals("diarios") && estado.isEmpty()) {
                     Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Diarios.class);
@@ -105,7 +108,7 @@ public class Administrador_busqueda extends AppCompatActivity {
                 } else if (estado.equals("finalizado") && !tipo.equals("diarios")) {
                     Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Mensuales_Finalizados.class);
                     startActivity(intent);
-                }
+                }*/
                 return false;
             }
         });
@@ -166,9 +169,11 @@ public class Administrador_busqueda extends AppCompatActivity {
                                     intent_detalle_tareas.putExtra("Id", id);
                                     if (tipo.equals("diarios")) {
                                         intent_detalle_tareas.putExtra("trabajos", "diarios");
+                                        intent_detalle_tareas.putExtra("busqueda","busqueda");
                                         startActivity(intent_detalle_tareas);
                                     } else {
                                         intent_detalle_tareas.putExtra("trabajos", "mensuales");
+                                        intent_detalle_tareas.putExtra("busqueda","busqueda");
                                         startActivity(intent_detalle_tareas);
                                     }
 
@@ -184,9 +189,11 @@ public class Administrador_busqueda extends AppCompatActivity {
                                     intent_detalle_tareas.putExtra("Id", id);
                                     if (tipo.equals("diarios")) {
                                         intent_detalle_tareas.putExtra("trabajos", "diarios");
+                                        intent_detalle_tareas.putExtra("busqueda","busqueda");
                                         startActivity(intent_detalle_tareas);
                                     } else {
                                         intent_detalle_tareas.putExtra("trabajos", "mensuales");
+                                        intent_detalle_tareas.putExtra("busqueda","busqueda");
                                         startActivity(intent_detalle_tareas);
                                     }
 

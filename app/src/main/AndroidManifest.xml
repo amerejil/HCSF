@@ -49,11 +49,7 @@
         <activity
             android:name=".Activities.Agregar_trabajos"
             android:configChanges="screenSize|orientation"
-            android:parentActivityName=".Activities.Trabajos_Mensuales"
             android:windowSoftInputMode="stateHidden">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.Trabajos_Mensuales" />
         </activity>
 
         <service android:name=".NotificationService">
@@ -65,18 +61,13 @@
         <activity
             android:name=".Activities.Detalle_tareas"
             android:configChanges="screenSize|orientation"
-            android:parentActivityName=".Activities.Trabajos_Mensuales"
+
             android:windowSoftInputMode="stateHidden">
-            <meta-data
-                android:name="android.support.PARENT"
-                android:value=".Activities.Trabajos_Mensuales" />
+
         </activity>
         <activity
             android:name=".Activities.Detalle_tareas_finalizadas"
-            android:parentActivityName=".Activities.Trabajos_Diarios_Finalizados">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.Trabajos_Mensuales" />
+            >
         </activity>
         <activity android:name=".Activities.Administrador_busqueda"></activity>
     </application>

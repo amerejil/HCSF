@@ -1,9 +1,11 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
+import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
@@ -35,6 +37,7 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_tareas_finalizadas);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         textViewTipoTarea = findViewById(R.id.textViewWorkFinished);
         textViewTipo = findViewById(R.id.textViewDetalleTipoFinalizdo);
         textViewUbicacion = findViewById(R.id.textViewDetalleUbicacionFinalizado);
@@ -87,5 +90,15 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
 
             }
         });
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return false;
+        }
+
     }
 }
