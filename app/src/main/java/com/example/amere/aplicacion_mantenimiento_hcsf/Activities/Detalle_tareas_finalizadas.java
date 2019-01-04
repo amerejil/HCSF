@@ -67,7 +67,7 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
             textViewSubarea.setText(dataTask.getSubarea());
             textViewSolicitante.setText(dataTask.getSolicitante());
             textViewTrabajoSolicitado.setText("Trabajo solicitado: " + dataTask.getTrabajo_solicitado());
-            textViewNota.setText("Nota " + dataTask.getNota());
+            textViewNota.setText("Nota: " + dataTask.getNota());
             textViewEstadoEquipo.setText(dataTask.getEstado_equipo());
             if (dataTask.getEstado_equipo().equals("Operativo")) {
                 cardViewEstadoEquipo.setCardBackgroundColor(getResources().getColor(R.color.prioridad_bajo));

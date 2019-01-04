@@ -64,7 +64,6 @@ public class Trabajos_Diarios extends AppCompatActivity {
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         database_hcsf = Utils.getDatabase();
         task = database_hcsf.getReference("Tareas_prueba"); //cambio
-        lista_tareas_diarias = new ArrayList<>();
         recyclerViewTDailyTask = findViewById(R.id.recyclerViewDailyTask);
         linearLayoutManager_daily_task = new LinearLayoutManager(this);
         linearLayoutManager_daily_task.setOrientation(LinearLayoutManager.VERTICAL);
@@ -104,20 +103,11 @@ public class Trabajos_Diarios extends AppCompatActivity {
                     }
                 }, Trabajos_Diarios.this, preferences, "diario");
                 recyclerViewTDailyTask.setAdapter(adaptador);
-                // This method is called once with the initial value and again
-
-                // whenever data at this location is updated.
-
 
             }
-
-
-            @Override
+        @Override
 
             public void onCancelled(DatabaseError error) {
-
-                // Failed to read value
-
 
             }
 
@@ -174,9 +164,6 @@ public class Trabajos_Diarios extends AppCompatActivity {
         floatingActionButtonAddDailyTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* String value=task.push().getKey();
-
-                task.child(value).setValue(new data_task(value,"H","o","l","a","c","a","r","a") );*/
                 Intent intent_añadir_trabajo = new Intent(Trabajos_Diarios.this, Agregar_trabajos.class);
                 intent_añadir_trabajo.putExtra("trabajos", "diarios");
                 startActivity(intent_añadir_trabajo);

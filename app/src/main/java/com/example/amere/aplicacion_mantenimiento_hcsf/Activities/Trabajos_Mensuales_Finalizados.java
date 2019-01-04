@@ -104,7 +104,7 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
                 orden_fecha_finalizacion.removeEventListener(listener);
             }
         });
-        textViewDateStart.setOnClickListener(new View.OnClickListener() {
+        textViewDateFinished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 task.removeEventListener(listener);
@@ -117,7 +117,7 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
 
             }
         });
-        textViewDateFinished.setOnClickListener(new View.OnClickListener() {
+        textViewDateStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 task.removeEventListener(listener);

@@ -59,7 +59,6 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         database_hcsf = Utils.getDatabase();
         task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
-        lista_tareas_mensuales = new ArrayList<>();
         recyclerViewTMonthlyTask = findViewById(R.id.recyclerViewMonthlyTask);
         linearLayoutManager_montly_task = new LinearLayoutManager(this);
         linearLayoutManager_montly_task.setOrientation(LinearLayoutManager.VERTICAL);
@@ -69,7 +68,6 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         textViewState = findViewById(R.id.textViewStateMonthlyTask);
         relativeLayout = findViewById(R.id.relativeLayoutTrabajosMensuales);
         floatingActionButtonAddMonthlyTask = findViewById(R.id.floatingActionButton_Add_MonthlyTask);
-        administradorNotificaciones = new administrador_notificaciones(this);
         tipo = preferences.getString("administrador", "usuario");
         final Query orden_estado = task.orderByChild("estado");
         final Query orden_tipo = task.orderByChild("tipo");
@@ -170,9 +168,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         floatingActionButtonAddMonthlyTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* String value=task.push().getKey();
 
-                task.child(value).setValue(new data_task(value,"H","o","l","a","c","a","r","a") );*/
                 Intent intent_añadir_trabajo = new Intent(Trabajos_Mensuales.this, Agregar_trabajos.class);
                 intent_añadir_trabajo.putExtra("trabajos", "mensuales");
                 startActivity(intent_añadir_trabajo);
