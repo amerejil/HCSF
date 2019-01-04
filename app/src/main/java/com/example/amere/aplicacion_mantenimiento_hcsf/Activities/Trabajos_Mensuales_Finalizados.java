@@ -48,6 +48,7 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
         textViewDateFinished = findViewById(R.id.textView_DateFinished);
         database_hcsf = Utils.getDatabase();
         task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
+        //task = database_hcsf.getReference("Tareas_Mensuales");
         lista_tareas_mensuales = new ArrayList<>();
         recyclerViewTDailyTask = findViewById(R.id.recyclerViewMonthlyTaskFinished);
         linearLayoutManager_monthly_task = new LinearLayoutManager(this);

@@ -68,28 +68,14 @@ public class Detalle_tareas extends AppCompatActivity {
         final String tipo_tarea = getIntent().getExtras().get("trabajos").toString();
         if (tipo_tarea.equals("diarios")) {
             task = database_hcsf.getReference("Tareas_prueba");//cambio
+            //task = database_hcsf.getReference("Tareas");
 
         } else {
             task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
+            //task = database_hcsf.getReference("Tareas_Mensuales");
             textViewTipo_Tarea.setText(R.string.submenu_monthly_work);
         }
-        /*ValueEventListener listener=new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String Id = getIntent().getExtras().get("Id").toString();
-                    dataTask = dataSnapshot.child(Id).getValue(data_task.class);
 
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };*/
-        /*task.addValueEventListener(listener);*/
-        //task.removeEventListener(listener);
         dataTask= (data_task) getIntent().getSerializableExtra("data");
         if (dataTask != null) {
             textViewTipo.setText(dataTask.getTipo());

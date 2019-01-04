@@ -55,6 +55,7 @@ public class Administrador_busqueda extends AppCompatActivity {
         String estado = getIntent().getExtras().get("estado").toString();
         String tipo = getIntent().getExtras().get("trabajos").toString();
         if (tipo.equals("diarios")) {
+            //task = database_hcsf.getReference("Tareas");
             task = database_hcsf.getReference("Tareas_prueba"); //cambio
             if (estado.equals("finalizado")) {
                 textViewTipo.setText(R.string.submenu_daily_work_finished);
@@ -62,6 +63,7 @@ public class Administrador_busqueda extends AppCompatActivity {
                 textView3.setText(R.string.fecha_finalizacion);
             }
         } else {
+            //task = database_hcsf.getReference("Tareas_Mensuales");
             task = database_hcsf.getReference("Tareas_Mensuales_prueba"); //cambio
             textViewTipo.setText(R.string.submenu_monthly_work);
             if (estado.equals("finalizado")) {

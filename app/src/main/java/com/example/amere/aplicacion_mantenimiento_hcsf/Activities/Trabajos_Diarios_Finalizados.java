@@ -47,6 +47,7 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
         textViewDateFinished = findViewById(R.id.textViewDateFinished);
         database_hcsf = Utils.getDatabase();
         task = database_hcsf.getReference("Tareas_prueba");//cambio
+        //task = database_hcsf.getReference("Tareas");
         recyclerViewTDailyTask = findViewById(R.id.recyclerViewDailyTaskFinished);
         linearLayoutManager_daily_task = new LinearLayoutManager(this);
         linearLayoutManager_daily_task.setOrientation(LinearLayoutManager.VERTICAL);
