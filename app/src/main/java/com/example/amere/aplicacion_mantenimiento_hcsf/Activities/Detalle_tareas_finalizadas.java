@@ -52,44 +52,31 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         database_hcsf = Utils.getDatabase();
         String tipo = getIntent().getExtras().get("trabajos").toString();
+        dataTask= (data_task) getIntent().getSerializableExtra("data");
         if (tipo.equals("diarios")) {
             task = database_hcsf.getReference("Tareas_prueba");//cambio
         } else {
             task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
             textViewTipoTarea.setText(R.string.submenu_monthly_work_finished);
         }
-        task.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String Id = getIntent().getExtras().get("Id").toString();
-                    dataTask = dataSnapshot.child(Id).getValue(data_task.class);
-                    if (dataTask != null) {
-                        textViewTipo.setText(dataTask.getTipo());
-                        textViewUbicacion.setText(dataTask.getUbicacion());
-                        textViewPiso.setText(dataTask.getPiso());
-                        textViewArea.setText(dataTask.getArea());
-                        textViewSubarea.setText(dataTask.getSubarea());
-                        textViewSolicitante.setText(dataTask.getSolicitante());
-                        textViewTrabajoSolicitado.setText("Trabajo solicitado: " + dataTask.getTrabajo_solicitado());
-                        textViewNota.setText("Nota " + dataTask.getNota());
-                        textViewEstadoEquipo.setText(dataTask.getEstado_equipo());
-                        if (dataTask.getEstado_equipo().equals("Operativo")) {
-                            cardViewEstadoEquipo.setCardBackgroundColor(getResources().getColor(R.color.prioridad_bajo));
-                        }
-                        if (dataTask.getEstado_equipo().equals("De baja")) {
-                            cardViewEstadoEquipo.setCardBackgroundColor(getResources().getColor(R.color.prioridad_alta));
-                        }
-
-                    }
-                }
+        if (dataTask != null) {
+            textViewTipo.setText(dataTask.getTipo());
+            textViewUbicacion.setText(dataTask.getUbicacion());
+            textViewPiso.setText(dataTask.getPiso());
+            textViewArea.setText(dataTask.getArea());
+            textViewSubarea.setText(dataTask.getSubarea());
+            textViewSolicitante.setText(dataTask.getSolicitante());
+            textViewTrabajoSolicitado.setText("Trabajo solicitado: " + dataTask.getTrabajo_solicitado());
+            textViewNota.setText("Nota " + dataTask.getNota());
+            textViewEstadoEquipo.setText(dataTask.getEstado_equipo());
+            if (dataTask.getEstado_equipo().equals("Operativo")) {
+                cardViewEstadoEquipo.setCardBackgroundColor(getResources().getColor(R.color.prioridad_bajo));
+            }
+            if (dataTask.getEstado_equipo().equals("De baja")) {
+                cardViewEstadoEquipo.setCardBackgroundColor(getResources().getColor(R.color.prioridad_alta));
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        }
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

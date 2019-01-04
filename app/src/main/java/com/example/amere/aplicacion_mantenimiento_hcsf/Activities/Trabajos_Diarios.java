@@ -97,6 +97,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
                         Intent intent_detalle_tareas = new Intent(Trabajos_Diarios.this, Detalle_tareas.class);
                         String id = data.getId();
                         intent_detalle_tareas.putExtra("Id", id);
+                        intent_detalle_tareas.putExtra("data",data);
                         intent_detalle_tareas.putExtra("trabajos", "diarios");
                         startActivity(intent_detalle_tareas);
 

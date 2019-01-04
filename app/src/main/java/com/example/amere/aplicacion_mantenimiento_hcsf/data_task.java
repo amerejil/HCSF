@@ -1,6 +1,8 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf;
 
-public class data_task {
+import java.io.Serializable;
+
+public class data_task implements Serializable {
 
     private String tipo;
     private String id;
@@ -14,15 +16,19 @@ public class data_task {
     private String estado;
     private String solicitante;
     private String trabajo_solicitado;
+
+
+
     private String estado_equipo;
     private String fecha_inicio_entero;
     private String fecha_finalizacion_entero;
     private String nota;
 
+//Añadir nuevos campos requeridos
     public data_task() {
 
     }
-
+//Añadir nuevos campos requeridos tambien en el constructor
     public data_task(String id, String tipo, String ubicacion, String piso, String area,
                      String subarea, String atencion, String solicitante, String trabajo_solicitado,
                      String fecha_inicio, String fecha_inicio_entero,
@@ -45,7 +51,7 @@ public class data_task {
         this.fecha_finalizacion_entero = fecha_finalizacion_entero;
         this.nota = nota;
     }
-
+//agregar getter a los nuevos campos
     public String getTipo() {
         return tipo;
     }
@@ -109,6 +115,43 @@ public class data_task {
     public String getFecha_finalizacion_entero() {
         return fecha_finalizacion_entero;
     }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
 
+    public void setPiso(String piso) {
+        this.piso = piso;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public void setSubarea(String subarea) {
+        this.subarea = subarea;
+    }
+
+    public void setAtencion(String atencion) {
+        this.atencion = atencion;
+    }
+
+    public void setSolicitante(String solicitante) {
+        this.solicitante = solicitante;
+    }
+
+    public void setTrabajo_solicitado(String trabajo_solicitado) {
+        this.trabajo_solicitado = trabajo_solicitado;
+    }
+
+    public void setEstado_equipo(String estado_equipo) {
+        this.estado_equipo = estado_equipo;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

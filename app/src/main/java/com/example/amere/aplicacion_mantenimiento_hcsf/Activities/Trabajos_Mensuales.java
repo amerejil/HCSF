@@ -92,6 +92,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                         Intent intent_detalle_tareas = new Intent(Trabajos_Mensuales.this, Detalle_tareas.class);
                         String id = data.getId();
                         intent_detalle_tareas.putExtra("Id", id);
+                        intent_detalle_tareas.putExtra("data",data);
                         intent_detalle_tareas.putExtra("trabajos", "mensuales");
                         startActivity(intent_detalle_tareas);
 

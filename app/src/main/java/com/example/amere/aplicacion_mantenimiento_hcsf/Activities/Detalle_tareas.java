@@ -41,11 +41,10 @@ public class Detalle_tareas extends AppCompatActivity {
     private String stringFecha_finalizacion_entero;
     private String stringFecha_finalizacion;
     private FirebaseDatabase database_hcsf;
-    private data_task dataTask;
+    public data_task dataTask;
     private DatabaseReference task;
     private SharedPreferences preferences;
     private String tipo;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,25 +73,13 @@ public class Detalle_tareas extends AppCompatActivity {
             task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
             textViewTipo_Tarea.setText(R.string.submenu_monthly_work);
         }
-        task.addValueEventListener(new ValueEventListener() {
+        /*ValueEventListener listener=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String Id = getIntent().getExtras().get("Id").toString();
                     dataTask = dataSnapshot.child(Id).getValue(data_task.class);
-                    if (dataTask != null) {
-                        textViewTipo.setText(dataTask.getTipo());
-                        if (dataTask.getAtencion().equals("Alta"))
-                            textViewTipo.setTextColor(getResources().getColor(R.color.prioridad_alta));
-                        if (dataTask.getAtencion().equals("Baja"))
-                            textViewTipo.setTextColor(getResources().getColor(R.color.prioridad_bajo));
-                        textViewUbicacion.setText(dataTask.getUbicacion());
-                        textViewPiso.setText(dataTask.getPiso());
-                        textViewArea.setText(dataTask.getArea());
-                        textViewSubarea.setText(dataTask.getSubarea());
-                        textViewSolicitante.setText(dataTask.getSolicitante());
-                        textViewTrabajoSolicitado.setText("Trabajo solicitado: " + dataTask.getTrabajo_solicitado());
-                    }
+
                 }
             }
 
@@ -100,7 +87,23 @@ public class Detalle_tareas extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        };*/
+        /*task.addValueEventListener(listener);*/
+        //task.removeEventListener(listener);
+        dataTask= (data_task) getIntent().getSerializableExtra("data");
+        if (dataTask != null) {
+            textViewTipo.setText(dataTask.getTipo());
+            if (dataTask.getAtencion().equals("Alta"))
+                textViewTipo.setTextColor(getResources().getColor(R.color.prioridad_alta));
+            if (dataTask.getAtencion().equals("Baja"))
+                textViewTipo.setTextColor(getResources().getColor(R.color.prioridad_bajo));
+            textViewUbicacion.setText(dataTask.getUbicacion());
+            textViewPiso.setText(dataTask.getPiso());
+            textViewArea.setText(dataTask.getArea());
+            textViewSubarea.setText(dataTask.getSubarea());
+            textViewSolicitante.setText(dataTask.getSolicitante());
+            textViewTrabajoSolicitado.setText("Trabajo solicitado: " + dataTask.getTrabajo_solicitado());
+        }
         final AlertDialog.Builder estado_dispositivo = new AlertDialog.Builder(this);
         estado_dispositivo.setMessage("¿El equipo quedo?");
         estado_dispositivo.setCancelable(false);

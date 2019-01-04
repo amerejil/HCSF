@@ -69,7 +69,6 @@ public class Administrador_busqueda extends AppCompatActivity {
                 textView2.setText(R.string.fecha_inicio);
                 textView3.setText(R.string.fecha_finalizacion);
             }
-
         }
         lista_tareas_diarias = new ArrayList<>();
         recyclerViewTDailyTask = findViewById(R.id.recyclerViewDailyTask3);
@@ -93,22 +92,6 @@ public class Administrador_busqueda extends AppCompatActivity {
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 finish();
-                /*String estado = getIntent().getExtras().get("estado").toString();
-                String tipo = getIntent().getExtras().get("trabajos").toString();
-                if (tipo.equals("diarios") && estado.isEmpty()) {
-                    Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Diarios.class);
-                    startActivity(intent);
-                } else if (!tipo.equals("diarios") && estado.isEmpty()) {
-                    Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Mensuales.class);
-                    startActivity(intent);
-                }
-                if (estado.equals("finalizado") && tipo.equals("diarios")) {
-                    Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Diarios_Finalizados.class);
-                    startActivity(intent);
-                } else if (estado.equals("finalizado") && !tipo.equals("diarios")) {
-                    Intent intent = new Intent(Administrador_busqueda.this, Trabajos_Mensuales_Finalizados.class);
-                    startActivity(intent);
-                }*/
                 return false;
             }
         });
@@ -161,24 +144,33 @@ public class Administrador_busqueda extends AppCompatActivity {
                             }
                         }
                         if (estado.isEmpty()) {
-                            adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(data_task data, int position) {
-                                    Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas.class);
-                                    String id = data.getId();
-                                    intent_detalle_tareas.putExtra("Id", id);
-                                    if (tipo.equals("diarios")) {
+                            if (tipo.equals("diarios")) {
+                                adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(data_task data, int position) {
+                                        Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas.class);
+                                        String id = data.getId();
+                                        intent_detalle_tareas.putExtra("data", data);
                                         intent_detalle_tareas.putExtra("trabajos", "diarios");
-                                        intent_detalle_tareas.putExtra("busqueda","busqueda");
                                         startActivity(intent_detalle_tareas);
-                                    } else {
-                                        intent_detalle_tareas.putExtra("trabajos", "mensuales");
-                                        intent_detalle_tareas.putExtra("busqueda","busqueda");
-                                        startActivity(intent_detalle_tareas);
-                                    }
 
-                                }
-                            }, Administrador_busqueda.this, preferences, "");
+                                    }
+                                }, Administrador_busqueda.this, preferences, "diario");
+                            }
+                            else
+                            {
+                                adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(data_task data, int position) {
+                                        Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas.class);
+                                        String id = data.getId();
+                                        intent_detalle_tareas.putExtra("data", data);
+                                        intent_detalle_tareas.putExtra("trabajos", "mensuales");
+                                        startActivity(intent_detalle_tareas);
+
+                                    }
+                                }, Administrador_busqueda.this, preferences, "");
+                            }
                             recyclerViewTDailyTask.setAdapter(adaptador);
                         } else {
                             adapter = new Adapter_for_task_finished(lista_tareas_diarias, new Adapter_for_task_finished.OnItemClickListener() {
@@ -186,14 +178,12 @@ public class Administrador_busqueda extends AppCompatActivity {
                                 public void onItemClick(data_task data, int position) {
                                     Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas_finalizadas.class);
                                     String id = data.getId();
-                                    intent_detalle_tareas.putExtra("Id", id);
+                                    intent_detalle_tareas.putExtra("data", data);
                                     if (tipo.equals("diarios")) {
                                         intent_detalle_tareas.putExtra("trabajos", "diarios");
-                                        intent_detalle_tareas.putExtra("busqueda","busqueda");
                                         startActivity(intent_detalle_tareas);
                                     } else {
                                         intent_detalle_tareas.putExtra("trabajos", "mensuales");
-                                        intent_detalle_tareas.putExtra("busqueda","busqueda");
                                         startActivity(intent_detalle_tareas);
                                     }
 

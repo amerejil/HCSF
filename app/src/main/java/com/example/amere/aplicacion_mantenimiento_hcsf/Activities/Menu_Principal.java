@@ -29,6 +29,8 @@ public class Menu_Principal extends AppCompatActivity {
 
     private SharedPreferences preferences;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -38,15 +40,14 @@ public class Menu_Principal extends AppCompatActivity {
         recyclerView_menu_principal = findViewById(R.id.recyclerView_menu_principal);
         logo = findViewById(R.id.image_HCSF);
         gridLayoutManager_menu_principal = new GridLayoutManager(this, 2);
-        //gridLayoutManager_menu_principal.setOrientation(LinearLayoutManager.VERTICAL);
 
         recyclerView_menu_principal.setLayoutManager(gridLayoutManager_menu_principal);
-        //FirebaseMessaging.getInstance().subscribeToTopic("usuario");
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("administrador", "administrador");
+        //editor.putString("administrador", "administrador");
+        editor.putString("administrador", "usuario");
         editor.apply();
         String tipo = preferences.getString("administrador", "usuario");
-        if (tipo == "usuario") {
+        if (tipo.equals("usuario")) {
             FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador_prueba");
             FirebaseMessaging.getInstance().subscribeToTopic("usuario_prueba");
             Toast.makeText(Menu_Principal.this, "Usuario", Toast.LENGTH_SHORT).show();

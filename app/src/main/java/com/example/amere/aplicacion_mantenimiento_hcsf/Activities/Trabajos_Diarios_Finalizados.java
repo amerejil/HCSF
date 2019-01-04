@@ -71,7 +71,7 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
                     public void onItemClick(data_task data, int position) {
                         Intent intent_detalle_tareas = new Intent(Trabajos_Diarios_Finalizados.this, Detalle_tareas_finalizadas.class);
                         String id = data.getId();
-                        intent_detalle_tareas.putExtra("Id", id);
+                        intent_detalle_tareas.putExtra("data", data);
                         intent_detalle_tareas.putExtra("trabajos", "diarios");
                         startActivity(intent_detalle_tareas);
 
@@ -110,8 +110,8 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
                 textViewDateFinished.setText(getString(R.string.fecha_finalizacion));
                 textViewType.setText(getString(R.string.type));
                 textViewDateStart.setText("Fecha de inicio ↓");
-                orden_fecha_finalizacion.addValueEventListener(listener);
-                orden_fecha_inicio.removeEventListener(listener);
+                orden_fecha_inicio.addValueEventListener(listener);
+                orden_fecha_finalizacion.removeEventListener(listener);
                 orden_tipo.removeEventListener(listener);
 
             }
@@ -123,8 +123,8 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
                 textViewDateStart.setText(getString(R.string.fecha_inicio));
                 textViewType.setText(getString(R.string.type));
                 textViewDateFinished.setText("Fecha de finalización ↓");
-                orden_fecha_inicio.addValueEventListener(listener);
-                orden_fecha_finalizacion.removeEventListener(listener);
+                orden_fecha_finalizacion.addValueEventListener(listener);
+                orden_fecha_inicio.removeEventListener(listener);
                 orden_tipo.removeEventListener(listener);
             }
         });
