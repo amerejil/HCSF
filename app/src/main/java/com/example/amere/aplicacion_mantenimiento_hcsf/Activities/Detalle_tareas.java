@@ -67,12 +67,12 @@ public class Detalle_tareas extends AppCompatActivity {
         database_hcsf = Utils.getDatabase();
         final String tipo_tarea = getIntent().getExtras().get("trabajos").toString();
         if (tipo_tarea.equals("diarios")) {
-            task = database_hcsf.getReference("Tareas_prueba");//cambio
-            //task = database_hcsf.getReference("Tareas");
+            //task = database_hcsf.getReference("Tareas_prueba");//cambio
+            task = database_hcsf.getReference("Tareas");
 
         } else {
-            task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
-            //task = database_hcsf.getReference("Tareas_Mensuales");
+            //task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
+            task = database_hcsf.getReference("Tareas_Mensuales");
             textViewTipo_Tarea.setText(R.string.submenu_monthly_work);
         }
 

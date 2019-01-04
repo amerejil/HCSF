@@ -48,17 +48,17 @@ public class Menu_Principal extends AppCompatActivity {
         editor.apply();
         String tipo = preferences.getString("administrador", "usuario");
         if (tipo.equals("usuario")) {
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador_prueba");
-            FirebaseMessaging.getInstance().subscribeToTopic("usuario_prueba");
-            //FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador");
-            //FirebaseMessaging.getInstance().subscribeToTopic("usuario");
+            //FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador_prueba");
+            //FirebaseMessaging.getInstance().subscribeToTopic("usuario_prueba");
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador");
+            FirebaseMessaging.getInstance().subscribeToTopic("usuario");
             Toast.makeText(Menu_Principal.this, "Usuario", Toast.LENGTH_SHORT).show();
         } else {
 
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario_prueba");
-            FirebaseMessaging.getInstance().subscribeToTopic("administrador_prueba");
-            //FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
-            //FirebaseMessaging.getInstance().subscribeToTopic("administrador");
+            //FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario_prueba");
+            //FirebaseMessaging.getInstance().subscribeToTopic("administrador_prueba");
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
+            FirebaseMessaging.getInstance().subscribeToTopic("administrador");
             Toast.makeText(Menu_Principal.this, "adm", Toast.LENGTH_SHORT).show();
         }
 

@@ -103,10 +103,10 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
             database_hcsf = Utils.getDatabase();
             if (tipo_tarea.equals("diario"))
             {
-                task = database_hcsf.getReference("Tareas_prueba");
+                task = database_hcsf.getReference("Tareas");
             }
             else {
-                task = database_hcsf.getReference("Tareas_Mensuales_prueba");
+                task = database_hcsf.getReference("Tareas_Mensuales");
             }
             String id = item_menus.get(this.getAdapterPosition()).getId();
             switch (item.getItemId()) {

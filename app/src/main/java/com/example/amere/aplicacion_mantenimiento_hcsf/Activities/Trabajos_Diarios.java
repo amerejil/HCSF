@@ -63,8 +63,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
         setContentView(R.layout.activity_trabajos__diarios);
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         database_hcsf = Utils.getDatabase();
-        //task = database_hcsf.getReference("Tareas");
-        task = database_hcsf.getReference("Tareas_prueba"); //cambio
+        task = database_hcsf.getReference("Tareas");
+        //task = database_hcsf.getReference("Tareas_prueba"); //cambio
         recyclerViewTDailyTask = findViewById(R.id.recyclerViewDailyTask);
         linearLayoutManager_daily_task = new LinearLayoutManager(this);
         linearLayoutManager_daily_task.setOrientation(LinearLayoutManager.VERTICAL);
