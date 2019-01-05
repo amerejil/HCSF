@@ -1,5 +1,6 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -68,8 +69,10 @@ public class administrador_notificaciones extends ContextWrapper {
     private Notification.Builder createNotificationWithoutChannel(String title, String message,data_task data) {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Intent intent=new Intent(this,Detalle_tareas.class);
+
         intent.putExtra("data",data);
         intent.putExtra("trabajos","diarios");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pIntent=PendingIntent.getActivity(this,data.getId().hashCode(),intent,PendingIntent.FLAG_UPDATE_CURRENT);
         return new Notification.Builder(getApplicationContext())
                 .setContentTitle(title)

@@ -37,7 +37,6 @@ public class Trabajos_Mensuales extends AppCompatActivity {
     private ArrayList<data_task> lista_tareas_mensuales;
     private RecyclerView recyclerViewTMonthlyTask;
     private Adapter_for_task_list adaptador;
-    private administrador_notificaciones administradorNotificaciones;
     private DatabaseReference task;
     private LinearLayoutManager linearLayoutManager_montly_task;
     private TextView textViewType;

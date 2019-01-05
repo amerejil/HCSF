@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -94,31 +93,9 @@ public class Menu_Principal extends AppCompatActivity {
                 }
             }
         });
-      /*  logo.setOnClickListener(new View.OnClickListener() {
-            int cont;
 
-            @Override
-            public void onClick(View v) {
-                cont++;
-                if (cont == 5) {
-                    FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
-                    FirebaseMessaging.getInstance().subscribeToTopic("administrador");
-                    Toast.makeText(Menu_Principal.this, "Administrador", Toast.LENGTH_SHORT).show();
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("administrador", "administrador");
-                    editor.apply();
-
-                }
-                if (cont == 10) {
-                    FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador");
-                    FirebaseMessaging.getInstance().subscribeToTopic("usuario");
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("administrador", "usuario");
-                    editor.apply();
-                }
-            }
-        });*/
         recyclerView_menu_principal.setAdapter(adaptador);
 
     }
 }
+

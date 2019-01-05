@@ -105,28 +105,28 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
                 orden_fecha_finalizacion.removeEventListener(listener);
             }
         });
-        textViewDateFinished.setOnClickListener(new View.OnClickListener() {
+        textViewDateStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 task.removeEventListener(listener);
                 textViewDateFinished.setText(getString(R.string.fecha_finalizacion));
                 textViewType.setText(getString(R.string.type));
                 textViewDateStart.setText("Fecha de inicio ↓");
-                orden_fecha_finalizacion.addValueEventListener(listener);
-                orden_fecha_inicio.removeEventListener(listener);
+                orden_fecha_inicio.addValueEventListener(listener);
+                orden_fecha_finalizacion.removeEventListener(listener);
                 orden_tipo.removeEventListener(listener);
 
             }
         });
-        textViewDateStart.setOnClickListener(new View.OnClickListener() {
+        textViewDateFinished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 task.removeEventListener(listener);
                 textViewDateStart.setText(getString(R.string.fecha_inicio));
                 textViewType.setText(getString(R.string.type));
                 textViewDateFinished.setText("Fecha de finalización ↓");
-                orden_fecha_inicio.addValueEventListener(listener);
-                orden_fecha_finalizacion.removeEventListener(listener);
+                orden_fecha_finalizacion.addValueEventListener(listener);
+                orden_fecha_inicio.removeEventListener(listener);
                 orden_tipo.removeEventListener(listener);
             }
         });
