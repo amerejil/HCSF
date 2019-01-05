@@ -39,7 +39,7 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_trabajos__diarios__finalizados);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         textViewType = findViewById(R.id.textViewTypeFinished);

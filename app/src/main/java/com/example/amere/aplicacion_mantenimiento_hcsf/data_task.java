@@ -16,6 +16,7 @@ public class data_task implements Serializable {
     private String estado;
     private String solicitante;
     private String trabajo_solicitado;
+    private String subtipo;
 
 
 
@@ -33,7 +34,7 @@ public class data_task implements Serializable {
                      String subarea, String atencion, String solicitante, String trabajo_solicitado,
                      String fecha_inicio, String fecha_inicio_entero,
                      String fecha_finalizacion, String fecha_finalizacion_entero,
-                     String estado, String estado_equipo, String nota) {
+                     String estado, String estado_equipo, String nota, String subtipo) {
         this.tipo = tipo;
         this.ubicacion = ubicacion;
         this.piso = piso;
@@ -50,6 +51,7 @@ public class data_task implements Serializable {
         this.estado_equipo = estado_equipo;
         this.fecha_finalizacion_entero = fecha_finalizacion_entero;
         this.nota = nota;
+        this.subtipo = subtipo;
     }
 //agregar getter a los nuevos campos
     public String getTipo() {
@@ -115,6 +117,15 @@ public class data_task implements Serializable {
     public String getFecha_finalizacion_entero() {
         return fecha_finalizacion_entero;
     }
+
+    public String getSubtipo() {
+        return subtipo;
+    }
+
+    public void setSubtipo(String subtipo) {
+        this.subtipo = subtipo;
+    }
+
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }

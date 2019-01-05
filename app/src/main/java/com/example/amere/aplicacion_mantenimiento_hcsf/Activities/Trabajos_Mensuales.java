@@ -52,7 +52,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajos__mensuales);
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);

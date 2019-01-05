@@ -58,7 +58,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajos__diarios);
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
@@ -71,7 +71,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
         recyclerViewTDailyTask.setLayoutManager(linearLayoutManager_daily_task);
         textViewType = findViewById(R.id.textViewType);
         textViewDate = findViewById(R.id.textViewDate);
-        textViewState = findViewById(R.id.textViewState);
+        textViewState = findViewById(R.id.textViewArea);
         relativeLayout = findViewById(R.id.relativeLayout);
         floatingActionButtonAddDailyTask = findViewById(R.id.floatingActionButton);
 

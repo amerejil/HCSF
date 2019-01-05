@@ -145,7 +145,7 @@ public class Agregar_trabajos extends AppCompatActivity {
                         new data_task(value, stringTipo, stringUbicacion, stringPiso, stringArea,
                         stringSubarea, stringAtencion, stringSolicitante, stringTrabajoSolicitado,
                         stringFecha_inicio, stringFecha_inicio_entero, "", "",
-                        stringEstado, "Desconocido", ""));
+                        stringEstado, "Desconocido", "",""));
             }
         });
     }

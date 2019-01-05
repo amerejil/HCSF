@@ -56,39 +56,55 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        public TextView textViewType;
+
         public TextView textViewDate;
-        public TextView textViewState;
+        public TextView textViewType;
+        public TextView textViewSubtipo;
+        public TextView textViewPiso;
+        public TextView textViewArea;
+        public TextView textViewSubarea;
         public CardView cardView;
-        private DatabaseReference task;
+        private DatabaseReference daily_task;
         private DatabaseReference monthly_task;
         private FirebaseDatabase database_hcsf;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.textViewType = itemView.findViewById(R.id.textViewTypeList);
             this.textViewDate = itemView.findViewById(R.id.textViewDateList);
-            this.textViewState = itemView.findViewById(R.id.textViewStateList);
+            this.textViewType = itemView.findViewById(R.id.textViewTypeList);
+            this.textViewSubtipo = itemView.findViewById(R.id.textViewSubtipoList);
+            this.textViewPiso = itemView.findViewById(R.id.textViewPisoList);
+            this.textViewArea = itemView.findViewById(R.id.textViewAreaList);
+            this.textViewSubarea = itemView.findViewById(R.id.textViewSubareaList);
             this.cardView = itemView.findViewById(R.id.cardView_lista_trabajos_diarios);
             itemView.setOnCreateContextMenuListener(this);
 
         }
 
         public void bind(final data_task data, final OnItemClickListener listener) {
-            this.textViewState.setText(data.getEstado());
             this.textViewDate.setText(data.getFecha_inicio());
             this.textViewType.setText(data.getTipo());
+            this.textViewSubtipo.setText(data.getSubtipo());
+            this.textViewPiso.setText(data.getPiso());
+            this.textViewArea.setText(data.getArea());
+            this.textViewSubarea.setText(data.getSubarea());
+            this.textViewDate.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
+            this.textViewType.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
+            this.textViewSubtipo.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
+            this.textViewPiso.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
+            this.textViewArea.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
+            this.textViewSubarea.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
+
+
             if (data.getAtencion().equals("Alta")) {
                 this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.prioridad_alta));
-                this.textViewDate.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
-                this.textViewState.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
-                this.textViewType.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
+
+
             }
             if (data.getAtencion().equals("Baja")) {
                 this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.prioridad_bajo));
-                this.textViewDate.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
-                this.textViewState.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
-                this.textViewType.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
+
+
             }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -101,26 +117,30 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             database_hcsf = Utils.getDatabase();
-            if (tipo_tarea.equals("diario"))
-            {
-                task = database_hcsf.getReference("Tareas_prueba");
-            }
-            else {
-                task = database_hcsf.getReference("Tareas_Mensuales_prueba");
-            }
+            daily_task = database_hcsf.getReference("Tareas_prueba"); //cambio
+            monthly_task = database_hcsf.getReference("Tareas_Mensuales_prueba"); //cambio
             String id = item_menus.get(this.getAdapterPosition()).getId();
             switch (item.getItemId()) {
                 case R.id.change_state_iniciado: {
-                        task.child(id).child("estado").setValue("En proceso");
+                    if (tipo_tarea.equals("diario"))
+
+                        daily_task.child(id).child("estado").setValue("En proceso");
+                    else
+                        monthly_task.child(id).child("estado").setValue("En proceso");
                 }
                 return true;
                 case R.id.delete_task_administrador: {
-
-                        task.child(id).removeValue();
+                    if (tipo_tarea.equals("diario"))
+                        daily_task.child(id).removeValue();
+                    else
+                        monthly_task.child(id).removeValue();
                 }
                 return true;
                 case R.id.change_state_pausado: {
-                        task.child(id).child("estado").setValue("Pausado");
+                    if (tipo_tarea.equals("diario"))
+                        daily_task.child(id).child("estado").setValue("Pausado");
+                    else
+                        monthly_task.child(id).child("estado").setValue("Pausado");
                 }
                 return true;
                 default:

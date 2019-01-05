@@ -20,29 +20,49 @@
         <TextView
             android:gravity="center_vertical"
             android:layout_margin="8dp"
-            android:id="@+id/textViewTypeList"
-            android:layout_width="0dp"
-            android:layout_weight="0.37"
-            android:layout_height="match_parent"
-            android:textSize="16sp"
-
-            />
-
-        <TextView
-            android:gravity="center_vertical"
-            android:layout_margin="8dp"
             android:id="@+id/textViewDateList"
             android:layout_width="0dp"
-            android:layout_weight="0.33"
+            android:layout_weight="0.16"
             android:layout_height="match_parent"
             android:textSize="16sp" />
-
         <TextView
             android:gravity="center_vertical"
             android:layout_margin="8dp"
-            android:id="@+id/textViewStateList"
+            android:id="@+id/textViewTypeList"
             android:layout_width="0dp"
-            android:layout_weight="0.30"
+            android:layout_weight="0.2"
+            android:layout_height="match_parent"
+            android:textSize="16sp" />
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_margin="8dp"
+            android:id="@+id/textViewSubtipoList"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:layout_height="match_parent"
+            android:textSize="16sp" />
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_margin="8dp"
+            android:id="@+id/textViewPisoList"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:layout_height="match_parent"
+            android:textSize="16sp" />
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_margin="8dp"
+            android:id="@+id/textViewAreaList"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:layout_height="match_parent"
+            android:textSize="16sp" />
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_margin="8dp"
+            android:id="@+id/textViewSubareaList"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
             android:layout_height="match_parent"
             android:textSize="16sp" />
     </LinearLayout>

@@ -28,10 +28,20 @@
         android:layout_below="@+id/textViewDailyWork">
 
         <TextView
+            android:id="@+id/textViewDate"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:text="@string/date" />
+        <TextView
             android:id="@+id/textViewType"
             android:padding="5dp"
             android:layout_width="0dp"
-            android:layout_weight="0.35"
+            android:layout_weight="0.2"
             android:gravity="center"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -39,26 +49,46 @@
             android:text="@string/type" />
 
         <TextView
-            android:id="@+id/textViewDate"
             android:padding="5dp"
+            android:id="@+id/textViewSubtipo"
             android:layout_width="0dp"
-            android:layout_weight="0.30"
-            android:gravity="center"
+            android:layout_weight="0.16"
             android:textStyle="bold"
             android:textSize="18sp"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/date" />
+            android:text="@string/Subtipo" />
 
         <TextView
             android:padding="5dp"
-            android:id="@+id/textViewState"
+            android:id="@+id/textViewPiso"
             android:layout_width="0dp"
-            android:layout_weight="0.35"
+            android:layout_weight="0.16"
             android:textStyle="bold"
             android:textSize="18sp"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/state" />
+            android:text="@string/Piso" />
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/textViewArea"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/Area" />
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/textViewSubarea"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/Subarea" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

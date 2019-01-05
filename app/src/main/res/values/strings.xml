@@ -16,8 +16,10 @@
     <string name="Piso">Piso</string>
     <string name="Area">Area</string>
     <string name="Subarea">Subarea</string>
+    <string name="Subtipo">Subtipo</string>
     <string name="Solicitante">Solicitante</string>
     <string name="Trabajo">Trabajo solicitado</string>
+
     <string-array name="tipo">
         <item>Eléctrico</item>
         <item>Electrónico</item>
@@ -27,6 +29,8 @@
         <item>Cerrajería</item>
         <item>Mecánico</item>
         <item>Pintura</item>
+        <item>Aluminio</item>
+        <item>Vidrio</item>
         <item>Varios</item>
     </string-array>
     <string-array name="ubicacion">
@@ -37,8 +41,8 @@
         <item>MGV</item>
     </string-array>
     <string-array name="atencion">
-        <item>Alta</item>
         <item>Baja</item>
+        <item>Alta</item>
     </string-array>
     <string-array name="piso">
         <item>Sótano</item>
