@@ -151,7 +151,7 @@ public class Agregar_trabajos extends AppCompatActivity {
                 SimpleDateFormat f_date_entero = new SimpleDateFormat("ddMMyyyy");
                 data.setArea(area.getText().toString());
                 data.setAtencion(stringAtencion);
-                data.setEstado("No iniciado");
+                data.setEstado("No iniciado");/////
                 data.setEstado_equipo("");
                 data.setFecha_finalizacion("");
                 data.setFecha_finalizacion_entero("");
