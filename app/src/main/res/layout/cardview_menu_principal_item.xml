@@ -9,8 +9,8 @@
     android:foreground="?android:attr/selectableItemBackground"
 
     app:cardCornerRadius="15dp"
-    app:cardElevation="3dp"
     android:layout_margin="5dp"
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 

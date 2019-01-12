@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.Agregar_trabajos">
-
+    <include
+        android:id="@+id/my_toolbar_agregar_tareas"
+        layout="@layout/actionbar">
+    </include>
 
     <TextView
+        android:layout_below="@+id/my_toolbar_agregar_tareas"
         android:id="@+id/textViewAddDailyTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:padding="5dp"
@@ -19,18 +22,20 @@
         android:textColor="@color/colorPrimary"
         android:textSize="22sp"
         android:textStyle="bold" />
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_below="@id/textViewAddDailyTask"
+    android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/textViewAddDailyTask"
+        android:layout_height="wrap_content"
 
+        android:layout_centerInParent="true"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_margin="8dp"
             android:orientation="vertical">
 
@@ -281,4 +286,5 @@
         android:focusable="true"
         app:maxImageSize="35dp"
         app:srcCompat="@drawable/icon_add_task" />
+</RelativeLayout>
 </RelativeLayout>

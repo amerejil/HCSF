@@ -165,4 +165,29 @@ public class data_task implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
+    public void setFecha_inicio(String fecha_inicio) {
+        this.fecha_inicio = fecha_inicio;
+    }
+
+    public void setFecha_finalizacion(String fecha_finalizacion) {
+        this.fecha_finalizacion = fecha_finalizacion;
+    }
+
+    public void setFecha_inicio_entero(String fecha_inicio_entero) {
+        this.fecha_inicio_entero = fecha_inicio_entero;
+    }
+
+    public void setFecha_finalizacion_entero(String fecha_finalizacion_entero) {
+        this.fecha_finalizacion_entero = fecha_finalizacion_entero;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+
+    }
 }

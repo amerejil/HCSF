@@ -6,11 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".Activities.Administrador_busqueda">
 
+    <include
+        android:id="@+id/my_toolbar_administrador_busqueda"
+        layout="@layout/actionbar"></include>
     <TextView
+        android:layout_below="@id/my_toolbar_administrador_busqueda"
         android:id="@+id/textViewDailyWork3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:padding="5dp"

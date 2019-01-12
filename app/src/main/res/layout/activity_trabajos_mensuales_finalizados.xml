@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.Trabajos_Mensuales_Finalizados">
-
+    <include
+        android:id="@+id/my_toolbar_trabajos_mensuales_finalizados"
+        layout="@layout/actionbar">
+    </include>
     <TextView
+        android:layout_below="@id/my_toolbar_trabajos_mensuales_finalizados"
         android:id="@+id/textViewMonthlyWorkFinished"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:padding="5dp"

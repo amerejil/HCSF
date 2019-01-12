@@ -2,9 +2,11 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -32,12 +34,18 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
     private FirebaseDatabase database_hcsf;
     private data_task dataTask;
     private DatabaseReference task;
+    private ActionBar ab;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_tareas_finalizadas);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        toolbar = findViewById(R.id.my_toolbar_detalle_tareas_finalizadas);
+        setSupportActionBar(toolbar);
+        ab = getSupportActionBar();
+        ab.setDisplayShowTitleEnabled(false);
+        ab.setDisplayHomeAsUpEnabled(true);
         textViewTipoTarea = findViewById(R.id.textViewWorkFinished);
         textViewTipo = findViewById(R.id.textViewDetalleTipoFinalizdo);
         textViewUbicacion = findViewById(R.id.textViewDetalleUbicacionFinalizado);
@@ -49,7 +57,7 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
         textViewNota = findViewById(R.id.texViewNotaFinalizado);
         textViewEstadoEquipo = findViewById(R.id.textViewEstadoEquipo);
         cardViewEstadoEquipo = findViewById(R.id.cardViewEstadoEquipo);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         database_hcsf = Utils.getDatabase();
         String tipo = getIntent().getExtras().get("trabajos").toString();
         dataTask= (data_task) getIntent().getSerializableExtra("data");

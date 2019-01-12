@@ -6,14 +6,17 @@
     android:layout_height="match_parent"
 
     android:id="@+id/relativeLayout"
-    tools:context=".Activities.Trabajos_Mensuales">
-
+    tools:context=".Activities.Trabajos_Diarios">
+    <include
+        android:id="@+id/my_toolbar_trabajos_diarios"
+        layout="@layout/actionbar">
+    </include>
     <TextView
         android:padding="5dp"
+        android:layout_below="@id/my_toolbar_trabajos_diarios"
         android:id="@+id/textViewDailyWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/submenu_daily_work"

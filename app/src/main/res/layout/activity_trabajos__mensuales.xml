@@ -7,20 +7,22 @@
     android:id="@+id/relativeLayoutTrabajosMensuales"
     tools:context=".Activities.Trabajos_Mensuales">
 
+<include
+    android:id="@+id/my_toolbar_trabajos_mensuales"
+    layout="@layout/actionbar">
+</include>
     <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/LinearLayoutMonthlyTask"
         android:id="@+id/recyclerViewMonthlyTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </android.support.v7.widget.RecyclerView>
-
     <TextView
         android:id="@+id/textViewMonthlyWork"
         android:padding="5dp"
+        android:layout_below="@+id/my_toolbar_trabajos_mensuales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/submenu_monthly_work"

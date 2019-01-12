@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -18,11 +18,8 @@ import android.widget.TextView;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 
@@ -45,12 +42,18 @@ public class Detalle_tareas extends AppCompatActivity {
     private DatabaseReference task;
     private SharedPreferences preferences;
     private String tipo;
+    private ActionBar ab;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.activity_detalle_tareas_diarias);
+        setContentView(R.layout.activity_detalle_tareas);
+        toolbar = findViewById(R.id.my_toolbar_detalle_tareas);
+        setSupportActionBar(toolbar);
+        ab = getSupportActionBar();
+        ab.setDisplayShowTitleEnabled(false);
+        ab.setDisplayHomeAsUpEnabled(true);
         textViewTipo_Tarea = findViewById(R.id.textViewDailyWork2);
         textViewTipo = findViewById(R.id.textViewDetalleTipo);
         textViewUbicacion = findViewById(R.id.textViewDetalleUbicacion);
@@ -63,7 +66,6 @@ public class Detalle_tareas extends AppCompatActivity {
         textViewTrabajoSolicitado = findViewById(R.id.textViewDetalleTrabajoSolicitado);
         buttonFinalizarTarea = findViewById(R.id.buttonFinalizarTarea);
         tipo = preferences.getString("administrador", "usuario");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         database_hcsf = Utils.getDatabase();
         final String tipo_tarea = getIntent().getExtras().get("trabajos").toString();
         if (tipo_tarea.equals("diarios")) {

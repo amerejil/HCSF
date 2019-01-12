@@ -2,8 +2,10 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.content.pm.ActivityInfo;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,11 +28,6 @@ public class Agregar_trabajos extends AppCompatActivity {
     private String stringUbicacion;
     private String stringPiso;
     private String stringAtencion;
-    private String stringArea;
-    private String stringSolicitante;
-    private String stringSubarea;
-    private String stringTrabajoSolicitado;
-    private String stringFecha_inicio_entero;
     private EditText area;
     private EditText subarea;
     private TextView textViewTipo;
@@ -41,17 +38,19 @@ public class Agregar_trabajos extends AppCompatActivity {
     private Spinner atencion;
     private FloatingActionButton enviarTarea;
     private DatabaseReference task;
-    private DatabaseReference monthly_task;
     private FirebaseDatabase database_hcsf;
-    private String stringFecha_inicio;
-    private String stringEstado;
+    private ActionBar ab;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_agregar_trabajos);
+        toolbar = findViewById(R.id.my_toolbar_agregar_tareas);
+        setSupportActionBar(toolbar);
+        ab = getSupportActionBar();
+        ab.setDisplayShowTitleEnabled(false);
+        ab.setDisplayHomeAsUpEnabled(true);
         area = findViewById(R.id.editTextArea);
         subarea = findViewById(R.id.editTextSubrea);
         solicitante = findViewById(R.id.editTextSolicitante);
@@ -66,7 +65,7 @@ public class Agregar_trabajos extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(this, R.array.tipo, R.layout.spinner_item);
         ArrayAdapter<CharSequence> adapterUbicacion = ArrayAdapter.createFromResource(this, R.array.ubicacion, R.layout.spinner_item);
         ArrayAdapter<CharSequence> adapterPiso = ArrayAdapter.createFromResource(this, R.array.piso, R.layout.spinner_item);
-        ArrayAdapter<CharSequence> adapterAtemcion = ArrayAdapter.createFromResource(this, R.array.atencion, R.layout.spinner_item);
+        final ArrayAdapter<CharSequence> adapterAtemcion = ArrayAdapter.createFromResource(this, R.array.atencion, R.layout.spinner_item);
         ubicacion.setAdapter(adapterUbicacion);
         tipo.setAdapter(adapterTipo);
         piso.setAdapter(adapterPiso);
@@ -130,22 +129,32 @@ public class Agregar_trabajos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 long date = System.currentTimeMillis();
-                stringEstado = "No iniciado";
+                data_task data=new data_task();
+                String value = task.push().getKey();
                 SimpleDateFormat f_date = new SimpleDateFormat("dd/MM/yyyy");
                 SimpleDateFormat f_date_entero = new SimpleDateFormat("ddMMyyyy");
-                stringFecha_inicio_entero = f_date_entero.format(date);
-                stringFecha_inicio = f_date.format(date);
-                stringSubarea = subarea.getText().toString();
-                stringSolicitante = solicitante.getText().toString();
-                stringTrabajoSolicitado = trabajo_solicitado.getText().toString();
-                stringArea = area.getText().toString();
-                String value = task.push().getKey();
-                Toast.makeText(Agregar_trabajos.this, stringFecha_inicio, Toast.LENGTH_SHORT).show();
-                task.child(value).setValue(
-                        new data_task(value, stringTipo, stringUbicacion, stringPiso, stringArea,
-                        stringSubarea, stringAtencion, stringSolicitante, stringTrabajoSolicitado,
-                        stringFecha_inicio, stringFecha_inicio_entero, "", "",
-                        stringEstado, "Desconocido", "",""));
+                data.setArea(area.getText().toString());
+                data.setAtencion(stringAtencion);
+                data.setEstado("No iniciado");
+                data.setEstado_equipo("");
+                data.setFecha_finalizacion("");
+                data.setFecha_finalizacion_entero("");
+                data.setFecha_inicio(f_date.format(date));
+                data.setFecha_inicio_entero(f_date_entero.format(date));
+                data.setId(value);
+                data.setNota("");
+                data.setPiso(stringPiso);
+                data.setSolicitante(solicitante.getText().toString());
+                data.setSubarea(subarea.getText().toString());
+                data.setTipo(stringTipo);
+                data.setTrabajo_solicitado(trabajo_solicitado.getText().toString());
+                data.setUbicacion(stringUbicacion);
+                task.child(value).setValue(data);
+                Toast.makeText(Agregar_trabajos.this,"Trabajo Enviado",Toast.LENGTH_SHORT).show();
+                area.setText("");
+                subarea.setText("");
+                solicitante.setText("");
+                trabajo_solicitado.setText("");
             }
         });
     }

@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "1051546622460-jlbocl0c3sp9q85o6boitq7gm0cq03pf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amere.aplicacion_mantenimiento_hcsf",
+            "certificate_hash": "8da3bebc9910dca3f0e3375883892a732d3245e6"
+          }
+        },
+        {
           "client_id": "1051546622460-vchpfcng68pv7pdg4o7u3kor6c844g34.apps.googleusercontent.com",
           "client_type": 3
         }

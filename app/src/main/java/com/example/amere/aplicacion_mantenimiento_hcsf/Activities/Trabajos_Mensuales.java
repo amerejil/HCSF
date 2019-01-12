@@ -4,12 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +22,6 @@ import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task
 import com.example.amere.aplicacion_mantenimiento_hcsf.OnSwipeTouchListener;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
-import com.example.amere.aplicacion_mantenimiento_hcsf.administrador_notificaciones;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,16 +45,20 @@ public class Trabajos_Mensuales extends AppCompatActivity {
     private FloatingActionButton floatingActionButtonAddMonthlyTask;
     private RelativeLayout relativeLayout;
     private String tipo;
+    private ActionBar ab;
+    private Toolbar toolbar;
     private SharedPreferences preferences;
-
+    private int orientation;
     @SuppressLint("ClickableViewAccessibility")
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajos__mensuales);
+        toolbar= findViewById(R.id.my_toolbar_trabajos_mensuales);
+        setSupportActionBar(toolbar);
+        orientation=getResources().getConfiguration().orientation;
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         database_hcsf = Utils.getDatabase();
         task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
@@ -72,7 +76,9 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         final Query orden_estado = task.orderByChild("estado");
         final Query orden_tipo = task.orderByChild("tipo");
         final Query orden_fecha = task.orderByChild("fecha_inicio_entero");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ab = getSupportActionBar();
+        ab.setDisplayShowTitleEnabled(false);
+        ab.setDisplayHomeAsUpEnabled(true);
         final ValueEventListener listener = new ValueEventListener() {
 
             @Override
@@ -95,7 +101,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                         startActivity(intent_detalle_tareas);
 
                     }
-                }, Trabajos_Mensuales.this, preferences, "mensual");
+                }, Trabajos_Mensuales.this, preferences, "mensual",orientation);
                 recyclerViewTMonthlyTask.setAdapter(adaptador);
                 // This method is called once with the initial value and again
 

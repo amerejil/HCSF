@@ -2,6 +2,7 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Adapters;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -28,13 +29,17 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
     private Activity activity;
     private SharedPreferences preferences;
     private String tipo_tarea;
+    private int orientation;
 
-    public Adapter_for_task_list(ArrayList<data_task> item_menus, OnItemClickListener listener, Activity activity, SharedPreferences preferences, String tipo_tarea) {
+    public Adapter_for_task_list(ArrayList<data_task> item_menus, OnItemClickListener listener,
+                                 Activity activity, SharedPreferences preferences, String tipo_tarea,
+                                 int orientation) {
         this.item_menus = item_menus;
         this.listener = listener;
         this.activity = activity;
         this.preferences = preferences;
         this.tipo_tarea = tipo_tarea;
+        this.orientation=orientation;
     }
 
 
@@ -82,9 +87,21 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         }
 
         public void bind(final data_task data, final OnItemClickListener listener) {
+            if(orientation==Configuration.ORIENTATION_PORTRAIT)
+            {
+                this.textViewPiso.setVisibility(View.GONE);
+                this.textViewArea.setVisibility(View.GONE);
+                this.textViewSubarea.setVisibility(View.GONE);
+            }
             this.textViewDate.setText(data.getFecha_inicio());
             this.textViewType.setText(data.getTipo());
-            this.textViewSubtipo.setText(data.getSubtipo());
+            if(orientation==Configuration.ORIENTATION_PORTRAIT) {
+                this.textViewSubtipo.setText(data.getEstado());
+            }
+            if(orientation==Configuration.ORIENTATION_LANDSCAPE)
+            {
+                this.textViewSubtipo.setText(data.getSubtipo());
+            }
             this.textViewPiso.setText(data.getPiso());
             this.textViewArea.setText(data.getArea());
             this.textViewSubarea.setText(data.getSubarea());

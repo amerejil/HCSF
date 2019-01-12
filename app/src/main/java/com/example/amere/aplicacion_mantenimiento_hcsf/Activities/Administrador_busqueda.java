@@ -3,12 +3,12 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,16 +40,19 @@ public class Administrador_busqueda extends AppCompatActivity {
     private TextView textViewTipo;
     private LinearLayoutManager linearLayoutManager_daily_task;
     private SharedPreferences preferences;
-
+    private Toolbar toolbar;
+    private int orientation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrador_busqueda);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        toolbar = findViewById(R.id.my_toolbar_administrador_busqueda);
+        setSupportActionBar(toolbar);
         textView1 = findViewById(R.id.textViewTypeSearch);
         textView2 = findViewById(R.id.textViewDateSearch);
         textView3 = findViewById(R.id.textViewStateSearch);
         textViewTipo = findViewById(R.id.textViewDailyWork3);
+        orientation=getResources().getConfiguration().orientation;
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         database_hcsf = Utils.getDatabase();
         String estado = getIntent().getExtras().get("estado").toString();
@@ -157,7 +160,7 @@ public class Administrador_busqueda extends AppCompatActivity {
                                         startActivity(intent_detalle_tareas);
 
                                     }
-                                }, Administrador_busqueda.this, preferences, "diario");
+                                }, Administrador_busqueda.this, preferences, "diario",orientation);
                             }
                             else
                             {
@@ -171,7 +174,7 @@ public class Administrador_busqueda extends AppCompatActivity {
                                         startActivity(intent_detalle_tareas);
 
                                     }
-                                }, Administrador_busqueda.this, preferences, "");
+                                }, Administrador_busqueda.this, preferences, "",orientation);
                             }
                             recyclerViewTDailyTask.setAdapter(adaptador);
                         } else {
@@ -214,14 +217,18 @@ public class Administrador_busqueda extends AppCompatActivity {
                             startActivity(intent_detalle_tareas);
 
                         }
-                    }, Administrador_busqueda.this, preferences, "");
+                    }, Administrador_busqueda.this, preferences, "",orientation);
                     recyclerViewTDailyTask.setAdapter(adaptador);
                 } else {
 
                     task.addValueEventListener(valueEventListener);
+                    recyclerViewTDailyTask.setAdapter(adaptador);
+
                 }
 
+                task.removeEventListener(valueEventListener);
                 return true;
+
             }
         });
 

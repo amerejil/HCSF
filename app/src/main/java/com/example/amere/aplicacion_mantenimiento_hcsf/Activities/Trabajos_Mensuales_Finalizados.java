@@ -2,10 +2,12 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,13 +38,17 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
     private TextView textViewType;
     private TextView textViewDateStart;
     private TextView textViewDateFinished;
-
+    private ActionBar ab;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_trabajos_mensuales_finalizados);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar = findViewById(R.id.my_toolbar_trabajos_mensuales_finalizados);
+        setSupportActionBar(toolbar);
+        ab = getSupportActionBar();
+        ab.setDisplayShowTitleEnabled(false);
+        ab.setDisplayHomeAsUpEnabled(true);
         textViewType = findViewById(R.id.textViewType_Finished);
         textViewDateStart = findViewById(R.id.textView_DateStart);
         textViewDateFinished = findViewById(R.id.textView_DateFinished);

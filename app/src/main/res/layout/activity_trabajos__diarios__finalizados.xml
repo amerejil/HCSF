@@ -4,12 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.Trabajos_Diarios_Finalizados">
-
+    <include
+        android:id="@+id/my_toolbar_trabajos_diarios_finalizados"
+        layout="@layout/actionbar">
+    </include>
     <TextView
+        android:layout_below="@+id/my_toolbar_trabajos_diarios_finalizados"
         android:id="@+id/textViewWorkFinished"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/submenu_daily_work_finished"
