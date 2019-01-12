@@ -166,7 +166,7 @@ public class Agregar_trabajos extends AppCompatActivity {
                 data.setTipo(stringTipo);
                 data.setTrabajo_solicitado(trabajo_solicitado.getText().toString());
                 data.setUbicacion(stringUbicacion);
-                task.child(value).setValue(data);
+                task.child(value).setValue(data);//comentariogit
                 Toast.makeText(Agregar_trabajos.this,"Trabajo Enviado",Toast.LENGTH_SHORT).show();
                 area.setText("");
                 subarea.setText("");
