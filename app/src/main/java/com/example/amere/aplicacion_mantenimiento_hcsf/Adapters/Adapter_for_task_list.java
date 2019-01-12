@@ -68,8 +68,9 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         public TextView textViewPiso;
         public TextView textViewArea;
         public TextView textViewSubarea;
+        public TextView textViewUbicacion;
         public CardView cardView;
-        private DatabaseReference daily_task;
+        private DatabaseReference task;
         private DatabaseReference monthly_task;
         private FirebaseDatabase database_hcsf;
 
@@ -81,36 +82,44 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
             this.textViewPiso = itemView.findViewById(R.id.textViewPisoList);
             this.textViewArea = itemView.findViewById(R.id.textViewAreaList);
             this.textViewSubarea = itemView.findViewById(R.id.textViewSubareaList);
+            this.textViewUbicacion = itemView.findViewById(R.id.textViewUbicacionList);
             this.cardView = itemView.findViewById(R.id.cardView_lista_trabajos_diarios);
             itemView.setOnCreateContextMenuListener(this);
 
         }
 
         public void bind(final data_task data, final OnItemClickListener listener) {
-            if(orientation==Configuration.ORIENTATION_PORTRAIT)
-            {
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                 this.textViewPiso.setVisibility(View.GONE);
                 this.textViewArea.setVisibility(View.GONE);
                 this.textViewSubarea.setVisibility(View.GONE);
+                this.textViewUbicacion.setVisibility(View.GONE);
             }
             this.textViewDate.setText(data.getFecha_inicio());
             this.textViewType.setText(data.getTipo());
-            if(orientation==Configuration.ORIENTATION_PORTRAIT) {
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                 this.textViewSubtipo.setText(data.getEstado());
             }
-            if(orientation==Configuration.ORIENTATION_LANDSCAPE)
-            {
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 this.textViewSubtipo.setText(data.getSubtipo());
             }
+            /*if (data.getSubtipo()!=null){
+                this.textViewSubtipo.setText(data.getSubtipo());
+            }
+
+*/
+
             this.textViewPiso.setText(data.getPiso());
             this.textViewArea.setText(data.getArea());
             this.textViewSubarea.setText(data.getSubarea());
+            this.textViewUbicacion.setText(data.getUbicacion());
             this.textViewDate.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
             this.textViewType.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
             this.textViewSubtipo.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
             this.textViewPiso.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
             this.textViewArea.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
             this.textViewSubarea.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
+            this.textViewUbicacion.setTextColor(ContextCompat.getColor(activity, R.color.text_button_color));
 
 
             if (data.getAtencion().equals("Alta")) {
@@ -134,30 +143,24 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             database_hcsf = Utils.getDatabase();
-            daily_task = database_hcsf.getReference("Tareas_prueba"); //cambio
+            if(tipo_tarea.equals("diario")){
+                task = database_hcsf.getReference("Tareas_prueba"); //cambio
+            }else{
+                task = database_hcsf.getReference("Tareas_Mensuales_prueba"); //cambio
+            }
             monthly_task = database_hcsf.getReference("Tareas_Mensuales_prueba"); //cambio
             String id = item_menus.get(this.getAdapterPosition()).getId();
             switch (item.getItemId()) {
                 case R.id.change_state_iniciado: {
-                    if (tipo_tarea.equals("diario"))
-
-                        daily_task.child(id).child("estado").setValue("En proceso");
-                    else
-                        monthly_task.child(id).child("estado").setValue("En proceso");
+                    task.child(id).child("estado").setValue("En proceso");
                 }
                 return true;
                 case R.id.delete_task_administrador: {
-                    if (tipo_tarea.equals("diario"))
-                        daily_task.child(id).removeValue();
-                    else
-                        monthly_task.child(id).removeValue();
+                    task.child(id).removeValue();
                 }
                 return true;
                 case R.id.change_state_pausado: {
-                    if (tipo_tarea.equals("diario"))
-                        daily_task.child(id).child("estado").setValue("Pausado");
-                    else
-                        monthly_task.child(id).child("estado").setValue("Pausado");
+                    task.child(id).child("estado").setValue("Pausado");
                 }
                 return true;
                 default:

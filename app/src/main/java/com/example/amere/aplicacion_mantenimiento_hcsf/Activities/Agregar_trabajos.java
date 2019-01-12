@@ -28,12 +28,14 @@ public class Agregar_trabajos extends AppCompatActivity {
     private String stringUbicacion;
     private String stringPiso;
     private String stringAtencion;
+    private String stringSubtipo;
     private EditText area;
     private EditText subarea;
     private TextView textViewTipo;
     private EditText solicitante;
     private EditText trabajo_solicitado;
     private Spinner ubicacion;
+    private Spinner subtipo;
     private Spinner piso;
     private Spinner atencion;
     private FloatingActionButton enviarTarea;
@@ -53,6 +55,7 @@ public class Agregar_trabajos extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         area = findViewById(R.id.editTextArea);
         subarea = findViewById(R.id.editTextSubrea);
+        subtipo = findViewById(R.id.spinnerSubtipo);
         solicitante = findViewById(R.id.editTextSolicitante);
         trabajo_solicitado = findViewById(R.id.editText);
         tipo = findViewById(R.id.spinner1);
@@ -65,10 +68,12 @@ public class Agregar_trabajos extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(this, R.array.tipo, R.layout.spinner_item);
         ArrayAdapter<CharSequence> adapterUbicacion = ArrayAdapter.createFromResource(this, R.array.ubicacion, R.layout.spinner_item);
         ArrayAdapter<CharSequence> adapterPiso = ArrayAdapter.createFromResource(this, R.array.piso, R.layout.spinner_item);
+        ArrayAdapter<CharSequence> adapterSubtipo = ArrayAdapter.createFromResource(this, R.array.subtipo, R.layout.spinner_item);
         final ArrayAdapter<CharSequence> adapterAtemcion = ArrayAdapter.createFromResource(this, R.array.atencion, R.layout.spinner_item);
         ubicacion.setAdapter(adapterUbicacion);
         tipo.setAdapter(adapterTipo);
         piso.setAdapter(adapterPiso);
+        subtipo.setAdapter(adapterSubtipo);
         atencion.setAdapter(adapterAtemcion);
         final String tipo_trabajo = getIntent().getExtras().get("trabajos").toString();
         if (!tipo_trabajo.equals("diarios")) {
@@ -94,6 +99,17 @@ public class Agregar_trabajos extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 stringUbicacion = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        subtipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                stringSubtipo = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -146,6 +162,7 @@ public class Agregar_trabajos extends AppCompatActivity {
                 data.setPiso(stringPiso);
                 data.setSolicitante(solicitante.getText().toString());
                 data.setSubarea(subarea.getText().toString());
+                data.setSubtipo(stringSubtipo);
                 data.setTipo(stringTipo);
                 data.setTrabajo_solicitado(trabajo_solicitado.getText().toString());
                 data.setUbicacion(stringUbicacion);

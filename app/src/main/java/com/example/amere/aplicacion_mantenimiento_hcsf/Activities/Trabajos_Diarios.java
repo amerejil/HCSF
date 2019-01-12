@@ -100,6 +100,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
             textViewPiso.setVisibility(View.GONE);
             textViewArea.setVisibility(View.GONE);
             textViewSubarea.setVisibility(View.GONE);
+
             textViewState.setText(R.string.state);
         }
         final Query orden_estado = task.orderByChild("estado");

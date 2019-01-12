@@ -67,9 +67,9 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         linearLayoutManager_montly_task = new LinearLayoutManager(this);
         linearLayoutManager_montly_task.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewTMonthlyTask.setLayoutManager(linearLayoutManager_montly_task);
-        textViewType = findViewById(R.id.textViewTypeMonthlyTask);
-        textViewDate = findViewById(R.id.textViewDateMonthlyTask);
-        textViewState = findViewById(R.id.textViewStateMonthlyTask);
+        textViewType = findViewById(R.id.textViewTypeMensual);
+        textViewDate = findViewById(R.id.textViewDateMensual);
+        textViewState = findViewById(R.id.textViewSubtipoMensual);
         relativeLayout = findViewById(R.id.relativeLayoutTrabajosMensuales);
         floatingActionButtonAddMonthlyTask = findViewById(R.id.floatingActionButton_Add_MonthlyTask);
         tipo = preferences.getString("administrador", "usuario");
