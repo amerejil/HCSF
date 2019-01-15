@@ -107,7 +107,7 @@ public class Detalle_tareas extends AppCompatActivity {
                 stringFecha_finalizacion = f_date.format(date);
                 task.child(Id).child("fecha_finalizacion").setValue(stringFecha_finalizacion);
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
-                task.child(Id).child("fecha_finalizacion_entero").setValue(stringFecha_finalizacion_entero);
+                task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(stringFecha_finalizacion_entero));
                 if (tipo_tarea.equals("diarios")) {
                     Intent intent = new Intent(Detalle_tareas.this, Trabajos_Diarios.class);
 
@@ -131,8 +131,9 @@ public class Detalle_tareas extends AppCompatActivity {
                 String Id = getIntent().getExtras().get("Id").toString();
                 task.child(Id).child("estado_equipo").setValue("De baja");
                 task.child(Id).child("estado").setValue("Finalizado");
+
                 task.child(Id).child("fecha_finalizacion").setValue(stringFecha_finalizacion);
-                task.child(Id).child("fecha_finalizacion_entero").setValue(stringFecha_finalizacion_entero);
+                task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(stringFecha_finalizacion_entero));
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
                 if (tipo_tarea.equals("diarios")) {
                     Intent intent = new Intent(Detalle_tareas.this, Trabajos_Diarios.class);

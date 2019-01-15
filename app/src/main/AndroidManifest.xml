@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.amere.aplicacion_mantenimiento_hcsf"
-    >
+    package="com.example.amere.aplicacion_mantenimiento_hcsf">
 
     <application
         android:allowBackup="true"
@@ -18,13 +17,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".Activities.Trabajos_Diarios"
-            android:parentActivityName=".Activities.Menu_Principal">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.Menu_Principal" />
         </activity>
         <activity
             android:name=".Activities.Trabajos_Mensuales"
@@ -50,8 +42,7 @@
         <activity
             android:name=".Activities.Agregar_trabajos"
             android:configChanges="screenSize|orientation"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <service android:name=".NotificationService">
             <intent-filter>
@@ -62,15 +53,18 @@
         <activity
             android:name=".Activities.Detalle_tareas"
             android:configChanges="screenSize|orientation"
-
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".Activities.Detalle_tareas_finalizadas"></activity>
+        <activity android:name=".Activities.Administrador_busqueda" />
         <activity
-            android:name=".Activities.Detalle_tareas_finalizadas"
+            android:name=".Activities.Trabajos_Diarios"
+            android:parentActivityName=".Activities.Menu_Principal"
             >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.Menu_Principal" />
+
         </activity>
-        <activity android:name=".Activities.Administrador_busqueda"></activity>
     </application>
 
 </manifest>

@@ -38,6 +38,11 @@ public class Agregar_trabajos extends AppCompatActivity {
     private Spinner subtipo;
     private Spinner piso;
     private Spinner atencion;
+    private ArrayAdapter<CharSequence> adapterTipo;
+    private ArrayAdapter<CharSequence> adapterUbicacion;
+    private ArrayAdapter<CharSequence> adapterPiso;
+    private ArrayAdapter<CharSequence> adapterSubtipo;
+    private ArrayAdapter<CharSequence> adapterAtencion;
     private FloatingActionButton enviarTarea;
     private DatabaseReference task;
     private FirebaseDatabase database_hcsf;
@@ -65,16 +70,16 @@ public class Agregar_trabajos extends AppCompatActivity {
         atencion = findViewById(R.id.spinner4);
         enviarTarea = findViewById(R.id.floatingActionButton1);
         database_hcsf = FirebaseDatabase.getInstance();
-        ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(this, R.array.tipo, R.layout.spinner_item);
-        ArrayAdapter<CharSequence> adapterUbicacion = ArrayAdapter.createFromResource(this, R.array.ubicacion, R.layout.spinner_item);
-        ArrayAdapter<CharSequence> adapterPiso = ArrayAdapter.createFromResource(this, R.array.piso, R.layout.spinner_item);
-        ArrayAdapter<CharSequence> adapterSubtipo = ArrayAdapter.createFromResource(this, R.array.subtipo, R.layout.spinner_item);
-        final ArrayAdapter<CharSequence> adapterAtemcion = ArrayAdapter.createFromResource(this, R.array.atencion, R.layout.spinner_item);
+        adapterTipo= ArrayAdapter.createFromResource(this, R.array.tipo, R.layout.spinner_item);
+        adapterUbicacion = ArrayAdapter.createFromResource(this, R.array.ubicacion, R.layout.spinner_item);
+        adapterPiso = ArrayAdapter.createFromResource(this, R.array.piso, R.layout.spinner_item);
+        adapterSubtipo = ArrayAdapter.createFromResource(this, R.array.subtipo, R.layout.spinner_item);
+        adapterAtencion = ArrayAdapter.createFromResource(this, R.array.atencion, R.layout.spinner_item);
         ubicacion.setAdapter(adapterUbicacion);
         tipo.setAdapter(adapterTipo);
         piso.setAdapter(adapterPiso);
         subtipo.setAdapter(adapterSubtipo);
-        atencion.setAdapter(adapterAtemcion);
+        atencion.setAdapter(adapterAtencion);
         final String tipo_trabajo = getIntent().getExtras().get("trabajos").toString();
         if (!tipo_trabajo.equals("diarios")) {
             textViewTipo.setText(R.string.new_monthly_task);
@@ -154,9 +159,9 @@ public class Agregar_trabajos extends AppCompatActivity {
                 data.setEstado("No iniciado");/////
                 data.setEstado_equipo("");
                 data.setFecha_finalizacion("");
-                data.setFecha_finalizacion_entero("");
+                data.setFecha_finalizacion_entero(0);
                 data.setFecha_inicio(f_date.format(date));
-                data.setFecha_inicio_entero(f_date_entero.format(date));
+                data.setFecha_inicio_entero(Integer.parseInt(f_date_entero.format(date)));
                 data.setId(value);
                 data.setNota("");
                 data.setPiso(stringPiso);
@@ -167,11 +172,12 @@ public class Agregar_trabajos extends AppCompatActivity {
                 data.setTrabajo_solicitado(trabajo_solicitado.getText().toString());
                 data.setUbicacion(stringUbicacion);
                 task.child(value).setValue(data);//comentariogit
-                Toast.makeText(Agregar_trabajos.this,"Trabajo Enviado",Toast.LENGTH_SHORT).show();
                 area.setText("");
                 subarea.setText("");
                 solicitante.setText("");
                 trabajo_solicitado.setText("");
+                String enviado="Trabajo Enviado";
+                Toast.makeText(Agregar_trabajos.this,enviado,Toast.LENGTH_SHORT).show();
             }
         });
     }

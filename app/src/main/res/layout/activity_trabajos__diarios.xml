@@ -39,11 +39,15 @@
             android:layout_gravity="center"
             android:textStyle="bold"
             android:textSize="18sp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_height="wrap_content"
             android:text="@string/date" />
         <TextView
             android:id="@+id/textViewType"
             android:padding="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_width="0dp"
             android:layout_weight="0.2"
             android:gravity="center"
@@ -56,6 +60,8 @@
         <TextView
             android:padding="5dp"
             android:id="@+id/textViewSubtipo"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_width="0dp"
             android:layout_weight="0.16"
             android:textStyle="bold"
@@ -68,6 +74,8 @@
         <TextView
             android:padding="5dp"
             android:id="@+id/textViewPiso"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_width="0dp"
             android:layout_weight="0.16"
             android:textStyle="bold"
@@ -79,6 +87,8 @@
         <TextView
             android:padding="5dp"
             android:id="@+id/textViewArea"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_width="0dp"
             android:layout_weight="0.16"
             android:textStyle="bold"
@@ -90,6 +100,8 @@
         <TextView
             android:padding="5dp"
             android:id="@+id/textViewSubarea"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_width="0dp"
             android:layout_weight="0.16"
             android:textStyle="bold"
@@ -101,6 +113,8 @@
         <TextView
             android:padding="5dp"
             android:id="@+id/textViewUbicacion"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_width="0dp"
             android:layout_weight="0.16"
             android:textStyle="bold"

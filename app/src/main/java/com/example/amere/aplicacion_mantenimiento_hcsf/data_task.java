@@ -1,6 +1,7 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class data_task implements Serializable {
 
@@ -17,12 +18,9 @@ public class data_task implements Serializable {
     private String solicitante;
     private String trabajo_solicitado;
     private String subtipo;
-
-
-
     private String estado_equipo;
-    private String fecha_inicio_entero;
-    private String fecha_finalizacion_entero;
+    private int fecha_inicio_entero;
+    private int fecha_finalizacion_entero;
     private String nota;
 
 //Añadir nuevos campos requeridos
@@ -32,8 +30,8 @@ public class data_task implements Serializable {
 //Añadir nuevos campos requeridos tambien en el constructor
     public data_task(String id, String tipo, String ubicacion, String piso, String area,
                      String subarea, String atencion, String solicitante, String trabajo_solicitado,
-                     String fecha_inicio, String fecha_inicio_entero,
-                     String fecha_finalizacion, String fecha_finalizacion_entero,
+                     String fecha_inicio, int fecha_inicio_entero,
+                     String fecha_finalizacion, int fecha_finalizacion_entero,
                      String estado, String estado_equipo, String nota, String subtipo) {
         this.tipo = tipo;
         this.ubicacion = ubicacion;
@@ -106,7 +104,7 @@ public class data_task implements Serializable {
         return estado_equipo;
     }
 
-    public String getFecha_inicio_entero() {
+    public int getFecha_inicio_entero() {
         return fecha_inicio_entero;
     }
 
@@ -114,7 +112,7 @@ public class data_task implements Serializable {
         return nota;
     }
 
-    public String getFecha_finalizacion_entero() {
+    public int getFecha_finalizacion_entero() {
         return fecha_finalizacion_entero;
     }
 
@@ -174,11 +172,11 @@ public class data_task implements Serializable {
         this.fecha_finalizacion = fecha_finalizacion;
     }
 
-    public void setFecha_inicio_entero(String fecha_inicio_entero) {
+    public void setFecha_inicio_entero(int fecha_inicio_entero) {
         this.fecha_inicio_entero = fecha_inicio_entero;
     }
 
-    public void setFecha_finalizacion_entero(String fecha_finalizacion_entero) {
+    public void setFecha_finalizacion_entero(int fecha_finalizacion_entero) {
         this.fecha_finalizacion_entero = fecha_finalizacion_entero;
     }
 
@@ -190,4 +188,12 @@ public class data_task implements Serializable {
         this.estado = estado;
 
     }
+    public static Comparator<data_task> orden_tipo=new Comparator<data_task>() {
+        @Override
+        public int compare(data_task o1, data_task o2) {
+            String tipo1=o1.getTipo();
+            String tipo2=o2.getTipo();
+            return tipo1.compareTo(tipo2);
+        }
+    };
 }

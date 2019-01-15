@@ -26,9 +26,9 @@ public class BD_sql_lite extends SQLiteOpenHelper {
                 Constantes_base_datos.TABLE_TAREAS_DIARIAS_ESTADO+" TEXT, "+
                 Constantes_base_datos.TABLE_TAREAS_DIARIAS_ESTADO_EQUIPO+" TEXT, "+
                 Constantes_base_datos.TABLE_TAREAS_DIARIAS_FECHA_FINALIZACION+" TEXT, "+
-                Constantes_base_datos.TABLE_TAREAS_DIARIAS_FECHA_FINALIZACION_ENTERO+" TEXT, "+
+                Constantes_base_datos.TABLE_TAREAS_DIARIAS_FECHA_FINALIZACION_ENTERO+" INT, "+
                 Constantes_base_datos.TABLE_TAREAS_DIARIAS_FECHA_INICIO+" TEXT, "+
-                Constantes_base_datos.TABLE_TAREAS_DIARIAS_FECHA_INICIO_ENTERO+" TEXT, "+
+                Constantes_base_datos.TABLE_TAREAS_DIARIAS_FECHA_INICIO_ENTERO+" INT, "+
                 Constantes_base_datos.TABLE_TAREAS_DIARIAS_ID+" TEXT, "+
                 Constantes_base_datos.TABLE_TAREAS_DIARIAS_NOTA+" TEXT, "+
                 Constantes_base_datos.TABLE_TAREAS_DIARIAS_PISO+" TEXT, "+
@@ -38,11 +38,13 @@ public class BD_sql_lite extends SQLiteOpenHelper {
                 Constantes_base_datos.TABLE_TAREAS_DIARIAS_TRABAJO_SOLICITADO+" TEXT, "+
                 Constantes_base_datos.TABLE_TAREAS_DIARIAS_UBICACION+" TEXT "+")";
         db.execSQL(queryCrearTablaTareas);
+        db.close();
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.close();
 
     }
     public ArrayList<data_task> obtenerDatos()
@@ -59,9 +61,9 @@ public class BD_sql_lite extends SQLiteOpenHelper {
             data.setEstado(registros.getString(2));
             data.setEstado_equipo(registros.getString(3));
             data.setFecha_finalizacion(registros.getString(4));
-            data.setFecha_finalizacion_entero(registros.getString(5));
+            data.setFecha_finalizacion_entero(registros.getInt(5));
             data.setFecha_inicio(registros.getString(6));
-            data.setFecha_inicio_entero(registros.getString(7));
+            data.setFecha_inicio_entero(registros.getInt(7));
             data.setId(registros.getString(8));
             data.setNota(registros.getString(9));
             data.setPiso(registros.getString(10));
@@ -81,5 +83,12 @@ public class BD_sql_lite extends SQLiteOpenHelper {
     {
         SQLiteDatabase db=this.getWritableDatabase();
         db.insert(Constantes_base_datos.TABLE_TAREAS_DIARIAS,null,contentValues);
+        db.close();
+    }
+    public  void deleteTable(String nameTable)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.delete(nameTable, null, null);
+        db.close();
     }
 }

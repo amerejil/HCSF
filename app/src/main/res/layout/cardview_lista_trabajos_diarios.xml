@@ -19,6 +19,8 @@
         <TextView
             android:gravity="center"
             android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:id="@+id/textViewDateList"
             android:layout_width="0dp"
             android:layout_weight="0.16"
@@ -27,6 +29,8 @@
         <TextView
             android:gravity="center"
             android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:id="@+id/textViewTypeList"
             android:layout_width="0dp"
             android:layout_weight="0.2"
@@ -35,6 +39,8 @@
         <TextView
             android:gravity="center"
             android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:id="@+id/textViewSubtipoList"
             android:layout_width="0dp"
             android:layout_weight="0.16"
@@ -43,6 +49,8 @@
         <TextView
             android:gravity="center"
             android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:id="@+id/textViewPisoList"
             android:layout_width="0dp"
             android:layout_weight="0.16"
@@ -51,6 +59,8 @@
         <TextView
             android:gravity="center"
             android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:id="@+id/textViewAreaList"
             android:layout_width="0dp"
             android:layout_weight="0.16"
@@ -59,6 +69,8 @@
         <TextView
             android:gravity="center"
             android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:id="@+id/textViewSubareaList"
             android:layout_width="0dp"
             android:layout_weight="0.16"
@@ -67,6 +79,8 @@
         <TextView
             android:gravity="center"
             android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:id="@+id/textViewUbicacionList"
             android:layout_width="0dp"
             android:layout_weight="0.16"

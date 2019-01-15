@@ -49,7 +49,6 @@ public class Trabajos_Mensuales extends AppCompatActivity {
     private Toolbar toolbar;
     private SharedPreferences preferences;
     private int orientation;
-    @SuppressLint("ClickableViewAccessibility")
 
 
     @Override
@@ -139,6 +138,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         textViewDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                task.removeEventListener(listener);
                 textViewState.setText(getString(R.string.state));
                 textViewType.setText(getString(R.string.type));
                 textViewDate.setText("Fecha ↓");
@@ -151,6 +151,7 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         textViewState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                task.removeEventListener(listener);
                 textViewDate.setText(getString(R.string.date));
                 textViewType.setText(getString(R.string.type));
                 textViewState.setText("Estado ↓");
@@ -160,13 +161,6 @@ public class Trabajos_Mensuales extends AppCompatActivity {
             }
         });
 
-        relativeLayout.setOnTouchListener(new OnSwipeTouchListener(Trabajos_Mensuales.this) {
-            public void onSwipeRight() {
-                Intent intent = new Intent(Trabajos_Mensuales.this, Menu_Principal.class);
-                startActivity(intent);
-
-            }
-        });
 
         if (tipo.equals("usuario")) {
             floatingActionButtonAddMonthlyTask.setVisibility(View.GONE);
@@ -175,9 +169,9 @@ public class Trabajos_Mensuales extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent_añadir_trabajo = new Intent(Trabajos_Mensuales.this, Agregar_trabajos.class);
-                intent_añadir_trabajo.putExtra("trabajos", "mensuales");
-                startActivity(intent_añadir_trabajo);
+                Intent intent = new Intent(Trabajos_Mensuales.this, Agregar_trabajos.class);
+                intent.putExtra("trabajos", "mensuales");
+                startActivity(intent);
 
             }
         });
