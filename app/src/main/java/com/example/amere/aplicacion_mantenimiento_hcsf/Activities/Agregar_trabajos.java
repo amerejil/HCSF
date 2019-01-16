@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
+import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -69,7 +70,7 @@ public class Agregar_trabajos extends AppCompatActivity {
         piso = findViewById(R.id.spinner3);
         atencion = findViewById(R.id.spinner4);
         enviarTarea = findViewById(R.id.floatingActionButton1);
-        database_hcsf = FirebaseDatabase.getInstance();
+        database_hcsf = Utils.getDatabase();
         adapterTipo= ArrayAdapter.createFromResource(this, R.array.tipo, R.layout.spinner_item);
         adapterUbicacion = ArrayAdapter.createFromResource(this, R.array.ubicacion, R.layout.spinner_item);
         adapterPiso = ArrayAdapter.createFromResource(this, R.array.piso, R.layout.spinner_item);

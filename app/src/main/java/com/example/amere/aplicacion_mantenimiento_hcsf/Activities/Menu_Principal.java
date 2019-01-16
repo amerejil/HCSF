@@ -73,7 +73,7 @@ public class Menu_Principal extends AppCompatActivity {
         gridLayoutManager_menu_principal = new GridLayoutManager(this, 4);
         if(orientation==Configuration.ORIENTATION_PORTRAIT)
             gridLayoutManager_menu_principal = new GridLayoutManager(this, 2);
-        Workbook wb = new HSSFWorkbook();
+        /*Workbook wb = new HSSFWorkbook();
         Sheet sheet1 = wb.createSheet("new sheet");
         OutputStream fileOut = null ;
         try {
@@ -105,7 +105,7 @@ public class Menu_Principal extends AppCompatActivity {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(Menu_Principal.this, "Successfully", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
         recyclerView_menu_principal.setLayoutManager(gridLayoutManager_menu_principal);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("administrador", "administrador");
