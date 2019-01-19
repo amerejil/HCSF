@@ -5,6 +5,9 @@
     <color name="colorAccent">#03A9F4</color>
     <color name="colorCardView_Menu">#11a7c3</color>
     <color name="text_button_color">#FFFFFF</color>
-    <color name="prioridad_alta">#d32f2f</color>
+    <color name="prioridad_alta">#D53030</color>
+    <color name="prioridad_alta_dark">#A20F0F</color>
     <color name="prioridad_bajo">#43A047</color>
+    <color name="prioridad_bajo_dark">#156319</color>
 </resources>
+

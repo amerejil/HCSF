@@ -196,7 +196,6 @@ public class Administrador_busqueda extends AppCompatActivity {
                     recyclerViewTDailyTask.setAdapter(adaptador);
                 } else {
                     task.addListenerForSingleValueEvent(valueEventListener);
-                    task.removeEventListener(valueEventListener);
 
                 }
 

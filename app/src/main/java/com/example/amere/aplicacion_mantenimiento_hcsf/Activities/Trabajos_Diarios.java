@@ -10,11 +10,15 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -27,6 +31,7 @@ import android.view.View;
 
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_list;
@@ -50,11 +55,13 @@ public class Trabajos_Diarios extends AppCompatActivity {
     private ArrayList<data_task> lista_tareas_diarias;
     private RecyclerView recyclerViewTDailyTask;
     private Adapter_for_task_list adaptador;
+    private SwipeRefreshLayout refreshLayout;
     private DatabaseReference task;
     private LinearLayoutManager linearLayoutManager_daily_task;
     private TextView textViewType;
     private TextView textViewDate;
     private TextView textViewState;
+    private TextView textViewSubtipo;
     private TextView textViewPiso;
     private TextView textViewSubarea;
     private TextView textViewArea;
@@ -73,11 +80,12 @@ public class Trabajos_Diarios extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
-        orientation=getResources().getConfiguration().orientation;
         setContentView(R.layout.activity_trabajos__diarios);
         toolbar = findViewById(R.id.my_toolbar_trabajos_diarios);
         setSupportActionBar(toolbar);
+        orientation=getResources().getConfiguration().orientation;
         ab=getSupportActionBar();
+        lista_tareas_diarias = new ArrayList<>();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
@@ -88,27 +96,46 @@ public class Trabajos_Diarios extends AppCompatActivity {
         linearLayoutManager_daily_task = new LinearLayoutManager(this);
         linearLayoutManager_daily_task.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewTDailyTask.setLayoutManager(linearLayoutManager_daily_task);
+        recyclerViewTDailyTask.setHasFixedSize(false);
+        recyclerViewTDailyTask.setItemAnimator(new DefaultItemAnimator());
+        refreshLayout=findViewById(R.id.refresh_tareas_diarias);
         textViewType = findViewById(R.id.textViewType);
         textViewDate = findViewById(R.id.textViewDate);
-        textViewState = findViewById(R.id.textViewSubtipo);
+        textViewState = findViewById(R.id.textViewEstado);
         textViewPiso=findViewById(R.id.textViewPiso);
         textViewArea=findViewById(R.id.textViewArea);
+        textViewSubtipo=findViewById(R.id.textViewSubtipo);
         textViewSubarea=findViewById(R.id.textViewSubarea);
         textViewUbicacion=findViewById(R.id.textViewUbicacion);
         relativeLayout = findViewById(R.id.relativeLayout);
+
         floatingActionButtonAddDailyTask = findViewById(R.id.floatingActionButton);
         if(orientation==Configuration.ORIENTATION_PORTRAIT)
         {
             textViewPiso.setVisibility(View.GONE);
             textViewArea.setVisibility(View.GONE);
             textViewSubarea.setVisibility(View.GONE);
+            textViewSubtipo.setVisibility(View.GONE);
             textViewUbicacion.setVisibility(View.GONE);
-            textViewState.setText(R.string.state);
+        }
+        else
+        {
+            textViewState.setVisibility(View.GONE);
         }
         final Query orden_estado = task.orderByChild("estado");
         final Query orden_tipo = task.orderByChild("tipo");
         final Query orden_fecha = task.orderByChild("fecha_inicio_entero");
+        final Query orden_subtipo=task.orderByChild("subtipo");
         tipo = preferences.getString("administrador", "usuario");
+        adaptador=new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
+            @Override
+            public void onItemClick(data_task data, int position) {
+
+            }
+        },Trabajos_Diarios.this,preferences,"diarios",orientation);
+        recyclerViewTDailyTask.setAdapter(adaptador);
+
+        //task.removeEventListener(listener1);
         final ValueEventListener listener = new ValueEventListener() {
 
             @Override
@@ -134,7 +161,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
 
 
                 recyclerViewTDailyTask.setAdapter(adaptador);
-                adaptador.notifyDataSetChanged();
+                //adaptador.notifyDataSetChanged();
 
             }
             @Override
@@ -144,46 +171,69 @@ public class Trabajos_Diarios extends AppCompatActivity {
             }
 
         };
-        task.addValueEventListener(listener);
+
+        task.addListenerForSingleValueEvent(listener);
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewDate.setTypeface(null, Typeface.NORMAL);
+                task.addListenerForSingleValueEvent(listener);
+                refreshLayout.setRefreshing(false);
+
+
+            }
+        });
+
         textViewType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task.removeEventListener(listener);
-                textViewDate.setText(getString(R.string.date));
-                textViewState.setText(getString(R.string.state));
-                textViewType.setText("Tipo ↓");
-                orden_tipo.addValueEventListener(listener);
-                orden_estado.removeEventListener(listener);
-                orden_fecha.removeEventListener(listener);
+                textViewType.setTypeface(null, Typeface.BOLD);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewDate.setTypeface(null, Typeface.NORMAL);
+                //orden_tipo.addValueEventListener(listener1);
+                orden_tipo.addListenerForSingleValueEvent(listener);
+
             }
         });
         textViewDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task.removeEventListener(listener);
-                textViewState.setText(getString(R.string.state));
-                textViewType.setText(getString(R.string.type));
-                textViewDate.setText("Fecha ↓");
-                orden_fecha.addValueEventListener(listener);
-                orden_estado.removeEventListener(listener);
-                orden_tipo.removeEventListener(listener);
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewDate.setTypeface(null, Typeface.BOLD);
+                orden_fecha.addListenerForSingleValueEvent(listener);
+
 
             }
         });
         textViewState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task.removeEventListener(listener);
-                textViewDate.setText(getString(R.string.date));
-                textViewType.setText(getString(R.string.type));
-                textViewState.setText("Estado ↓");
-                orden_estado.addValueEventListener(listener);
-                orden_fecha.removeEventListener(listener);
-                orden_tipo.removeEventListener(listener);
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.BOLD);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewDate.setTypeface(null, Typeface.NORMAL);
+                orden_estado.addListenerForSingleValueEvent(listener);
             }
         });
+        textViewSubtipo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.BOLD);
+                textViewDate.setTypeface(null, Typeface.NORMAL);
+                orden_subtipo.addListenerForSingleValueEvent(listener);
 
 
+            }
+        });
         if (tipo.equals("usuario")) {
             floatingActionButtonAddDailyTask.setVisibility(View.GONE);
         }
@@ -193,6 +243,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 Intent intent_añadir_trabajo = new Intent(Trabajos_Diarios.this, Agregar_trabajos.class);
                 intent_añadir_trabajo.putExtra("trabajos", "diarios");
                 startActivity(intent_añadir_trabajo);
+
+
 
             }
 
@@ -217,7 +269,13 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 intent.putExtra("trabajos", "diarios");
                 intent.putExtra("estado", "");
                 startActivity(intent);
+                return true;
+            }
+            case android.R.id.home: {
+                Intent intent = new Intent(Trabajos_Diarios.this, Menu_Principal.class);
 
+                startActivity(intent);
+                finish();
                 return true;
             }
             default:

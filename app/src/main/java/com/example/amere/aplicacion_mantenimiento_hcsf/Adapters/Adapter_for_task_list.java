@@ -42,6 +42,10 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         this.orientation=orientation;
     }
 
+    public Adapter_for_task_list() {
+
+    }
+
 
     @NonNull
     @Override
@@ -127,15 +131,37 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
 
 
             }
+            else
+                { if(data.getAtencion().equals("Alta_") )
+                    this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.prioridad_alta_dark));
+            }
             if (data.getAtencion().equals("Baja")) {
                 this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.prioridad_bajo));
 
 
             }
+            else if(data.getAtencion().equals("Baja_"))
+            {
+                this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity,R.color.prioridad_bajo_dark));
+            }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     listener.onItemClick(data, getAdapterPosition());
+                    if (data.getAtencion().equals("Alta")) {
+                        cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.prioridad_alta_dark));
+                        data.setAtencion("Alta_");
+
+
+                    }
+                    if (data.getAtencion().equals("Baja")) {
+                        cardView.setCardBackgroundColor(ContextCompat.getColor(activity,R.color.prioridad_bajo_dark));
+                        data.setAtencion("Baja_");
+
+                    }
+
+
                 }
             });
         }
@@ -152,10 +178,13 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
             String id = item_menus.get(this.getAdapterPosition()).getId();
             switch (item.getItemId()) {
                 case R.id.change_state_iniciado: {
+
                     task.child(id).child("estado").setValue("En proceso");
                 }
                 return true;
                 case R.id.delete_task_administrador: {
+                    item_menus.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
                     task.child(id).removeValue();
                 }
                 return true;
