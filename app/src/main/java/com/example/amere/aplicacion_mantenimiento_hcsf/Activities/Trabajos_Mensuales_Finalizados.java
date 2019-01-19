@@ -1,7 +1,7 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_finished;
+import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_list;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
@@ -31,11 +32,12 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
 
     private FirebaseDatabase database_hcsf;
     private ArrayList<data_task> lista_tareas_mensuales;
-    private RecyclerView recyclerViewTDailyTask;
+    private RecyclerView recyclerViewMonthlyTaskFinished;
     private Adapter_for_task_finished adaptador;
-    private LinearLayoutManager linearLayoutManager_monthly_task;
+    private LinearLayoutManager linearLayoutManagerMonthlyTaskFinished;
     private DatabaseReference task;
     private TextView textViewType;
+    private SwipeRefreshLayout swipeRefreshLayoutMonthlyTask;
     private TextView textViewDateStart;
     private TextView textViewDateFinished;
     private ActionBar ab;
@@ -49,6 +51,7 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
         ab = getSupportActionBar();
         ab.setDisplayShowTitleEnabled(false);
         ab.setDisplayHomeAsUpEnabled(true);
+        swipeRefreshLayoutMonthlyTask=findViewById(R.id.refresh_tareas_mensuales_finalizadas);
         textViewType = findViewById(R.id.textViewType_Finished);
         textViewDateStart = findViewById(R.id.textView_DateStart);
         textViewDateFinished = findViewById(R.id.textView_DateFinished);
@@ -56,10 +59,17 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
         task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
         //task = database_hcsf.getReference("Tareas_Mensuales");
         lista_tareas_mensuales = new ArrayList<>();
-        recyclerViewTDailyTask = findViewById(R.id.recyclerViewMonthlyTaskFinished);
-        linearLayoutManager_monthly_task = new LinearLayoutManager(this);
-        linearLayoutManager_monthly_task.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerViewTDailyTask.setLayoutManager(linearLayoutManager_monthly_task);
+        recyclerViewMonthlyTaskFinished = findViewById(R.id.recyclerViewMonthlyTaskFinished);
+        linearLayoutManagerMonthlyTaskFinished = new LinearLayoutManager(this);
+        linearLayoutManagerMonthlyTaskFinished.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewMonthlyTaskFinished.setLayoutManager(linearLayoutManagerMonthlyTaskFinished);
+        adaptador=new Adapter_for_task_finished(lista_tareas_mensuales, new Adapter_for_task_finished.OnItemClickListener() {
+            @Override
+            public void onItemClick(data_task data, int position) {
+
+            }
+        },Trabajos_Mensuales_Finalizados.this);
+        recyclerViewMonthlyTaskFinished.setAdapter(adaptador);
         final Query orden_fecha_inicio = task.orderByChild("fecha_inicio_entero");
         final Query orden_tipo = task.orderByChild("tipo");
         final Query orden_fecha_finalizacion = task.orderByChild("fecha_finalizacion_entero");
@@ -85,7 +95,7 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
 
                     }
                 }, Trabajos_Mensuales_Finalizados.this);
-                recyclerViewTDailyTask.setAdapter(adaptador);
+                recyclerViewMonthlyTaskFinished.setAdapter(adaptador);
 
             }
 

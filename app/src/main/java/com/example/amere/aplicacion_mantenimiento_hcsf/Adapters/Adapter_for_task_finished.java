@@ -37,7 +37,7 @@ public class Adapter_for_task_finished extends RecyclerView.Adapter<Adapter_for_
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.cardview_lista_trabajos_diarios, viewGroup, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.cardview_lista_trabajos_finalizados, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -58,9 +58,9 @@ public class Adapter_for_task_finished extends RecyclerView.Adapter<Adapter_for_
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.textViewType = itemView.findViewById(R.id.textViewTypeList);
-            this.textViewDateStart = itemView.findViewById(R.id.textViewDateList);
-            this.textViewDateFinished = itemView.findViewById(R.id.textViewDateList);
+            this.textViewType = itemView.findViewById(R.id.textViewTipoFinalizado);
+            this.textViewDateStart = itemView.findViewById(R.id.textViewFechaInicio);
+            this.textViewDateFinished = itemView.findViewById(R.id.textViewFechaInicio);
 
         }
 
