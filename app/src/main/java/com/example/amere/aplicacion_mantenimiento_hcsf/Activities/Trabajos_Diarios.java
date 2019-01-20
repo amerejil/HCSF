@@ -78,7 +78,6 @@ public class Trabajos_Diarios extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajos__diarios);
         toolbar = findViewById(R.id.my_toolbar_trabajos_diarios);
@@ -122,10 +121,14 @@ public class Trabajos_Diarios extends AppCompatActivity {
         {
             textViewState.setVisibility(View.GONE);
         }
-        final Query orden_estado = task.orderByChild("estado");
         final Query orden_tipo = task.orderByChild("tipo");
         final Query orden_fecha = task.orderByChild("fecha_inicio_entero");
-        final Query orden_subtipo=task.orderByChild("subtipo");
+        final Query orden_estado = task.orderByChild("estado");
+        final Query orden_piso = task.orderByChild("piso");
+        final Query orden_area = task.orderByChild("area");
+        final Query orden_subtipo = task.orderByChild("subtipo");
+        final Query orden_subarea=task.orderByChild("subarea");
+        final Query orden_ubicacion = task.orderByChild("ubicacion");
         tipo = preferences.getString("administrador", "usuario");
         adaptador=new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
             @Override
@@ -178,60 +181,127 @@ public class Trabajos_Diarios extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 textViewType.setTypeface(null, Typeface.NORMAL);
-                textViewState.setTypeface(null, Typeface.NORMAL);
-                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
                 textViewDate.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewPiso.setTypeface(null, Typeface.NORMAL);
+                textViewArea.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewSubarea.setTypeface(null, Typeface.NORMAL);
+                textViewUbicacion.setTypeface(null, Typeface.NORMAL);
                 task.addListenerForSingleValueEvent(listener);
                 refreshLayout.setRefreshing(false);
-
-
             }
         });
-
         textViewType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 textViewType.setTypeface(null, Typeface.BOLD);
-                textViewState.setTypeface(null, Typeface.NORMAL);
-                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
                 textViewDate.setTypeface(null, Typeface.NORMAL);
-                //orden_tipo.addValueEventListener(listener1);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewPiso.setTypeface(null, Typeface.NORMAL);
+                textViewArea.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewSubarea.setTypeface(null, Typeface.NORMAL);
+                textViewUbicacion.setTypeface(null, Typeface.NORMAL);
                 orden_tipo.addListenerForSingleValueEvent(listener);
-
             }
         });
         textViewDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 textViewType.setTypeface(null, Typeface.NORMAL);
-                textViewState.setTypeface(null, Typeface.NORMAL);
-                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
                 textViewDate.setTypeface(null, Typeface.BOLD);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewPiso.setTypeface(null, Typeface.NORMAL);
+                textViewArea.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewSubarea.setTypeface(null, Typeface.NORMAL);
+                textViewUbicacion.setTypeface(null, Typeface.NORMAL);
                 orden_fecha.addListenerForSingleValueEvent(listener);
-
-
             }
         });
         textViewState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 textViewType.setTypeface(null, Typeface.NORMAL);
-                textViewState.setTypeface(null, Typeface.BOLD);
-                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
                 textViewDate.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.BOLD);
+                textViewPiso.setTypeface(null, Typeface.NORMAL);
+                textViewArea.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewSubarea.setTypeface(null, Typeface.NORMAL);
+                textViewUbicacion.setTypeface(null, Typeface.NORMAL);
                 orden_estado.addListenerForSingleValueEvent(listener);
+            }
+        });
+        textViewPiso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                textViewDate.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewPiso.setTypeface(null, Typeface.BOLD);
+                textViewArea.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewSubarea.setTypeface(null, Typeface.NORMAL);
+                textViewUbicacion.setTypeface(null, Typeface.NORMAL);
+                orden_piso.addListenerForSingleValueEvent(listener);
+            }
+        });
+        textViewArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                textViewDate.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewPiso.setTypeface(null, Typeface.NORMAL);
+                textViewArea.setTypeface(null, Typeface.BOLD);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewSubarea.setTypeface(null, Typeface.NORMAL);
+                textViewUbicacion.setTypeface(null, Typeface.NORMAL);
+                orden_area.addListenerForSingleValueEvent(listener);
             }
         });
         textViewSubtipo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 textViewType.setTypeface(null, Typeface.NORMAL);
-                textViewState.setTypeface(null, Typeface.NORMAL);
-                textViewSubtipo.setTypeface(null, Typeface.BOLD);
                 textViewDate.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewPiso.setTypeface(null, Typeface.NORMAL);
+                textViewArea.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.BOLD);
+                textViewSubarea.setTypeface(null, Typeface.NORMAL);
+                textViewUbicacion.setTypeface(null, Typeface.NORMAL);
                 orden_subtipo.addListenerForSingleValueEvent(listener);
-
-
+            }
+        });
+        textViewSubarea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                textViewDate.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewPiso.setTypeface(null, Typeface.NORMAL);
+                textViewArea.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewSubarea.setTypeface(null, Typeface.NORMAL);
+                textViewUbicacion.setTypeface(null, Typeface.BOLD);
+                orden_subarea.addListenerForSingleValueEvent(listener);
+            }
+        });
+        textViewUbicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                textViewDate.setTypeface(null, Typeface.NORMAL);
+                textViewState.setTypeface(null, Typeface.NORMAL);
+                textViewPiso.setTypeface(null, Typeface.NORMAL);
+                textViewArea.setTypeface(null, Typeface.NORMAL);
+                textViewSubtipo.setTypeface(null, Typeface.NORMAL);
+                textViewSubarea.setTypeface(null, Typeface.BOLD);
+                textViewUbicacion.setTypeface(null, Typeface.NORMAL);
+                orden_ubicacion.addListenerForSingleValueEvent(listener);
             }
         });
         if (tipo.equals("usuario")) {
@@ -243,9 +313,6 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 Intent intent_añadir_trabajo = new Intent(Trabajos_Diarios.this, Agregar_trabajos.class);
                 intent_añadir_trabajo.putExtra("trabajos", "diarios");
                 startActivity(intent_añadir_trabajo);
-
-
-
             }
 
         });
