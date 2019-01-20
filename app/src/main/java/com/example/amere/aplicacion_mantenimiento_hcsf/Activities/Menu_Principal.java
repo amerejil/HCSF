@@ -130,6 +130,8 @@ public class Menu_Principal extends AppCompatActivity {
 
             }
         };
+        diarioTask.addValueEventListener(listener1);
+        mensualTask.addValueEventListener(listener1);
 
         item_menu_principal = new ArrayList<>();
         item_menu_principal.add(new data_cardView_item(R.drawable.icon_task, getResources().getString(R.string.submenu_daily_work), getResources().getColor(R.color.colorCardView_Menu)));
@@ -145,22 +147,19 @@ public class Menu_Principal extends AppCompatActivity {
                 //String valor =data.getType_task();
                 // Toast.makeText(Menu_Principal.this,"Presionaste "+ valor,Toast.LENGTH_SHORT).show();
                 if (position == 0) {
-                    diarioTask.addValueEventListener(listener1);
+
                     Intent intent = new Intent(Menu_Principal.this, Trabajos_Diarios.class);
                     startActivity(intent);
                 }
                 if (position == 1) {
-                    mensualTask.addValueEventListener(listener1);
                     Intent intent = new Intent(Menu_Principal.this, Trabajos_Mensuales.class);
                     startActivity(intent);
                 }
                 if (position == 2) {
-                    diarioTask.addValueEventListener(listener1);
                     Intent intent = new Intent(Menu_Principal.this, Trabajos_Diarios_Finalizados.class);
                     startActivity(intent);
                 }
                 if (position == 3) {
-                    mensualTask.addValueEventListener(listener1);
                     Intent intent = new Intent(Menu_Principal.this, Trabajos_Mensuales_Finalizados.class);
                     startActivity(intent);
                 }

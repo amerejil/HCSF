@@ -204,6 +204,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 textViewSubarea.setTypeface(null, Typeface.NORMAL);
                 textViewUbicacion.setTypeface(null, Typeface.NORMAL);
                 orden_tipo.addListenerForSingleValueEvent(listener);
+
             }
         });
         textViewDate.setOnClickListener(new View.OnClickListener() {
@@ -285,8 +286,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 textViewPiso.setTypeface(null, Typeface.NORMAL);
                 textViewArea.setTypeface(null, Typeface.NORMAL);
                 textViewSubtipo.setTypeface(null, Typeface.NORMAL);
-                textViewSubarea.setTypeface(null, Typeface.NORMAL);
-                textViewUbicacion.setTypeface(null, Typeface.BOLD);
+                textViewSubarea.setTypeface(null, Typeface.BOLD);
+                textViewUbicacion.setTypeface(null, Typeface.NORMAL);
                 orden_subarea.addListenerForSingleValueEvent(listener);
             }
         });
@@ -299,8 +300,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 textViewPiso.setTypeface(null, Typeface.NORMAL);
                 textViewArea.setTypeface(null, Typeface.NORMAL);
                 textViewSubtipo.setTypeface(null, Typeface.NORMAL);
-                textViewSubarea.setTypeface(null, Typeface.BOLD);
-                textViewUbicacion.setTypeface(null, Typeface.NORMAL);
+                textViewSubarea.setTypeface(null, Typeface.NORMAL);
+                textViewUbicacion.setTypeface(null, Typeface.BOLD);
                 orden_ubicacion.addListenerForSingleValueEvent(listener);
             }
         });

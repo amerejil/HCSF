@@ -24,50 +24,113 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutMonthlyTaskFinished3"
+        android:id="@+id/linearLayoutBusqueda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewDailyWork3">
 
-        <TextView
-            android:id="@+id/textViewTypeSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.35"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/type"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewDateSearch"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.30"
+            android:layout_height="match_parent"
+            android:layout_weight="0.16"
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/date"
             android:textSize="18sp"
-            android:textStyle="bold" />
-
+             />
         <TextView
-            android:id="@+id/textViewStateSearch"
+            android:id="@+id/textViewTypeSearch"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.35"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/state"
+            android:text="@string/type"
+
             android:textSize="18sp"
-            android:textStyle="bold" />
+            />
+
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/textViewSubtipoSearch"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/Subtipo" />
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/textViewEstadoSearch"
+
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:text="@string/state" />
+
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/textViewPisoSearch"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/Piso" />
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/textViewAreaSearch"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/Area" />
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/textViewSubareaSearch"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/Subarea" />
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/textViewUbicacionSearch"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/Ubicacion" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewDailyTask3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayoutMonthlyTaskFinished3">
+        android:layout_below="@+id/linearLayoutBusqueda">
 
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

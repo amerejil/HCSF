@@ -1,6 +1,7 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -63,6 +64,7 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
         linearLayoutManagerMonthlyTaskFinished = new LinearLayoutManager(this);
         linearLayoutManagerMonthlyTaskFinished.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewMonthlyTaskFinished.setLayoutManager(linearLayoutManagerMonthlyTaskFinished);
+        lista_tareas_mensuales = new ArrayList<>();
         adaptador=new Adapter_for_task_finished(lista_tareas_mensuales, new Adapter_for_task_finished.OnItemClickListener() {
             @Override
             public void onItemClick(data_task data, int position) {
@@ -70,6 +72,7 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
             }
         },Trabajos_Mensuales_Finalizados.this);
         recyclerViewMonthlyTaskFinished.setAdapter(adaptador);
+
         final Query orden_fecha_inicio = task.orderByChild("fecha_inicio_entero");
         final Query orden_tipo = task.orderByChild("tipo");
         final Query orden_fecha_finalizacion = task.orderByChild("fecha_finalizacion_entero");
@@ -107,43 +110,45 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
             }
 
         };
-        task.addValueEventListener(listener);
+        swipeRefreshLayoutMonthlyTask.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                textViewDateStart.setTypeface(null, Typeface.NORMAL);
+                textViewDateFinished.setTypeface(null, Typeface.NORMAL);
+                task.addListenerForSingleValueEvent(listener);
+                swipeRefreshLayoutMonthlyTask.setRefreshing(false);
+            }
+        });
+        task.addListenerForSingleValueEvent(listener);
 
         textViewType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task.removeEventListener(listener);
-                textViewDateStart.setText(getString(R.string.fecha_inicio));
-                textViewDateFinished.setText(getString(R.string.fecha_finalizacion));
-                textViewType.setText("Tipo ↓");
-                orden_tipo.addValueEventListener(listener);
-                orden_fecha_inicio.removeEventListener(listener);
-                orden_fecha_finalizacion.removeEventListener(listener);
+                textViewDateStart.setTypeface(null, Typeface.NORMAL);
+                textViewDateFinished.setTypeface(null, Typeface.NORMAL);
+                textViewType.setTypeface(null, Typeface.BOLD);
+                orden_tipo.addListenerForSingleValueEvent(listener);
+
             }
         });
         textViewDateStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task.removeEventListener(listener);
-                textViewDateFinished.setText(getString(R.string.fecha_finalizacion));
-                textViewType.setText(getString(R.string.type));
-                textViewDateStart.setText("Fecha de inicio ↓");
-                orden_fecha_inicio.addValueEventListener(listener);
-                orden_fecha_finalizacion.removeEventListener(listener);
-                orden_tipo.removeEventListener(listener);
+                textViewDateStart.setTypeface(null, Typeface.BOLD);
+                textViewDateFinished.setTypeface(null, Typeface.NORMAL);
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                orden_fecha_inicio.addListenerForSingleValueEvent(listener);
 
             }
         });
         textViewDateFinished.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task.removeEventListener(listener);
-                textViewDateStart.setText(getString(R.string.fecha_inicio));
-                textViewType.setText(getString(R.string.type));
-                textViewDateFinished.setText("Fecha de finalización ↓");
-                orden_fecha_finalizacion.addValueEventListener(listener);
-                orden_fecha_inicio.removeEventListener(listener);
-                orden_tipo.removeEventListener(listener);
+                textViewDateStart.setTypeface(null, Typeface.NORMAL);
+                textViewDateFinished.setTypeface(null, Typeface.BOLD);
+                textViewType.setTypeface(null, Typeface.NORMAL);
+                orden_fecha_finalizacion.addListenerForSingleValueEvent(listener);
             }
         });
 

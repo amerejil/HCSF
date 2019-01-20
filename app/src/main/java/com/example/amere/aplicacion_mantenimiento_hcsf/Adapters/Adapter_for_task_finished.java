@@ -60,7 +60,7 @@ public class Adapter_for_task_finished extends RecyclerView.Adapter<Adapter_for_
             super(itemView);
             this.textViewType = itemView.findViewById(R.id.textViewTipoFinalizado);
             this.textViewDateStart = itemView.findViewById(R.id.textViewFechaInicio);
-            this.textViewDateFinished = itemView.findViewById(R.id.textViewFechaInicio);
+            this.textViewDateFinished = itemView.findViewById(R.id.textViewFechaFinalizado);
 
         }
 

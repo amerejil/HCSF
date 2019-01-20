@@ -3,6 +3,7 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_finished;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_list;
@@ -45,6 +48,11 @@ public class Administrador_busqueda extends AppCompatActivity {
     private String uper;
     private String estado;
     private String tipo;
+    private TextView textView4;
+    private TextView textView5;
+    private TextView textView6;
+    private TextView textView7;
+    private TextView textView8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,22 +60,48 @@ public class Administrador_busqueda extends AppCompatActivity {
         setContentView(R.layout.activity_administrador_busqueda);
         toolbar = findViewById(R.id.my_toolbar_administrador_busqueda);
         setSupportActionBar(toolbar);
-        textView1 = findViewById(R.id.textViewTypeSearch);
-        textView2 = findViewById(R.id.textViewDateSearch);
-        textView3 = findViewById(R.id.textViewStateSearch);
+        textView1 = findViewById(R.id.textViewDateSearch);
+        textView2 = findViewById(R.id.textViewTypeSearch);
+        textView3= findViewById(R.id.textViewSubtipoSearch);
+        textView4 = findViewById(R.id.textViewEstadoSearch);
+        textView5= findViewById(R.id.textViewPisoSearch);
+        textView6= findViewById(R.id.textViewAreaSearch);
+        textView7= findViewById(R.id.textViewSubareaSearch);
+        textView8= findViewById(R.id.textViewUbicacionSearch);
         textViewTipo = findViewById(R.id.textViewDailyWork3);
         orientation=getResources().getConfiguration().orientation;
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         database_hcsf = Utils.getDatabase();
         estado = getIntent().getExtras().get("estado").toString();
         tipo = getIntent().getExtras().get("trabajos").toString();
+        if(orientation== Configuration.ORIENTATION_PORTRAIT&&!estado.equals("finalizado"))
+        {
+            textView3.setVisibility(View.GONE);
+            textView5.setVisibility(View.GONE);
+            textView6.setVisibility(View.GONE);
+            textView7.setVisibility(View.GONE);
+            textView8.setVisibility(View.GONE);
+        }
+        else if(!estado.equals("finalizado"))
+        {
+            textView4.setVisibility(View.GONE);
+        }
         if (tipo.equals("diarios")) {
             //task = database_hcsf.getReference("Tareas");
             task = database_hcsf.getReference("Tareas_prueba"); //cambio
             if (estado.equals("finalizado")) {
                 textViewTipo.setText(R.string.submenu_daily_work_finished);
+                textView1.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT,  0.35f));
+                textView2.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.30f));
+                textView3.setVisibility(View.GONE);
+                textView4.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.35f));
+                textView5.setVisibility(View.GONE);
+                textView6.setVisibility(View.GONE);
+                textView7.setVisibility(View.GONE);
+                textView8.setVisibility(View.GONE);
+                textView1.setText(R.string.type);
                 textView2.setText(R.string.fecha_inicio);
-                textView3.setText(R.string.fecha_finalizacion);
+                textView4.setText(R.string.fecha_finalizacion);
             }
         } else {
             //task = database_hcsf.getReference("Tareas_Mensuales");
@@ -173,7 +207,7 @@ public class Administrador_busqueda extends AppCompatActivity {
                             recyclerViewTDailyTask.setAdapter(adapter);
 
                         }
-                        adaptador.notifyDataSetChanged();
+                        //adaptador.notifyDataSetChanged();
                     }
 
                     @Override

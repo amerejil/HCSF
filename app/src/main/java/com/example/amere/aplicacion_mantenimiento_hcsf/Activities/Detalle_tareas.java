@@ -161,11 +161,11 @@ public class Detalle_tareas extends AppCompatActivity {
             }
         });
 
-        if (tipo.equals("administrador")) {
+       /* if (tipo.equals("administrador")) {
             buttonFinalizarTarea.setVisibility(View.GONE);
             cardViewNota.setVisibility(View.GONE);
 
-        }
+        }*/
         buttonFinalizarTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

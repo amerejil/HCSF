@@ -208,12 +208,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:clickable="true"
-                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:orientation="horizontal"
                 app:cardCornerRadius="17dp"
-                app:cardElevation="3dp">
+                >
 
                 <TextView
                     android:id="@+id/textViewEstadoEquipo"
