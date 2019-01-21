@@ -92,7 +92,7 @@ public class Administrador_busqueda extends AppCompatActivity {
             if (estado.equals("finalizado")) {
                 textViewTipo.setText(R.string.submenu_daily_work_finished);
                 textView1.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT,  0.35f));
-                textView2.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.30f));
+                textView2.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.35f));
                 textView3.setVisibility(View.GONE);
                 textView4.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.35f));
                 textView5.setVisibility(View.GONE);

@@ -41,8 +41,8 @@
         <TextView
             android:id="@+id/textView_DateStart"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.30"
+            android:layout_height="match_parent"
+            android:layout_weight="0.35"
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/fecha_inicio"

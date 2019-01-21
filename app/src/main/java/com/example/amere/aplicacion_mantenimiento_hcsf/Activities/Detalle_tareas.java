@@ -81,9 +81,9 @@ public class Detalle_tareas extends AppCompatActivity {
         dataTask= (data_task) getIntent().getSerializableExtra("data");
         if (dataTask != null) {
             textViewTipo.setText(dataTask.getTipo());
-            if (dataTask.getAtencion().equals("Alta"))
+            if (dataTask.getAtencion().equals("Alta")||dataTask.getAtencion().equals("Alta_"))
                 textViewTipo.setTextColor(getResources().getColor(R.color.prioridad_alta));
-            if (dataTask.getAtencion().equals("Baja"))
+            if (dataTask.getAtencion().equals("Baja")||dataTask.getAtencion().equals("Baja_"))
                 textViewTipo.setTextColor(getResources().getColor(R.color.prioridad_bajo));
             textViewUbicacion.setText(dataTask.getUbicacion());
             textViewPiso.setText(dataTask.getPiso());
@@ -110,11 +110,11 @@ public class Detalle_tareas extends AppCompatActivity {
                 task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(stringFecha_finalizacion_entero));
                 if (tipo_tarea.equals("diarios")) {
                     Intent intent = new Intent(Detalle_tareas.this, Trabajos_Diarios.class);
-
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(Detalle_tareas.this, Trabajos_Mensuales.class);
-
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
 
@@ -137,11 +137,11 @@ public class Detalle_tareas extends AppCompatActivity {
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
                 if (tipo_tarea.equals("diarios")) {
                     Intent intent = new Intent(Detalle_tareas.this, Trabajos_Diarios.class);
-
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(Detalle_tareas.this, Trabajos_Mensuales.class);
-
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
             }

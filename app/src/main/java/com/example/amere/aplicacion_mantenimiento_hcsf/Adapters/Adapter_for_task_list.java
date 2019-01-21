@@ -50,7 +50,7 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.cardview_lista_trabajos_diarios, viewGroup, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.cardview_lista_trabajos, viewGroup, false);
         return new ViewHolder(view);
     }
 

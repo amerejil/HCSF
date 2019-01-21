@@ -142,7 +142,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
         final ValueEventListener listener = new ValueEventListener() {
 
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(final DataSnapshot dataSnapshot) {
                 lista_tareas_diarias = new ArrayList<>();
                 for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
                     if (!datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado"))
@@ -152,6 +152,11 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                     @Override
                     public void onItemClick(data_task data, int position) {
+                        if(getIntent().getExtras()!=null)
+                        {
+                            lista_tareas_diarias.remove(position);
+                            adaptador.notifyItemRemoved(position);
+                        }
                         Intent intent_detalle_tareas = new Intent(Trabajos_Diarios.this, Detalle_tareas.class);
                         String id = data.getId();
                         intent_detalle_tareas.putExtra("Id", id);
@@ -176,6 +181,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
         };
 
         task.addListenerForSingleValueEvent(listener);
+
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

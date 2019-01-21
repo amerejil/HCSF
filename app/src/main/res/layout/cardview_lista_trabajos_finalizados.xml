@@ -33,7 +33,7 @@
             android:maxLines="1"
             android:id="@+id/textViewFechaInicio"
             android:layout_width="0dp"
-            android:layout_weight="0.30"
+            android:layout_weight="0.35"
             android:layout_height="match_parent"
             android:textSize="15sp" />
         <TextView
