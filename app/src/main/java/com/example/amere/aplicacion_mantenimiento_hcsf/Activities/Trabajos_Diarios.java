@@ -142,7 +142,7 @@ public class Trabajos_Diarios extends AppCompatActivity {
         final ValueEventListener listener = new ValueEventListener() {
 
             @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
+            public void onDataChange( DataSnapshot dataSnapshot) {
                 lista_tareas_diarias = new ArrayList<>();
                 for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
                     if (!datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado"))

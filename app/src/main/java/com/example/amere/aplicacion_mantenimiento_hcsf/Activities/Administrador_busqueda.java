@@ -274,7 +274,8 @@ public class Administrador_busqueda extends AppCompatActivity {
                     task.getSubarea().contains(search) || task.getSubarea().contains(uper) ||
                     task.getTipo().contains(search) || task.getTipo().contains(uper) ||
                     task.getPiso().contains(search) || task.getPiso().contains(uper) ||
-                    task.getUbicacion().contains(search) || task.getUbicacion().contains(uper))
+                    task.getUbicacion().contains(search) || task.getUbicacion().contains(uper)||
+                    task.getSubtipo().contains(search) || task.getSubtipo().contains(uper))
             {
                 temp.add(task);
             }

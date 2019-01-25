@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.Activities.Detalle_tareas;
+import com.example.amere.aplicacion_mantenimiento_hcsf.Activities.Detalle_tareas_finalizadas;
 
 public class administrador_notificaciones extends ContextWrapper {
     private NotificationManager manager;
@@ -21,6 +22,7 @@ public class administrador_notificaciones extends ContextWrapper {
     private final String CHANNEL_HIGH_NAME = "HIGH";
     public static final String CHANNEL_LOW_ID = "2";
     private final String CHANNEL_LOW_NAME = "LOW CHANNEL";
+    private Intent intent = null;
 
     private void crearCanales() {
         if (Build.VERSION.SDK_INT >= 26) {
@@ -67,13 +69,24 @@ public class administrador_notificaciones extends ContextWrapper {
     }
 
     private Notification.Builder createNotificationWithoutChannel(String title, String message,data_task data) {
+        String estado = data.getEstado();
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Intent intent=new Intent(this,Detalle_tareas.class);
+        //Intent intent=new Intent(this,Detalle_tareas.class);
+        if (!estado.equals("Finalizado")) {
+            intent = new Intent(this, Detalle_tareas.class);
+            intent.putExtra("data", data);
+            intent.putExtra("trabajos", "diarios");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        else
+        {
+            intent = new Intent(this, Detalle_tareas_finalizadas.class);
+            intent.putExtra("data", data);
+            intent.putExtra("trabajos", "diarios");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        PendingIntent pIntent = PendingIntent.getActivity(this, data.getId().hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        intent.putExtra("data",data);
-        intent.putExtra("trabajos","diarios");
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pIntent=PendingIntent.getActivity(this,data.getId().hashCode(),intent,PendingIntent.FLAG_UPDATE_CURRENT);
         return new Notification.Builder(getApplicationContext())
                 .setContentTitle(title)
                 .setContentText(message)

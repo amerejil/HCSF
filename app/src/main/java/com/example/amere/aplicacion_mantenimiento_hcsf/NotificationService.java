@@ -23,6 +23,9 @@ public class NotificationService extends FirebaseMessagingService {
         task.setPiso(remoteMessage.getData().get("piso"));
         task.setSubarea(remoteMessage.getData().get("subarea"));
         task.setId(remoteMessage.getData().get("id"));
+        task.setEstado(remoteMessage.getData().get("estado"));
+        task.setNota(remoteMessage.getData().get("nota"));
+        task.setEstado_equipo(remoteMessage.getData().get("estado_equipo"));
         if (remoteMessage.getData().size() > 0) {
             topics=remoteMessage.getFrom();
             estado=remoteMessage.getData().get("estado");
@@ -30,7 +33,7 @@ public class NotificationService extends FirebaseMessagingService {
                 if (estado.equals("No iniciado")) {
 
                     administrador_notificaciones adm = new administrador_notificaciones(NotificationService.this);
-                    Notification.Builder nb = adm.createNotification("", "", true, task);
+                    Notification.Builder nb = adm.createNotification("Nueva Tarea", task.getTrabajo_solicitado(), true, task);
                     adm.getManager().notify(task.getId().hashCode(), nb.build());
                 }
             }

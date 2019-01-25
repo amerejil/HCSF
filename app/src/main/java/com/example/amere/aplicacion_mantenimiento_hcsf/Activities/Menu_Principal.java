@@ -19,6 +19,7 @@ import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_cardView_item;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
+import com.example.amere.aplicacion_mantenimiento_hcsf.data_task_temp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -119,6 +120,33 @@ public class Menu_Principal extends AppCompatActivity {
             //FirebaseMessaging.getInstance().subscribeToTopic("administrador");
             Toast.makeText(Menu_Principal.this, "adm", Toast.LENGTH_SHORT).show();
         }
+/*
+
+            final ValueEventListener listener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
+                        //Integer.parseInt
+                        diarioTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_inicio_entero").setValue(Integer.parseInt(datasnapshot.getValue(data_task_temp.class).getFecha_inicio_entero()));
+                        if (datasnapshot.getValue(data_task_temp.class).getFecha_finalizacion_entero().isEmpty()) {
+                            diarioTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_finalizacion_entero").setValue(0);
+                        }
+                        else
+                        {
+                            diarioTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_finalizacion_entero").setValue(Integer.parseInt(datasnapshot.getValue(data_task_temp.class).getFecha_finalizacion_entero()));
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+            diarioTask.addListenerForSingleValueEvent(listener);
+*/
+
         final ValueEventListener listener1=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -130,6 +158,9 @@ public class Menu_Principal extends AppCompatActivity {
 
             }
         };
+
+
+
         diarioTask.addValueEventListener(listener1);
         mensualTask.addValueEventListener(listener1);
 

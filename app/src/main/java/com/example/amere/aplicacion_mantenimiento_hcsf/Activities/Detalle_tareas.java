@@ -1,5 +1,6 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Detalle_tareas extends AppCompatActivity {
     private TextView textViewTipo;
@@ -44,6 +47,7 @@ public class Detalle_tareas extends AppCompatActivity {
     private String tipo;
     private ActionBar ab;
     private Toolbar toolbar;
+    private String estado_equipo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,22 +96,31 @@ public class Detalle_tareas extends AppCompatActivity {
             textViewSolicitante.setText(dataTask.getSolicitante());
             textViewTrabajoSolicitado.setText("Trabajo solicitado: " + dataTask.getTrabajo_solicitado());
         }
-        final AlertDialog.Builder estado_dispositivo = new AlertDialog.Builder(this);
-        estado_dispositivo.setMessage("¿El equipo quedo?");
-        estado_dispositivo.setCancelable(false);
-        estado_dispositivo.setPositiveButton("Operativo", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogo1, int id) {
-                long date = System.currentTimeMillis();
+        final Calendar c= Calendar.getInstance();
+        final int year,month,day;
+        year=c.get(Calendar.YEAR);
+        month=c.get(Calendar.MONTH);
+        day=c.get(Calendar.DAY_OF_MONTH);
+
+        final DatePickerDialog fecha=new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 String Id = getIntent().getExtras().get("Id").toString();
-                task.child(Id).child("estado_equipo").setValue("Operativo");
                 task.child(Id).child("estado").setValue("Finalizado");
-                SimpleDateFormat f_date = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat f_date_entero = new SimpleDateFormat("ddMMyyyy");
-                stringFecha_finalizacion_entero = f_date_entero.format(date);
-                stringFecha_finalizacion = f_date.format(date);
-                task.child(Id).child("fecha_finalizacion").setValue(stringFecha_finalizacion);
+                task.child(Id).child("estado_equipo").setValue(estado_equipo);
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
-                task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(stringFecha_finalizacion_entero));
+                if(month>=9)
+                {
+                    task.child(Id).child("fecha_finalizacion").setValue(""+dayOfMonth+"/"+(month+1)+"/"+year);
+                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+dayOfMonth+""+(month+1)+""+year));
+                }
+                else
+                {
+                    task.child(Id).child("fecha_finalizacion").setValue(""+dayOfMonth+"/"+"0"+(month+1)+"/"+year);
+                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+dayOfMonth+""+"0"+(month+1)+""+year));
+                }
+
+                task.child(Id).child("nota").setValue(editTextNota.getText().toString());
                 if (tipo_tarea.equals("diarios")) {
                     Intent intent = new Intent(Detalle_tareas.this, Trabajos_Diarios.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -119,8 +132,11 @@ public class Detalle_tareas extends AppCompatActivity {
                 }
 
             }
-        });
-        estado_dispositivo.setNegativeButton("De baja", new DialogInterface.OnClickListener() {
+        },year,month,day);
+        final AlertDialog.Builder selecionar_fecha = new AlertDialog.Builder(this);
+        selecionar_fecha.setMessage("¿Desea poner la fecha de finalización automáticamente?");
+        selecionar_fecha.setCancelable(false);
+        selecionar_fecha.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 long date = System.currentTimeMillis();
@@ -129,7 +145,7 @@ public class Detalle_tareas extends AppCompatActivity {
                 stringFecha_finalizacion_entero = f_date_entero.format(date);
                 stringFecha_finalizacion = f_date.format(date);
                 String Id = getIntent().getExtras().get("Id").toString();
-                task.child(Id).child("estado_equipo").setValue("De baja");
+                task.child(Id).child("estado_equipo").setValue(estado_equipo);
                 task.child(Id).child("estado").setValue("Finalizado");
 
                 task.child(Id).child("fecha_finalizacion").setValue(stringFecha_finalizacion);
@@ -144,6 +160,34 @@ public class Detalle_tareas extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
+            }
+        });
+        selecionar_fecha.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                fecha.show();
+            }
+        });
+        final AlertDialog.Builder estado_dispositivo = new AlertDialog.Builder(this);
+        estado_dispositivo.setMessage("¿El equipo quedo?");
+        estado_dispositivo.setCancelable(false);
+        estado_dispositivo.setPositiveButton("Operativo", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                estado_equipo="Operativo";
+
+                selecionar_fecha.show();
+
+            }
+        });
+        estado_dispositivo.setNegativeButton("De baja", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                estado_equipo="De baja";
+
+                selecionar_fecha.show();
+
+
             }
         });
         final AlertDialog.Builder confirmar_finalizar_tarea = new AlertDialog.Builder(this);
@@ -160,6 +204,7 @@ public class Detalle_tareas extends AppCompatActivity {
 
             }
         });
+
 
        /* if (tipo.equals("administrador")) {
             buttonFinalizarTarea.setVisibility(View.GONE);
