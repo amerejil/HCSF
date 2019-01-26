@@ -105,19 +105,29 @@ public class Detalle_tareas extends AppCompatActivity {
         final DatePickerDialog fecha=new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String Id = getIntent().getExtras().get("Id").toString();
+                String Id = dataTask.getId();
                 task.child(Id).child("estado").setValue("Finalizado");
                 task.child(Id).child("estado_equipo").setValue(estado_equipo);
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
-                if(month>=9)
+                if(month>=9 && dayOfMonth >=9)
                 {
                     task.child(Id).child("fecha_finalizacion").setValue(""+dayOfMonth+"/"+(month+1)+"/"+year);
-                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+dayOfMonth+""+(month+1)+""+year));
+                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+year+""+(month+1)+""+dayOfMonth));
                 }
-                else
+                if(month<9 && dayOfMonth >=9)
                 {
                     task.child(Id).child("fecha_finalizacion").setValue(""+dayOfMonth+"/"+"0"+(month+1)+"/"+year);
-                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+dayOfMonth+""+"0"+(month+1)+""+year));
+                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+year+""+"0"+(month+1)+""+dayOfMonth));
+                }
+                if(month>=9 && dayOfMonth <9)
+                {
+                    task.child(Id).child("fecha_finalizacion").setValue("0"+dayOfMonth+"/"+""+(month+1)+"/"+year);
+                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+year+""+""+(month+1)+"0"+dayOfMonth));
+                }
+                if(month<9 && dayOfMonth <9)
+                {
+                    task.child(Id).child("fecha_finalizacion").setValue("0"+dayOfMonth+"/"+"0"+(month+1)+"/"+year);
+                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+year+""+"0"+(month+1)+"0"+dayOfMonth));
                 }
 
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
@@ -144,10 +154,10 @@ public class Detalle_tareas extends AppCompatActivity {
                 SimpleDateFormat f_date_entero = new SimpleDateFormat("ddMMyyyy");
                 stringFecha_finalizacion_entero = f_date_entero.format(date);
                 stringFecha_finalizacion = f_date.format(date);
-                String Id = getIntent().getExtras().get("Id").toString();
-                task.child(Id).child("estado_equipo").setValue(estado_equipo);
-                task.child(Id).child("estado").setValue("Finalizado");
+                String Id = dataTask.getId();
 
+                task.child(Id).child("estado").setValue("Finalizado");
+                task.child(Id).child("estado_equipo").setValue(estado_equipo);
                 task.child(Id).child("fecha_finalizacion").setValue(stringFecha_finalizacion);
                 task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(stringFecha_finalizacion_entero));
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());

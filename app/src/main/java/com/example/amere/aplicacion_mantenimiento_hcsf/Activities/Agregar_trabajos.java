@@ -154,7 +154,7 @@ public class Agregar_trabajos extends AppCompatActivity {
                 data_task data=new data_task();
                 String value = task.push().getKey();
                 SimpleDateFormat f_date = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat f_date_entero = new SimpleDateFormat("ddMMyyyy");
+                SimpleDateFormat f_date_entero = new SimpleDateFormat("yyyyMMdd");
                 data.setArea(area.getText().toString());
                 data.setAtencion(stringAtencion);
                 data.setEstado("No iniciado");/////

@@ -62,7 +62,7 @@ public class Menu_Principal extends AppCompatActivity {
         //diarioTask = database_hcsf.getReference("Tareas");
         diarioTask = database_hcsf.getReference("Tareas_prueba"); //cambio
         mensualTask = database_hcsf.getReference("Tareas_mesuales_prueba"); //cambio
-        FirebaseStorage storage = FirebaseStorage.getInstance();
+        //FirebaseStorage storage = FirebaseStorage.getInstance();
         if(orientation==Configuration.ORIENTATION_LANDSCAPE)
         gridLayoutManager_menu_principal = new GridLayoutManager(this, 4);
         if(orientation==Configuration.ORIENTATION_PORTRAIT)

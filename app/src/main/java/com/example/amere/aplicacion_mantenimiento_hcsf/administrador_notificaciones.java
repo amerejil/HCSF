@@ -91,7 +91,7 @@ public class administrador_notificaciones extends ContextWrapper {
                 .setContentTitle(title)
                 .setContentText(message)
                 .setContentIntent(pIntent)
-                .setPriority(Notification.PRIORITY_HIGH)
+                //.setPriority(Notification.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.icon_task)
                 .setSound(defaultSoundUri)
                 .setAutoCancel(true);

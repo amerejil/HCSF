@@ -73,7 +73,6 @@ public class Trabajos_Diarios extends AppCompatActivity {
     private int orientation;
     private ActionBar ab;
     private Toolbar toolbar;
-    @SuppressLint({"ClickableViewAccessibility", "RestrictedApi"})
 
 
     @Override
