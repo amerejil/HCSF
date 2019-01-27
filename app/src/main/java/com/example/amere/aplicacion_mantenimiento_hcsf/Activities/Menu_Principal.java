@@ -59,9 +59,9 @@ public class Menu_Principal extends AppCompatActivity {
         recyclerView_menu_principal = findViewById(R.id.recyclerView_menu_principal);
         logo = findViewById(R.id.image_HCSF);
         database_hcsf = Utils.getDatabase();
-        //diarioTask = database_hcsf.getReference("Tareas");
-        diarioTask = database_hcsf.getReference("Tareas_prueba"); //cambio
-        mensualTask = database_hcsf.getReference("Tareas_mesuales_prueba"); //cambio
+        diarioTask = database_hcsf.getReference("Tareas");
+        //diarioTask = database_hcsf.getReference("Tareas_prueba"); //cambio
+        mensualTask = database_hcsf.getReference("Tareas_Mensuales"); //cambio
         //FirebaseStorage storage = FirebaseStorage.getInstance();
         if(orientation==Configuration.ORIENTATION_LANDSCAPE)
         gridLayoutManager_menu_principal = new GridLayoutManager(this, 4);
@@ -102,39 +102,41 @@ public class Menu_Principal extends AppCompatActivity {
         });*/
         recyclerView_menu_principal.setLayoutManager(gridLayoutManager_menu_principal);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("administrador", "administrador");
-        //editor.putString("administrador", "usuario");
+        //editor.putString("administrador", "administrador");
+        editor.putString("administrador", "usuario");
         editor.apply();
         String tipo = preferences.getString("administrador", "usuario");
         if (tipo.equals("usuario")) {
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador_prueba");
-            FirebaseMessaging.getInstance().subscribeToTopic("usuario_prueba");
-            //FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador");
-            //FirebaseMessaging.getInstance().subscribeToTopic("usuario");
+            //FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador_prueba");
+            //FirebaseMessaging.getInstance().subscribeToTopic("usuario_prueba");
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador");
+            FirebaseMessaging.getInstance().subscribeToTopic("usuario");
             Toast.makeText(Menu_Principal.this, "Usuario", Toast.LENGTH_SHORT).show();
         } else {
 
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario_prueba");
-            FirebaseMessaging.getInstance().subscribeToTopic("administrador_prueba");
-            //FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
-            //FirebaseMessaging.getInstance().subscribeToTopic("administrador");
+            //FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario_prueba");
+            //FirebaseMessaging.getInstance().subscribeToTopic("administrador_prueba");
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
+            FirebaseMessaging.getInstance().subscribeToTopic("administrador");
             Toast.makeText(Menu_Principal.this, "adm", Toast.LENGTH_SHORT).show();
         }
-/*
 
-            final ValueEventListener listener = new ValueEventListener() {
+
+          /*final ValueEventListener listener = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
-                        //Integer.parseInt
-                        diarioTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_inicio_entero").setValue(Integer.parseInt(datasnapshot.getValue(data_task_temp.class).getFecha_inicio_entero()));
-                        if (datasnapshot.getValue(data_task_temp.class).getFecha_finalizacion_entero().isEmpty()) {
-                            diarioTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_finalizacion_entero").setValue(0);
+                        if(!datasnapshot.getValue(data_task.class).getFecha_finalizacion().isEmpty()) {
+                            mensualTask.child(datasnapshot.getValue(data_task.class).getId()).child("fecha_finalizacion_entero").setValue(convertir_string_entero(datasnapshot.getValue(data_task.class).getFecha_finalizacion()));
+                        }//Integer.parseInt
+                        // mensualTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_inicio_entero").setValue(Integer.parseInt(datasnapshot.getValue(data_task_temp.class).getFecha_inicio_entero()));
+                        *//*if (datasnapshot.getValue(data_task_temp.class).getFecha_finalizacion_entero().isEmpty()) {
+                            //mensualTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_finalizacion_entero").setValue(0);
                         }
                         else
                         {
-                            diarioTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_finalizacion_entero").setValue(Integer.parseInt(datasnapshot.getValue(data_task_temp.class).getFecha_finalizacion_entero()));
-                        }
+                            //mensualTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_finalizacion_entero").setValue(Integer.parseInt(datasnapshot.getValue(data_task_temp.class).getFecha_finalizacion_entero()));
+                        }*//*
                     }
 
                 }
@@ -144,8 +146,8 @@ public class Menu_Principal extends AppCompatActivity {
 
                 }
             };
-            diarioTask.addListenerForSingleValueEvent(listener);
-*/
+            mensualTask.addListenerForSingleValueEvent(listener);*/
+
 
         final ValueEventListener listener1=new ValueEventListener() {
             @Override
@@ -175,8 +177,6 @@ public class Menu_Principal extends AppCompatActivity {
             @Override
             public void onItemClick(data_cardView_item data, int position) {
 
-                //String valor =data.getType_task();
-                // Toast.makeText(Menu_Principal.this,"Presionaste "+ valor,Toast.LENGTH_SHORT).show();
                 if (position == 0) {
 
                     Intent intent = new Intent(Menu_Principal.this, Trabajos_Diarios.class);
@@ -198,7 +198,22 @@ public class Menu_Principal extends AppCompatActivity {
         });
 
         recyclerView_menu_principal.setAdapter(adaptador);
-
     }
+    /*public int ordenar_fecha(int fecha_desorden)
+    {
+        int temp1=fecha_desorden%10000;
+        int temp2=fecha_desorden/10000;
+        int temp3=temp2%100;
+        int temp4=temp2/100;
+        int temp5=temp4;
+        return temp1*10000+temp3*100+temp5;
+    }
+    public int convertir_string_entero(String fecha_finalizacion)
+    {
+        int temp1=Integer.parseInt(fecha_finalizacion.substring(6,10));
+        int temp2=Integer.parseInt(fecha_finalizacion.substring(0,2));
+        int temp3=Integer.parseInt(fecha_finalizacion.substring(3,5));
+        return temp1*10000+temp3*100+temp2;
+    }*/
 }
 

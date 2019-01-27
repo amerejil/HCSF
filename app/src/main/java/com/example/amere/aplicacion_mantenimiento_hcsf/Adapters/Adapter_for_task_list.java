@@ -170,11 +170,10 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         public boolean onMenuItemClick(MenuItem item) {
             database_hcsf = Utils.getDatabase();
             if(tipo_tarea.equals("diario")){
-                task = database_hcsf.getReference("Tareas_prueba"); //cambio
+                task = database_hcsf.getReference("Tareas"); //cambio
             }else{
-                task = database_hcsf.getReference("Tareas_Mensuales_prueba"); //cambio
+                task = database_hcsf.getReference("Tareas_Mensuales"); //cambio
             }
-            monthly_task = database_hcsf.getReference("Tareas_Mensuales_prueba"); //cambio
             String id = item_menus.get(this.getAdapterPosition()).getId();
             switch (item.getItemId()) {
                 case R.id.change_state_iniciado: {

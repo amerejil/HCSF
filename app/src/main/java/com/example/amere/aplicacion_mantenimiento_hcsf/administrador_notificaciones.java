@@ -50,18 +50,37 @@ public class administrador_notificaciones extends ContextWrapper {
     public Notification.Builder createNotification(String title, String message, boolean isHighImportance, data_task data) {
         if (Build.VERSION.SDK_INT >= 26) {
             if (isHighImportance) {
-                return this.createNotificationWithChannel(title, message, CHANNEL_HIGH_ID);
+                return this.createNotificationWithChannel(title, message, CHANNEL_HIGH_ID,data);
             }
-            return this.createNotificationWithChannel(title, message, CHANNEL_LOW_ID);
+            return this.createNotificationWithChannel(title, message, CHANNEL_LOW_ID,data);
         }
         return this.createNotificationWithoutChannel(title, message,data);
     }
 
-    private Notification.Builder createNotificationWithChannel(String title, String message, String channelId) {
+    private Notification.Builder createNotificationWithChannel(String title, String message, String channelId,data_task data) {
         if (Build.VERSION.SDK_INT >= 26) {
+            String estado = data.getEstado();
+            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            //Intent intent=new Intent(this,Detalle_tareas.class);
+            if (!estado.equals("Finalizado")) {
+                intent = new Intent(this, Detalle_tareas.class);
+                intent.putExtra("data", data);
+                intent.putExtra("trabajos", "diarios");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
+            else
+            {
+                intent = new Intent(this, Detalle_tareas_finalizadas.class);
+                intent.putExtra("data", data);
+                intent.putExtra("trabajos", "diarios");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
+            PendingIntent pIntent = PendingIntent.getActivity(this, data.getId().hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
             return new Notification.Builder(getApplicationContext(), channelId)
                     .setContentTitle(title)
                     .setContentText(message)
+                    .setContentIntent(pIntent)
                     .setSmallIcon(R.drawable.icon_task)
                     .setAutoCancel(true);
         }
@@ -91,7 +110,7 @@ public class administrador_notificaciones extends ContextWrapper {
                 .setContentTitle(title)
                 .setContentText(message)
                 .setContentIntent(pIntent)
-                //.setPriority(Notification.PRIORITY_HIGH)
+                .setPriority(Notification.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.icon_task)
                 .setSound(defaultSoundUri)
                 .setAutoCancel(true);

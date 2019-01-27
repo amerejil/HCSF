@@ -73,12 +73,12 @@ public class Detalle_tareas extends AppCompatActivity {
         database_hcsf = Utils.getDatabase();
         final String tipo_tarea = getIntent().getExtras().get("trabajos").toString();
         if (tipo_tarea.equals("diarios")) {
-            task = database_hcsf.getReference("Tareas_prueba");//cambio
-            //task = database_hcsf.getReference("Tareas");
+            //task = database_hcsf.getReference("Tareas_prueba");//cambio
+            task = database_hcsf.getReference("Tareas");
 
         } else {
-            task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
-            //task = database_hcsf.getReference("Tareas_Mensuales");
+            //task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
+            task = database_hcsf.getReference("Tareas_Mensuales");
             textViewTipo_Tarea.setText(R.string.submenu_monthly_work);
         }
 
@@ -151,7 +151,7 @@ public class Detalle_tareas extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 long date = System.currentTimeMillis();
                 SimpleDateFormat f_date = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat f_date_entero = new SimpleDateFormat("ddMMyyyy");
+                SimpleDateFormat f_date_entero = new SimpleDateFormat("yyyyMMdd");
                 stringFecha_finalizacion_entero = f_date_entero.format(date);
                 stringFecha_finalizacion = f_date.format(date);
                 String Id = dataTask.getId();
