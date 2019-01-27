@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/my_toolbar_administrador_busqueda"
-        layout="@layout/actionbar"></include>
+        layout="@layout/actionbar" />
 
     <TextView
         android:id="@+id/textViewDailyWork3"

@@ -11,14 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adaptader_for_principal_menu;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_cardView_item;
-import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,12 +32,10 @@ public class Menu_Principal extends AppCompatActivity {
     private RecyclerView recyclerView_menu_principal;
     private Adaptader_for_principal_menu adaptador;
     private GridLayoutManager gridLayoutManager_menu_principal;
-    private ImageView logo;
     private int orientation;
     private SharedPreferences preferences;
     private ActionBar ab;
     private Toolbar toolbar;
-    private ArrayList<data_task> test;
     private DatabaseReference diarioTask;
     private DatabaseReference mensualTask;
     private FirebaseDatabase database_hcsf;
@@ -55,7 +51,6 @@ public class Menu_Principal extends AppCompatActivity {
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         orientation = getResources().getConfiguration().orientation;
         recyclerView_menu_principal = findViewById(R.id.recyclerView_menu_principal);
-        logo = findViewById(R.id.image_HCSF);
         database_hcsf = Utils.getDatabase();
         diarioTask = database_hcsf.getReference("Tareas");
         //diarioTask = database_hcsf.getReference("Tareas_prueba"); //cambio

@@ -1,18 +1,8 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf;
 
 import java.io.Serializable;
-import java.util.Comparator;
 
 public class data_task implements Serializable {
-
-    public static Comparator<data_task> orden_tipo = new Comparator<data_task>() {
-        @Override
-        public int compare(data_task o1, data_task o2) {
-            String tipo1 = o1.getTipo();
-            String tipo2 = o2.getTipo();
-            return tipo1.compareTo(tipo2);
-        }
-    };
     private String tipo;
     private String id;
     private String fecha_inicio;

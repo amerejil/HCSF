@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/my_toolbar_detalle_tareas_finalizadas"
-        layout="@layout/actionbar"></include>
+        layout="@layout/actionbar" />
 
     <TextView
         android:id="@+id/textViewWorkFinished"

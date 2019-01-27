@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/my_toolbar_trabajos_diarios"
-        layout="@layout/actionbar"></include>
+        layout="@layout/actionbar" />
 
     <TextView
         android:id="@+id/textViewDailyWork"
@@ -164,6 +164,8 @@
         android:clickable="true"
         android:focusable="true"
         app:maxImageSize="35dp"
-        app:srcCompat="@drawable/icon_add_task" />
+        app:srcCompat="@drawable/icon_add_task"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp" />
 
 </RelativeLayout>

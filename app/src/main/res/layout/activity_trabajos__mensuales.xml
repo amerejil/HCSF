@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/my_toolbar_trabajos_mensuales"
-        layout="@layout/actionbar"></include>
+        layout="@layout/actionbar" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresh_tareas_mensuales"
@@ -20,7 +20,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewMonthlyTask"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

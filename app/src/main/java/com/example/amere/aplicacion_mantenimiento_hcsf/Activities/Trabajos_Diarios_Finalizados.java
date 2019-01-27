@@ -89,7 +89,6 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
                     @Override
                     public void onItemClick(data_task data, int position) {
                         Intent intent_detalle_tareas = new Intent(Trabajos_Diarios_Finalizados.this, Detalle_tareas_finalizadas.class);
-                        String id = data.getId();
                         intent_detalle_tareas.putExtra("data", data);
                         intent_detalle_tareas.putExtra("trabajos", "diarios");
                         startActivity(intent_detalle_tareas);

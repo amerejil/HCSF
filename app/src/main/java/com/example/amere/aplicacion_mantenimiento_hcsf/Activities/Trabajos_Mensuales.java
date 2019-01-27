@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_list;
@@ -51,7 +50,6 @@ public class Trabajos_Mensuales extends AppCompatActivity {
     private TextView textViewArea;
     private TextView textViewUbicacion;
     private FloatingActionButton floatingActionButtonAddMonthlyTask;
-    private RelativeLayout relativeLayout;
     private SharedPreferences preferences;
     private String tipo;
     private int orientation;
@@ -90,7 +88,6 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         textViewSubarea = findViewById(R.id.textViewSubareaMensual);
         textViewSubtipo = findViewById(R.id.textViewSubtipoMensual);
         textViewUbicacion = findViewById(R.id.textViewUbicacionMensual);
-        relativeLayout = findViewById(R.id.relativeLayoutTrabajosMensuales);
 
         floatingActionButtonAddMonthlyTask = findViewById(R.id.floatingActionButton_Add_MonthlyTask);
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {

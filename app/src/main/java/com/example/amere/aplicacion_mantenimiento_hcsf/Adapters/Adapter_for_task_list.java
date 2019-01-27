@@ -42,10 +42,6 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         this.orientation = orientation;
     }
 
-    public Adapter_for_task_list() {
-
-    }
-
 
     @NonNull
     @Override
@@ -79,7 +75,6 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         public TextView textViewUbicacion;
         public CardView cardView;
         private DatabaseReference task;
-        private DatabaseReference monthly_task;
         private FirebaseDatabase database_hcsf;
 
         public ViewHolder(View itemView) {

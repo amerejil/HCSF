@@ -14,7 +14,7 @@ public class NotificationService extends FirebaseMessagingService {
 
     public void onMessageReceived(RemoteMessage remoteMessage) {
         task = new data_task();
-        estado = new String();
+        estado = "";
         task.setArea(remoteMessage.getData().get("area"));
         task.setUbicacion(remoteMessage.getData().get("ubicacion"));
         task.setAtencion(remoteMessage.getData().get("atencion"));

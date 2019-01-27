@@ -9,10 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
-import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class Detalle_tareas_finalizadas extends AppCompatActivity {
     private TextView textViewTipoTarea;
@@ -26,9 +23,7 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
     private TextView textViewNota;
     private CardView cardViewEstadoEquipo;
     private TextView textViewEstadoEquipo;
-    private FirebaseDatabase database_hcsf;
     private data_task dataTask;
-    private DatabaseReference task;
     private ActionBar ab;
     private Toolbar toolbar;
 
@@ -52,16 +47,13 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
         textViewNota = findViewById(R.id.texViewNotaFinalizado);
         textViewEstadoEquipo = findViewById(R.id.textViewEstadoEquipo);
         cardViewEstadoEquipo = findViewById(R.id.cardViewEstadoEquipo);
-
-        database_hcsf = Utils.getDatabase();
         String tipo = getIntent().getExtras().get("trabajos").toString();
         dataTask = (data_task) getIntent().getSerializableExtra("data");
         if (tipo.equals("diarios")) {
             //task = database_hcsf.getReference("Tareas_prueba");//cambio
-            task = database_hcsf.getReference("Tareas");
         } else {
             //task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
-            task = database_hcsf.getReference("Tareas_Mensuales");
+
             textViewTipoTarea.setText(R.string.submenu_monthly_work_finished);
         }
         if (dataTask != null) {

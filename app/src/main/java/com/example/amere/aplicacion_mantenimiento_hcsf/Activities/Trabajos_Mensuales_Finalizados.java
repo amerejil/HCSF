@@ -91,7 +91,6 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
                     @Override
                     public void onItemClick(data_task data, int position) {
                         Intent intent_detalle_tareas = new Intent(Trabajos_Mensuales_Finalizados.this, Detalle_tareas_finalizadas.class);
-                        String id = data.getId();
                         intent_detalle_tareas.putExtra("data", data);
                         intent_detalle_tareas.putExtra("trabajos", "mensuales");
                         startActivity(intent_detalle_tareas);

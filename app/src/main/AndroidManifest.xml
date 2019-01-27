@@ -42,7 +42,7 @@
         <activity
             android:name=".Activities.Agregar_trabajos"
             android:configChanges="screenSize|orientation"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
 
         <service android:name=".NotificationService">
             <intent-filter>
@@ -53,8 +53,8 @@
         <activity
             android:name=".Activities.Detalle_tareas"
             android:configChanges="screenSize|orientation"
-            android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".Activities.Detalle_tareas_finalizadas"></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activities.Detalle_tareas_finalizadas" />
         <activity android:name=".Activities.Administrador_busqueda" />
         <activity
             android:name=".Activities.Trabajos_Diarios"

@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_list;
@@ -51,7 +50,6 @@ public class Trabajos_Diarios extends AppCompatActivity {
     private TextView textViewArea;
     private TextView textViewUbicacion;
     private FloatingActionButton floatingActionButtonAddDailyTask;
-    private RelativeLayout relativeLayout;
     private SharedPreferences preferences;
     private String tipo;
     private int orientation;
@@ -89,7 +87,6 @@ public class Trabajos_Diarios extends AppCompatActivity {
         textViewSubtipo = findViewById(R.id.textViewSubtipo);
         textViewSubarea = findViewById(R.id.textViewSubarea);
         textViewUbicacion = findViewById(R.id.textViewUbicacion);
-        relativeLayout = findViewById(R.id.relativeLayout);
 
         floatingActionButtonAddDailyTask = findViewById(R.id.floatingActionButton);
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -321,13 +318,6 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 intent.putExtra("trabajos", "diarios");
                 intent.putExtra("estado", "");
                 startActivity(intent);
-                return true;
-            }
-            case android.R.id.home: {
-                Intent intent = new Intent(Trabajos_Diarios.this, Menu_Principal.class);
-
-                startActivity(intent);
-                finish();
                 return true;
             }
             default:

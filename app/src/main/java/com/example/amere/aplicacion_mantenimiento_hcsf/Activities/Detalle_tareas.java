@@ -36,15 +36,12 @@ public class Detalle_tareas extends AppCompatActivity {
     private TextView textViewSolicitante;
     private TextView textViewTrabajoSolicitado;
     private EditText editTextNota;
-    private CardView cardViewNota;
     private TextView textViewTipo_Tarea;
     private CardView buttonFinalizarTarea;
     private String stringFecha_finalizacion_entero;
     private String stringFecha_finalizacion;
     private FirebaseDatabase database_hcsf;
     private DatabaseReference task;
-    private SharedPreferences preferences;
-    private String tipo;
     private ActionBar ab;
     private Toolbar toolbar;
     private String estado_equipo;
@@ -52,7 +49,6 @@ public class Detalle_tareas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         setContentView(R.layout.activity_detalle_tareas);
         toolbar = findViewById(R.id.my_toolbar_detalle_tareas);
         setSupportActionBar(toolbar);
@@ -67,10 +63,8 @@ public class Detalle_tareas extends AppCompatActivity {
         textViewSubarea = findViewById(R.id.textViewDetalleSubarea);
         textViewSolicitante = findViewById(R.id.textViewDetalleSolicitante);
         editTextNota = findViewById(R.id.editTextNota);
-        cardViewNota = findViewById(R.id.cardViewNota);
         textViewTrabajoSolicitado = findViewById(R.id.textViewDetalleTrabajoSolicitado);
         buttonFinalizarTarea = findViewById(R.id.buttonFinalizarTarea);
-        tipo = preferences.getString("administrador", "usuario");
         database_hcsf = Utils.getDatabase();
         final String tipo_tarea = getIntent().getExtras().get("trabajos").toString();
         if (tipo_tarea.equals("diarios")) {

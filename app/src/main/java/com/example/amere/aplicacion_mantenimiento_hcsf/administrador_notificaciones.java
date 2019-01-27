@@ -59,7 +59,6 @@ public class administrador_notificaciones extends ContextWrapper {
     private Notification.Builder createNotificationWithChannel(String title, String message, String channelId, data_task data) {
         if (Build.VERSION.SDK_INT >= 26) {
             String estado = data.getEstado();
-            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             //Intent intent=new Intent(this,Detalle_tareas.class);
             if (!estado.equals("Finalizado")) {
                 intent = new Intent(this, Detalle_tareas.class);

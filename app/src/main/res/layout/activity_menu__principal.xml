@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/my_toolbar_menu_principal"
-        layout="@layout/actionbar"></include>
+        layout="@layout/actionbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
