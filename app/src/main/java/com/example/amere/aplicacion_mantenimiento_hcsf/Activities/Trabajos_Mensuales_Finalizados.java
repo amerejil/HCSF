@@ -2,10 +2,10 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_finished;
-import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_list;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
@@ -43,6 +42,7 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
     private TextView textViewDateFinished;
     private ActionBar ab;
     private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
         ab = getSupportActionBar();
         ab.setDisplayShowTitleEnabled(false);
         ab.setDisplayHomeAsUpEnabled(true);
-        swipeRefreshLayoutMonthlyTask=findViewById(R.id.refresh_tareas_mensuales_finalizadas);
+        swipeRefreshLayoutMonthlyTask = findViewById(R.id.refresh_tareas_mensuales_finalizadas);
         textViewType = findViewById(R.id.textViewType_Finished);
         textViewDateStart = findViewById(R.id.textView_DateStart);
         textViewDateFinished = findViewById(R.id.textView_DateFinished);
@@ -65,12 +65,12 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
         linearLayoutManagerMonthlyTaskFinished.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewMonthlyTaskFinished.setLayoutManager(linearLayoutManagerMonthlyTaskFinished);
         lista_tareas_mensuales = new ArrayList<>();
-        adaptador=new Adapter_for_task_finished(lista_tareas_mensuales, new Adapter_for_task_finished.OnItemClickListener() {
+        adaptador = new Adapter_for_task_finished(lista_tareas_mensuales, new Adapter_for_task_finished.OnItemClickListener() {
             @Override
             public void onItemClick(data_task data, int position) {
 
             }
-        },Trabajos_Mensuales_Finalizados.this);
+        }, Trabajos_Mensuales_Finalizados.this);
         recyclerViewMonthlyTaskFinished.setAdapter(adaptador);
 
         final Query orden_fecha_inicio = task.orderByChild("fecha_inicio_entero");

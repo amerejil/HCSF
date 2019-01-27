@@ -2,10 +2,10 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_finished;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
@@ -41,6 +42,7 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
     private TextView textViewDateFinished;
     private ActionBar ab;
     private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
         ab = getSupportActionBar();
         ab.setDisplayShowTitleEnabled(false);
         ab.setDisplayHomeAsUpEnabled(true);
-        swipeRefreshLayoutDailyTask=findViewById(R.id.refresh_tareas_diarias_finalizadas);
+        swipeRefreshLayoutDailyTask = findViewById(R.id.refresh_tareas_diarias_finalizadas);
         textViewType = findViewById(R.id.textViewTypeFinished);
         textViewDateStart = findViewById(R.id.textViewDateStart);
         textViewDateFinished = findViewById(R.id.textViewDateFinished);
@@ -61,13 +63,13 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
         linearLayoutManager_daily_task = new LinearLayoutManager(this);
         linearLayoutManager_daily_task.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewTDailyTask.setLayoutManager(linearLayoutManager_daily_task);
-        lista_tareas_diarias=new ArrayList<>();
-        adaptador=new Adapter_for_task_finished(lista_tareas_diarias, new Adapter_for_task_finished.OnItemClickListener() {
+        lista_tareas_diarias = new ArrayList<>();
+        adaptador = new Adapter_for_task_finished(lista_tareas_diarias, new Adapter_for_task_finished.OnItemClickListener() {
             @Override
             public void onItemClick(data_task data, int position) {
 
             }
-        },Trabajos_Diarios_Finalizados.this);
+        }, Trabajos_Diarios_Finalizados.this);
         recyclerViewTDailyTask.setAdapter(adaptador);
         final Query orden_fecha_inicio = task.orderByChild("fecha_inicio_entero");
         final Query orden_tipo = task.orderByChild("tipo");
@@ -125,7 +127,6 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
                 textViewDateFinished.setTypeface(null, Typeface.NORMAL);
                 textViewType.setTypeface(null, Typeface.BOLD);
                 orden_tipo.addListenerForSingleValueEvent(listener);
-
 
 
             }

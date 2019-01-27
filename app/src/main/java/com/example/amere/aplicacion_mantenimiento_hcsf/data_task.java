@@ -5,6 +5,14 @@ import java.util.Comparator;
 
 public class data_task implements Serializable {
 
+    public static Comparator<data_task> orden_tipo = new Comparator<data_task>() {
+        @Override
+        public int compare(data_task o1, data_task o2) {
+            String tipo1 = o1.getTipo();
+            String tipo2 = o2.getTipo();
+            return tipo1.compareTo(tipo2);
+        }
+    };
     private String tipo;
     private String id;
     private String fecha_inicio;
@@ -23,11 +31,12 @@ public class data_task implements Serializable {
     private int fecha_finalizacion_entero;
     private String nota;
 
-//Añadir nuevos campos requeridos
+    //Añadir nuevos campos requeridos
     public data_task() {
 
     }
-//Añadir nuevos campos requeridos tambien en el constructor
+
+    //Añadir nuevos campos requeridos tambien en el constructor
     public data_task(String id, String tipo, String ubicacion, String piso, String area,
                      String subarea, String atencion, String solicitante, String trabajo_solicitado,
                      String fecha_inicio, int fecha_inicio_entero,
@@ -51,69 +60,135 @@ public class data_task implements Serializable {
         this.nota = nota;
         this.subtipo = subtipo;
     }
-//agregar getter a los nuevos campos
+
+    //agregar getter a los nuevos campos
     public String getTipo() {
         return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getUbicacion() {
         return ubicacion;
     }
 
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
     public String getPiso() {
         return piso;
+    }
+
+    public void setPiso(String piso) {
+        this.piso = piso;
     }
 
     public String getArea() {
         return area;
     }
 
+    public void setArea(String area) {
+        this.area = area;
+    }
+
     public String getSubarea() {
         return subarea;
+    }
+
+    public void setSubarea(String subarea) {
+        this.subarea = subarea;
     }
 
     public String getAtencion() {
         return atencion;
     }
 
+    public void setAtencion(String atencion) {
+        this.atencion = atencion;
+    }
+
     public String getSolicitante() {
         return solicitante;
+    }
+
+    public void setSolicitante(String solicitante) {
+        this.solicitante = solicitante;
     }
 
     public String getTrabajo_solicitado() {
         return trabajo_solicitado;
     }
 
+    public void setTrabajo_solicitado(String trabajo_solicitado) {
+        this.trabajo_solicitado = trabajo_solicitado;
+    }
+
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFecha_inicio() {
         return fecha_inicio;
     }
 
+    public void setFecha_inicio(String fecha_inicio) {
+        this.fecha_inicio = fecha_inicio;
+    }
+
     public String getFecha_finalizacion() {
         return fecha_finalizacion;
+    }
+
+    public void setFecha_finalizacion(String fecha_finalizacion) {
+        this.fecha_finalizacion = fecha_finalizacion;
     }
 
     public String getEstado() {
         return estado;
     }
 
+    public void setEstado(String estado) {
+        this.estado = estado;
+
+    }
+
     public String getEstado_equipo() {
         return estado_equipo;
+    }
+
+    public void setEstado_equipo(String estado_equipo) {
+        this.estado_equipo = estado_equipo;
     }
 
     public int getFecha_inicio_entero() {
         return fecha_inicio_entero;
     }
 
+    public void setFecha_inicio_entero(int fecha_inicio_entero) {
+        this.fecha_inicio_entero = fecha_inicio_entero;
+    }
+
     public String getNota() {
         return nota;
     }
 
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+
     public int getFecha_finalizacion_entero() {
         return fecha_finalizacion_entero;
+    }
+
+    public void setFecha_finalizacion_entero(int fecha_finalizacion_entero) {
+        this.fecha_finalizacion_entero = fecha_finalizacion_entero;
     }
 
     public String getSubtipo() {
@@ -123,77 +198,4 @@ public class data_task implements Serializable {
     public void setSubtipo(String subtipo) {
         this.subtipo = subtipo;
     }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
-    public void setPiso(String piso) {
-        this.piso = piso;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public void setSubarea(String subarea) {
-        this.subarea = subarea;
-    }
-
-    public void setAtencion(String atencion) {
-        this.atencion = atencion;
-    }
-
-    public void setSolicitante(String solicitante) {
-        this.solicitante = solicitante;
-    }
-
-    public void setTrabajo_solicitado(String trabajo_solicitado) {
-        this.trabajo_solicitado = trabajo_solicitado;
-    }
-
-    public void setEstado_equipo(String estado_equipo) {
-        this.estado_equipo = estado_equipo;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setFecha_inicio(String fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
-    }
-
-    public void setFecha_finalizacion(String fecha_finalizacion) {
-        this.fecha_finalizacion = fecha_finalizacion;
-    }
-
-    public void setFecha_inicio_entero(int fecha_inicio_entero) {
-        this.fecha_inicio_entero = fecha_inicio_entero;
-    }
-
-    public void setFecha_finalizacion_entero(int fecha_finalizacion_entero) {
-        this.fecha_finalizacion_entero = fecha_finalizacion_entero;
-    }
-
-    public void setNota(String nota) {
-        this.nota = nota;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-
-    }
-    public static Comparator<data_task> orden_tipo=new Comparator<data_task>() {
-        @Override
-        public int compare(data_task o1, data_task o2) {
-            String tipo1=o1.getTipo();
-            String tipo2=o2.getTipo();
-            return tipo1.compareTo(tipo2);
-        }
-    };
 }

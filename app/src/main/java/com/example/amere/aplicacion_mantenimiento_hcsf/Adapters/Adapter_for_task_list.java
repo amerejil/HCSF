@@ -39,7 +39,7 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         this.activity = activity;
         this.preferences = preferences;
         this.tipo_tarea = tipo_tarea;
-        this.orientation=orientation;
+        this.orientation = orientation;
     }
 
     public Adapter_for_task_list() {
@@ -62,6 +62,10 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
     @Override
     public int getItemCount() {
         return item_menus.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(data_task data, int position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
@@ -130,19 +134,16 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
                 this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.prioridad_alta));
 
 
-            }
-            else
-                { if(data.getAtencion().equals("Alta_") )
+            } else {
+                if (data.getAtencion().equals("Alta_"))
                     this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.prioridad_alta_dark));
             }
             if (data.getAtencion().equals("Baja")) {
                 this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.prioridad_bajo));
 
 
-            }
-            else if(data.getAtencion().equals("Baja_"))
-            {
-                this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity,R.color.prioridad_bajo_dark));
+            } else if (data.getAtencion().equals("Baja_")) {
+                this.cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.prioridad_bajo_dark));
             }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -156,7 +157,7 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
 
                     }
                     if (data.getAtencion().equals("Baja")) {
-                        cardView.setCardBackgroundColor(ContextCompat.getColor(activity,R.color.prioridad_bajo_dark));
+                        cardView.setCardBackgroundColor(ContextCompat.getColor(activity, R.color.prioridad_bajo_dark));
                         data.setAtencion("Baja_");
 
                     }
@@ -169,9 +170,9 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             database_hcsf = Utils.getDatabase();
-            if(tipo_tarea.equals("diario")){
+            if (tipo_tarea.equals("diario")) {
                 task = database_hcsf.getReference("Tareas"); //cambio
-            }else{
+            } else {
                 task = database_hcsf.getReference("Tareas_Mensuales"); //cambio
             }
             String id = item_menus.get(this.getAdapterPosition()).getId();
@@ -208,9 +209,5 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
                 menu.getItem(i).setOnMenuItemClickListener(this);
 
         }
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(data_task data, int position);
     }
 }

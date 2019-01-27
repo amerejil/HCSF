@@ -1,10 +1,9 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
-import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -71,7 +70,7 @@ public class Agregar_trabajos extends AppCompatActivity {
         atencion = findViewById(R.id.spinner4);
         enviarTarea = findViewById(R.id.floatingActionButton1);
         database_hcsf = Utils.getDatabase();
-        adapterTipo= ArrayAdapter.createFromResource(this, R.array.tipo, R.layout.spinner_item);
+        adapterTipo = ArrayAdapter.createFromResource(this, R.array.tipo, R.layout.spinner_item);
         adapterUbicacion = ArrayAdapter.createFromResource(this, R.array.ubicacion, R.layout.spinner_item);
         adapterPiso = ArrayAdapter.createFromResource(this, R.array.piso, R.layout.spinner_item);
         adapterSubtipo = ArrayAdapter.createFromResource(this, R.array.subtipo, R.layout.spinner_item);
@@ -84,10 +83,8 @@ public class Agregar_trabajos extends AppCompatActivity {
         final String tipo_trabajo = getIntent().getExtras().get("trabajos").toString();
         if (!tipo_trabajo.equals("diarios")) {
             textViewTipo.setText(R.string.new_monthly_task);
-            task=database_hcsf.getReference("Tareas_Mensuales");
-        }
-        else
-        {
+            task = database_hcsf.getReference("Tareas_Mensuales");
+        } else {
             task = database_hcsf.getReference("Tareas");
         }
         tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -151,7 +148,7 @@ public class Agregar_trabajos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 long date = System.currentTimeMillis();
-                data_task data=new data_task();
+                data_task data = new data_task();
                 String value = task.push().getKey();
                 SimpleDateFormat f_date = new SimpleDateFormat("dd/MM/yyyy");
                 SimpleDateFormat f_date_entero = new SimpleDateFormat("yyyyMMdd");
@@ -177,11 +174,12 @@ public class Agregar_trabajos extends AppCompatActivity {
                 subarea.setText("");
                 solicitante.setText("");
                 trabajo_solicitado.setText("");
-                String enviado="Trabajo Enviado";
-                Toast.makeText(Agregar_trabajos.this,enviado,Toast.LENGTH_SHORT).show();
+                String enviado = "Trabajo Enviado";
+                Toast.makeText(Agregar_trabajos.this, enviado, Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -192,4 +190,4 @@ public class Agregar_trabajos extends AppCompatActivity {
         }
     }
 
-    }
+}

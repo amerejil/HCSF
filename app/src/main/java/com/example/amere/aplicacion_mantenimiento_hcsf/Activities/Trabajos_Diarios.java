@@ -1,43 +1,27 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
-import android.annotation.SuppressLint;
-
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
 import android.content.res.Configuration;
-import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_list;
-import com.example.amere.aplicacion_mantenimiento_hcsf.Base_datos.BD_sql_lite;
-import com.example.amere.aplicacion_mantenimiento_hcsf.Base_datos.Constantes_base_datos;
-import com.example.amere.aplicacion_mantenimiento_hcsf.OnSwipeTouchListener;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
@@ -81,8 +65,8 @@ public class Trabajos_Diarios extends AppCompatActivity {
         setContentView(R.layout.activity_trabajos__diarios);
         toolbar = findViewById(R.id.my_toolbar_trabajos_diarios);
         setSupportActionBar(toolbar);
-        orientation=getResources().getConfiguration().orientation;
-        ab=getSupportActionBar();
+        orientation = getResources().getConfiguration().orientation;
+        ab = getSupportActionBar();
         lista_tareas_diarias = new ArrayList<>();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
@@ -96,28 +80,25 @@ public class Trabajos_Diarios extends AppCompatActivity {
         recyclerViewTDailyTask.setLayoutManager(linearLayoutManager_daily_task);
         recyclerViewTDailyTask.setHasFixedSize(false);
         recyclerViewTDailyTask.setItemAnimator(new DefaultItemAnimator());
-        refreshLayout=findViewById(R.id.refresh_tareas_diarias);
+        refreshLayout = findViewById(R.id.refresh_tareas_diarias);
         textViewType = findViewById(R.id.textViewType);
         textViewDate = findViewById(R.id.textViewDate);
         textViewState = findViewById(R.id.textViewEstado);
-        textViewPiso=findViewById(R.id.textViewPiso);
-        textViewArea=findViewById(R.id.textViewArea);
-        textViewSubtipo=findViewById(R.id.textViewSubtipo);
-        textViewSubarea=findViewById(R.id.textViewSubarea);
-        textViewUbicacion=findViewById(R.id.textViewUbicacion);
+        textViewPiso = findViewById(R.id.textViewPiso);
+        textViewArea = findViewById(R.id.textViewArea);
+        textViewSubtipo = findViewById(R.id.textViewSubtipo);
+        textViewSubarea = findViewById(R.id.textViewSubarea);
+        textViewUbicacion = findViewById(R.id.textViewUbicacion);
         relativeLayout = findViewById(R.id.relativeLayout);
 
         floatingActionButtonAddDailyTask = findViewById(R.id.floatingActionButton);
-        if(orientation==Configuration.ORIENTATION_PORTRAIT)
-        {
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             textViewPiso.setVisibility(View.GONE);
             textViewArea.setVisibility(View.GONE);
             textViewSubarea.setVisibility(View.GONE);
             textViewSubtipo.setVisibility(View.GONE);
             textViewUbicacion.setVisibility(View.GONE);
-        }
-        else
-        {
+        } else {
             textViewState.setVisibility(View.GONE);
         }
         final Query orden_tipo = task.orderByChild("tipo");
@@ -126,22 +107,22 @@ public class Trabajos_Diarios extends AppCompatActivity {
         final Query orden_piso = task.orderByChild("piso");
         final Query orden_area = task.orderByChild("area");
         final Query orden_subtipo = task.orderByChild("subtipo");
-        final Query orden_subarea=task.orderByChild("subarea");
+        final Query orden_subarea = task.orderByChild("subarea");
         final Query orden_ubicacion = task.orderByChild("ubicacion");
         tipo = preferences.getString("administrador", "usuario");
-        adaptador=new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
+        adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
             @Override
             public void onItemClick(data_task data, int position) {
 
             }
-        },Trabajos_Diarios.this,preferences,"diarios",orientation);
+        }, Trabajos_Diarios.this, preferences, "diarios", orientation);
         recyclerViewTDailyTask.setAdapter(adaptador);
 
         //task.removeEventListener(listener1);
         final ValueEventListener listener = new ValueEventListener() {
 
             @Override
-            public void onDataChange( DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 lista_tareas_diarias = new ArrayList<>();
                 for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
                     if (!datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado"))
@@ -151,26 +132,24 @@ public class Trabajos_Diarios extends AppCompatActivity {
                 adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                     @Override
                     public void onItemClick(data_task data, int position) {
-                        if(getIntent().getExtras()!=null)
-                        {
+                        if (getIntent().getExtras() != null) {
                             lista_tareas_diarias.remove(position);
                             adaptador.notifyItemRemoved(position);
                         }
                         Intent intent_detalle_tareas = new Intent(Trabajos_Diarios.this, Detalle_tareas.class);
-                        String id = data.getId();
-                        intent_detalle_tareas.putExtra("Id", id);
-                        intent_detalle_tareas.putExtra("data",data);
+                        intent_detalle_tareas.putExtra("data", data);
                         intent_detalle_tareas.putExtra("trabajos", "diarios");
                         startActivity(intent_detalle_tareas);
 
                     }
-                }, Trabajos_Diarios.this, preferences, "diario",orientation);
+                }, Trabajos_Diarios.this, preferences, "diario", orientation);
 
 
                 recyclerViewTDailyTask.setAdapter(adaptador);
                 //adaptador.notifyDataSetChanged();
 
             }
+
             @Override
 
             public void onCancelled(DatabaseError error) {

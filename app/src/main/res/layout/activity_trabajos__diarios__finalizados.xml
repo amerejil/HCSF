@@ -4,20 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.Trabajos_Diarios_Finalizados">
+
     <include
         android:id="@+id/my_toolbar_trabajos_diarios_finalizados"
-        layout="@layout/actionbar">
-    </include>
+        layout="@layout/actionbar"></include>
+
     <TextView
-        android:layout_below="@+id/my_toolbar_trabajos_diarios_finalizados"
         android:id="@+id/textViewWorkFinished"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/my_toolbar_trabajos_diarios_finalizados"
 
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="@string/submenu_daily_work_finished"
         android:padding="5dp"
+        android:text="@string/submenu_daily_work_finished"
         android:textColor="@color/colorPrimary"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -36,8 +37,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/type"
-            android:textSize="18sp"
-             />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewDateStart"
@@ -47,8 +47,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/fecha_inicio"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewDateFinished"
@@ -58,21 +57,20 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/fecha_finalizacion"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
     </LinearLayout>
+
     <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_tareas_diarias_finalizadas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/refresh_tareas_diarias_finalizadas"
-        android:layout_below="@+id/linearLayoutDailyTaskFinished"
-        >
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewDailyTaskFinished"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_below="@+id/linearLayoutDailyTaskFinished">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewDailyTaskFinished"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

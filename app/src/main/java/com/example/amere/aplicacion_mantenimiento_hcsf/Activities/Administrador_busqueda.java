@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_finished;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_list;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
@@ -54,6 +55,14 @@ public class Administrador_busqueda extends AppCompatActivity {
     private TextView textView7;
     private TextView textView8;
 
+    public static String ucFirst(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        } else {
+            return str.substring(0, 1).toUpperCase() + str.substring(1);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,28 +71,25 @@ public class Administrador_busqueda extends AppCompatActivity {
         setSupportActionBar(toolbar);
         textView1 = findViewById(R.id.textViewDateSearch);
         textView2 = findViewById(R.id.textViewTypeSearch);
-        textView3= findViewById(R.id.textViewSubtipoSearch);
+        textView3 = findViewById(R.id.textViewSubtipoSearch);
         textView4 = findViewById(R.id.textViewEstadoSearch);
-        textView5= findViewById(R.id.textViewPisoSearch);
-        textView6= findViewById(R.id.textViewAreaSearch);
-        textView7= findViewById(R.id.textViewSubareaSearch);
-        textView8= findViewById(R.id.textViewUbicacionSearch);
+        textView5 = findViewById(R.id.textViewPisoSearch);
+        textView6 = findViewById(R.id.textViewAreaSearch);
+        textView7 = findViewById(R.id.textViewSubareaSearch);
+        textView8 = findViewById(R.id.textViewUbicacionSearch);
         textViewTipo = findViewById(R.id.textViewDailyWork3);
-        orientation=getResources().getConfiguration().orientation;
+        orientation = getResources().getConfiguration().orientation;
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         database_hcsf = Utils.getDatabase();
         estado = getIntent().getExtras().get("estado").toString();
         tipo = getIntent().getExtras().get("trabajos").toString();
-        if(orientation== Configuration.ORIENTATION_PORTRAIT&&!estado.equals("finalizado"))
-        {
+        if (orientation == Configuration.ORIENTATION_PORTRAIT && !estado.equals("finalizado")) {
             textView3.setVisibility(View.GONE);
             textView5.setVisibility(View.GONE);
             textView6.setVisibility(View.GONE);
             textView7.setVisibility(View.GONE);
             textView8.setVisibility(View.GONE);
-        }
-        else if(!estado.equals("finalizado"))
-        {
+        } else if (!estado.equals("finalizado")) {
             textView4.setVisibility(View.GONE);
         }
         if (tipo.equals("diarios")) {
@@ -91,7 +97,7 @@ public class Administrador_busqueda extends AppCompatActivity {
             //task = database_hcsf.getReference("Tareas_prueba"); //cambio
             if (estado.equals("finalizado")) {
                 textViewTipo.setText(R.string.submenu_daily_work_finished);
-                textView1.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT,  0.35f));
+                textView1.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.35f));
                 textView2.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.35f));
                 textView3.setVisibility(View.GONE);
                 textView4.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.35f));
@@ -109,7 +115,7 @@ public class Administrador_busqueda extends AppCompatActivity {
             textViewTipo.setText(R.string.submenu_monthly_work);
             if (estado.equals("finalizado")) {
                 textViewTipo.setText(R.string.submenu_monthly_work_finished);
-                textView1.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT,  0.35f));
+                textView1.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.35f));
                 textView2.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.35f));
                 textView3.setVisibility(View.GONE);
                 textView4.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0.35f));
@@ -155,7 +161,7 @@ public class Administrador_busqueda extends AppCompatActivity {
                         for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
                             if (estado.isEmpty()) {
                                 if (!datasnapshot.getValue(data_task.class).getEstado().equals("Finalizado")) {
-                                        lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
+                                    lista_tareas_diarias.add(datasnapshot.getValue(data_task.class));
                                 }
 
 
@@ -170,7 +176,7 @@ public class Administrador_busqueda extends AppCompatActivity {
                         if (estado.isEmpty()) {
                             if (tipo.equals("diarios")) {
 
-                                adaptador = new Adapter_for_task_list(encontrarTareas(newText,uper,lista_tareas_diarias), new Adapter_for_task_list.OnItemClickListener() {
+                                adaptador = new Adapter_for_task_list(encontrarTareas(newText, uper, lista_tareas_diarias), new Adapter_for_task_list.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(data_task data, int position) {
                                         Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas.class);
@@ -179,11 +185,9 @@ public class Administrador_busqueda extends AppCompatActivity {
                                         startActivity(intent_detalle_tareas);
 
                                     }
-                                }, Administrador_busqueda.this, preferences, "diario",orientation);
-                            }
-                            else
-                            {
-                                adaptador = new Adapter_for_task_list(encontrarTareas(newText,uper,lista_tareas_diarias), new Adapter_for_task_list.OnItemClickListener() {
+                                }, Administrador_busqueda.this, preferences, "diario", orientation);
+                            } else {
+                                adaptador = new Adapter_for_task_list(encontrarTareas(newText, uper, lista_tareas_diarias), new Adapter_for_task_list.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(data_task data, int position) {
                                         Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas.class);
@@ -192,12 +196,11 @@ public class Administrador_busqueda extends AppCompatActivity {
                                         startActivity(intent_detalle_tareas);
 
                                     }
-                                }, Administrador_busqueda.this, preferences, "",orientation);
+                                }, Administrador_busqueda.this, preferences, "", orientation);
                             }
                             recyclerViewTDailyTask.setAdapter(adaptador);
-                        }
-                        else {
-                            adapter = new Adapter_for_task_finished(encontrarTareas(newText,uper,lista_tareas_diarias), new Adapter_for_task_finished.OnItemClickListener() {
+                        } else {
+                            adapter = new Adapter_for_task_finished(encontrarTareas(newText, uper, lista_tareas_diarias), new Adapter_for_task_finished.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(data_task data, int position) {
                                     Intent intent_detalle_tareas = new Intent(Administrador_busqueda.this, Detalle_tareas_finalizadas.class);
@@ -235,7 +238,7 @@ public class Administrador_busqueda extends AppCompatActivity {
                             startActivity(intent_detalle_tareas);
 
                         }
-                    }, Administrador_busqueda.this, preferences, "",orientation);
+                    }, Administrador_busqueda.this, preferences, "", orientation);
                     recyclerViewTDailyTask.setAdapter(adaptador);
                 } else {
                     task.addListenerForSingleValueEvent(valueEventListener);
@@ -263,18 +266,11 @@ public class Administrador_busqueda extends AppCompatActivity {
         return true;
     }
 
-    public static String ucFirst(String str) {
-        if (str == null || str.isEmpty()) {
-            return str;
-        } else {
-            return str.substring(0, 1).toUpperCase() + str.substring(1);
-        }
-    }
     public ArrayList<data_task> encontrarTareas(
-            String search,String uper, ArrayList<data_task> tareas) {
-        ArrayList<data_task>temp=new ArrayList<>();
+            String search, String uper, ArrayList<data_task> tareas) {
+        ArrayList<data_task> temp = new ArrayList<>();
 
-        for ( data_task task: tareas) {
+        for (data_task task : tareas) {
             if (task.getEstado_equipo().contains(search) || task.getEstado_equipo().contains(uper) ||
                     task.getTrabajo_solicitado().contains(search) || task.getTrabajo_solicitado().contains(uper) ||
                     task.getNota().contains(search) || task.getNota().contains(uper) ||
@@ -283,10 +279,9 @@ public class Administrador_busqueda extends AppCompatActivity {
                     task.getSubarea().contains(search) || task.getSubarea().contains(uper) ||
                     task.getTipo().contains(search) || task.getTipo().contains(uper) ||
                     task.getPiso().contains(search) || task.getPiso().contains(uper) ||
-                    task.getUbicacion().contains(search) || task.getUbicacion().contains(uper)||
-                    task.getSubtipo().contains(search) || task.getSubtipo().contains(uper)||
-                    task.getFecha_inicio().contains(search)|| task.getFecha_finalizacion().contains(search))
-            {
+                    task.getUbicacion().contains(search) || task.getUbicacion().contains(uper) ||
+                    task.getSubtipo().contains(search) || task.getSubtipo().contains(uper) ||
+                    task.getFecha_inicio().contains(search) || task.getFecha_finalizacion().contains(search)) {
                 temp.add(task);
             }
         }

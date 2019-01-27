@@ -5,6 +5,12 @@ public class data_cardView_item {
     private String type_task;
     private int color_cardView;
 
+    public data_cardView_item(int picture_task, String type_task, int color_cardView) {
+        this.picture_task = picture_task;
+        this.type_task = type_task;
+        this.color_cardView = color_cardView;
+    }
+
     public int getPicture_task() {
         return picture_task;
     }
@@ -15,11 +21,5 @@ public class data_cardView_item {
 
     public int getColor_cardView() {
         return color_cardView;
-    }
-
-    public data_cardView_item(int picture_task, String type_task, int color_cardView) {
-        this.picture_task = picture_task;
-        this.type_task = type_task;
-        this.color_cardView = color_cardView;
     }
 }

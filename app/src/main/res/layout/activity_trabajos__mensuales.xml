@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayoutTrabajosMensuales"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/relativeLayoutTrabajosMensuales"
     tools:context=".Activities.Trabajos_Mensuales">
 
-<include
-    android:id="@+id/my_toolbar_trabajos_mensuales"
-    layout="@layout/actionbar">
-</include>
+    <include
+        android:id="@+id/my_toolbar_trabajos_mensuales"
+        layout="@layout/actionbar"></include>
+
     <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_tareas_mensuales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/LinearLayoutMonthlyTask"
-        android:id="@+id/refresh_tareas_mensuales"
-        >
+        android:layout_below="@+id/LinearLayoutMonthlyTask">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewMonthlyTask"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView
         android:id="@+id/textViewMonthlyWork"
-        android:padding="5dp"
-        android:layout_below="@+id/my_toolbar_trabajos_mensuales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/my_toolbar_trabajos_mensuales"
         android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:padding="5dp"
         android:text="@string/submenu_monthly_work"
         android:textColor="@color/colorPrimary"
         android:textSize="22sp"
@@ -46,115 +45,120 @@
 
         <TextView
             android:id="@+id/textViewDateMensual"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.16"
             android:ellipsize="end"
+            android:gravity="center"
             android:maxLines="1"
             android:padding="5dp"
-            android:layout_width="0dp"
-            android:layout_weight="0.16"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:layout_height="wrap_content"
-            android:text="@string/date" />
+            android:text="@string/date"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/textViewTypeMensual"
-            android:padding="5dp"
             android:layout_width="0dp"
-            android:layout_weight="0.2"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:ellipsize="end"
-            android:maxLines="1"
             android:layout_height="wrap_content"
-            android:text="@string/type" />
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:text="@string/type"
+            android:textSize="18sp" />
 
         <TextView
-            android:padding="5dp"
             android:id="@+id/textViewSubtipoMensual"
             android:layout_width="0dp"
-            android:layout_weight="0.16"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:ellipsize="end"
-            android:maxLines="1"
             android:layout_height="wrap_content"
-            android:text="@string/Subtipo" />
-        <TextView
+            android:layout_gravity="center"
+            android:layout_weight="0.16"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
             android:padding="5dp"
-            android:id="@+id/textViewEstadoMensual"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:layout_width="0dp"
-            android:layout_weight="0.16"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:text="@string/state" />
+            android:text="@string/Subtipo"
+            android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/textViewEstadoMensual"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.16"
             android:ellipsize="end"
+            android:gravity="center"
             android:maxLines="1"
             android:padding="5dp"
+            android:text="@string/state"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/textViewPisoMensual"
             android:layout_width="0dp"
-            android:layout_weight="0.16"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/Piso" />
-        <TextView
+            android:layout_gravity="center"
+            android:layout_weight="0.16"
             android:ellipsize="end"
+            android:gravity="center"
             android:maxLines="1"
             android:padding="5dp"
+            android:text="@string/Piso"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/textViewAreaMensual"
             android:layout_width="0dp"
-            android:layout_weight="0.16"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/Area" />
-        <TextView
+            android:layout_gravity="center"
+            android:layout_weight="0.16"
             android:ellipsize="end"
+            android:gravity="center"
             android:maxLines="1"
             android:padding="5dp"
+            android:text="@string/Area"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/textViewSubareaMensual"
             android:layout_width="0dp"
-            android:layout_weight="0.16"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/Subarea" />
-        <TextView
+            android:layout_gravity="center"
+            android:layout_weight="0.16"
             android:ellipsize="end"
+            android:gravity="center"
             android:maxLines="1"
             android:padding="5dp"
+            android:text="@string/Subarea"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/textViewUbicacionMensual"
             android:layout_width="0dp"
-            android:layout_weight="0.16"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/Ubicacion" />
+            android:layout_gravity="center"
+            android:layout_weight="0.16"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:text="@string/Ubicacion"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton_Add_MonthlyTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="visible"
         app:maxImageSize="35dp"
         app:srcCompat="@drawable/icon_add_task" />
 </RelativeLayout>

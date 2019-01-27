@@ -3,22 +3,14 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Adapters;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
-import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -51,6 +43,10 @@ public class Adapter_for_task_finished extends RecyclerView.Adapter<Adapter_for_
         return item_menus.size();
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(data_task data, int position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewType;
         public TextView textViewDateStart;
@@ -77,9 +73,5 @@ public class Adapter_for_task_finished extends RecyclerView.Adapter<Adapter_for_
             });
         }
 
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(data_task data, int position);
     }
 }

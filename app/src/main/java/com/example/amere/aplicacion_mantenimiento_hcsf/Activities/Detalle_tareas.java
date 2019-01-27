@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Detalle_tareas extends AppCompatActivity {
+    public data_task dataTask;
     private TextView textViewTipo;
     private TextView textViewUbicacion;
     private TextView textViewPiso;
@@ -41,13 +42,13 @@ public class Detalle_tareas extends AppCompatActivity {
     private String stringFecha_finalizacion_entero;
     private String stringFecha_finalizacion;
     private FirebaseDatabase database_hcsf;
-    public data_task dataTask;
     private DatabaseReference task;
     private SharedPreferences preferences;
     private String tipo;
     private ActionBar ab;
     private Toolbar toolbar;
     private String estado_equipo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,12 +83,12 @@ public class Detalle_tareas extends AppCompatActivity {
             textViewTipo_Tarea.setText(R.string.submenu_monthly_work);
         }
 
-        dataTask= (data_task) getIntent().getSerializableExtra("data");
+        dataTask = (data_task) getIntent().getSerializableExtra("data");
         if (dataTask != null) {
             textViewTipo.setText(dataTask.getTipo());
-            if (dataTask.getAtencion().equals("Alta")||dataTask.getAtencion().equals("Alta_"))
+            if (dataTask.getAtencion().equals("Alta") || dataTask.getAtencion().equals("Alta_"))
                 textViewTipo.setTextColor(getResources().getColor(R.color.prioridad_alta));
-            if (dataTask.getAtencion().equals("Baja")||dataTask.getAtencion().equals("Baja_"))
+            if (dataTask.getAtencion().equals("Baja") || dataTask.getAtencion().equals("Baja_"))
                 textViewTipo.setTextColor(getResources().getColor(R.color.prioridad_bajo));
             textViewUbicacion.setText(dataTask.getUbicacion());
             textViewPiso.setText(dataTask.getPiso());
@@ -96,38 +97,34 @@ public class Detalle_tareas extends AppCompatActivity {
             textViewSolicitante.setText(dataTask.getSolicitante());
             textViewTrabajoSolicitado.setText("Trabajo solicitado: " + dataTask.getTrabajo_solicitado());
         }
-        final Calendar c= Calendar.getInstance();
-        final int year,month,day;
-        year=c.get(Calendar.YEAR);
-        month=c.get(Calendar.MONTH);
-        day=c.get(Calendar.DAY_OF_MONTH);
+        final Calendar c = Calendar.getInstance();
+        final int year, month, day;
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
 
-        final DatePickerDialog fecha=new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog fecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 String Id = dataTask.getId();
                 task.child(Id).child("estado").setValue("Finalizado");
                 task.child(Id).child("estado_equipo").setValue(estado_equipo);
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
-                if(month>=9 && dayOfMonth >=9)
-                {
-                    task.child(Id).child("fecha_finalizacion").setValue(""+dayOfMonth+"/"+(month+1)+"/"+year);
-                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+year+""+(month+1)+""+dayOfMonth));
+                if (month >= 9 && dayOfMonth >= 9) {
+                    task.child(Id).child("fecha_finalizacion").setValue("" + dayOfMonth + "/" + (month + 1) + "/" + year);
+                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt("" + year + "" + (month + 1) + "" + dayOfMonth));
                 }
-                if(month<9 && dayOfMonth >=9)
-                {
-                    task.child(Id).child("fecha_finalizacion").setValue(""+dayOfMonth+"/"+"0"+(month+1)+"/"+year);
-                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+year+""+"0"+(month+1)+""+dayOfMonth));
+                if (month < 9 && dayOfMonth >= 9) {
+                    task.child(Id).child("fecha_finalizacion").setValue("" + dayOfMonth + "/" + "0" + (month + 1) + "/" + year);
+                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt("" + year + "" + "0" + (month + 1) + "" + dayOfMonth));
                 }
-                if(month>=9 && dayOfMonth <9)
-                {
-                    task.child(Id).child("fecha_finalizacion").setValue("0"+dayOfMonth+"/"+""+(month+1)+"/"+year);
-                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+year+""+""+(month+1)+"0"+dayOfMonth));
+                if (month >= 9 && dayOfMonth < 9) {
+                    task.child(Id).child("fecha_finalizacion").setValue("0" + dayOfMonth + "/" + "" + (month + 1) + "/" + year);
+                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt("" + year + "" + "" + (month + 1) + "0" + dayOfMonth));
                 }
-                if(month<9 && dayOfMonth <9)
-                {
-                    task.child(Id).child("fecha_finalizacion").setValue("0"+dayOfMonth+"/"+"0"+(month+1)+"/"+year);
-                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt(""+year+""+"0"+(month+1)+"0"+dayOfMonth));
+                if (month < 9 && dayOfMonth < 9) {
+                    task.child(Id).child("fecha_finalizacion").setValue("0" + dayOfMonth + "/" + "0" + (month + 1) + "/" + year);
+                    task.child(Id).child("fecha_finalizacion_entero").setValue(Integer.parseInt("" + year + "" + "0" + (month + 1) + "0" + dayOfMonth));
                 }
 
                 task.child(Id).child("nota").setValue(editTextNota.getText().toString());
@@ -142,7 +139,7 @@ public class Detalle_tareas extends AppCompatActivity {
                 }
 
             }
-        },year,month,day);
+        }, year, month, day);
         final AlertDialog.Builder selecionar_fecha = new AlertDialog.Builder(this);
         selecionar_fecha.setMessage("¿Desea poner la fecha de finalización automáticamente?");
         selecionar_fecha.setCancelable(false);
@@ -183,7 +180,7 @@ public class Detalle_tareas extends AppCompatActivity {
         estado_dispositivo.setCancelable(false);
         estado_dispositivo.setPositiveButton("Operativo", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
-                estado_equipo="Operativo";
+                estado_equipo = "Operativo";
 
                 selecionar_fecha.show();
 
@@ -193,7 +190,7 @@ public class Detalle_tareas extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                estado_equipo="De baja";
+                estado_equipo = "De baja";
 
                 selecionar_fecha.show();
 
@@ -230,13 +227,14 @@ public class Detalle_tareas extends AppCompatActivity {
         });
         //registerForContextMenu(buttonFinalizarTarea);
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
-                default:
-                    return false;
+            default:
+                return false;
         }
 
     }

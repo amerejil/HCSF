@@ -41,6 +41,10 @@ public class Adaptader_for_principal_menu extends RecyclerView.Adapter<Adaptader
         return item_menus.size();
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(data_cardView_item data, int position);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView_Task;
         TextView textView_Task;
@@ -65,9 +69,5 @@ public class Adaptader_for_principal_menu extends RecyclerView.Adapter<Adaptader
                 }
             });
         }
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(data_cardView_item data, int position);
     }
 }

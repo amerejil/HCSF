@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,14 +19,12 @@ import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_cardView_item;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
-import com.example.amere.aplicacion_mantenimiento_hcsf.data_task_temp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -55,7 +53,7 @@ public class Menu_Principal extends AppCompatActivity {
         ab = getSupportActionBar();
         ab.setDisplayShowTitleEnabled(false);
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
-        orientation=getResources().getConfiguration().orientation;
+        orientation = getResources().getConfiguration().orientation;
         recyclerView_menu_principal = findViewById(R.id.recyclerView_menu_principal);
         logo = findViewById(R.id.image_HCSF);
         database_hcsf = Utils.getDatabase();
@@ -63,9 +61,9 @@ public class Menu_Principal extends AppCompatActivity {
         //diarioTask = database_hcsf.getReference("Tareas_prueba"); //cambio
         mensualTask = database_hcsf.getReference("Tareas_Mensuales"); //cambio
         //FirebaseStorage storage = FirebaseStorage.getInstance();
-        if(orientation==Configuration.ORIENTATION_LANDSCAPE)
-        gridLayoutManager_menu_principal = new GridLayoutManager(this, 4);
-        if(orientation==Configuration.ORIENTATION_PORTRAIT)
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE)
+            gridLayoutManager_menu_principal = new GridLayoutManager(this, 4);
+        if (orientation == Configuration.ORIENTATION_PORTRAIT)
             gridLayoutManager_menu_principal = new GridLayoutManager(this, 2);
         /*Workbook wb = new HSSFWorkbook();
         Sheet sheet1 = wb.createSheet("new sheet");
@@ -149,7 +147,7 @@ public class Menu_Principal extends AppCompatActivity {
             mensualTask.addListenerForSingleValueEvent(listener);*/
 
 
-        final ValueEventListener listener1=new ValueEventListener() {
+        final ValueEventListener listener1 = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -160,7 +158,6 @@ public class Menu_Principal extends AppCompatActivity {
 
             }
         };
-
 
 
         diarioTask.addValueEventListener(listener1);

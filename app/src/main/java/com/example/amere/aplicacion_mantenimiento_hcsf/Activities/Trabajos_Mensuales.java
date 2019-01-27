@@ -1,16 +1,15 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +22,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adapter_for_task_list;
-import com.example.amere.aplicacion_mantenimiento_hcsf.OnSwipeTouchListener;
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
@@ -61,15 +59,14 @@ public class Trabajos_Mensuales extends AppCompatActivity {
     private Toolbar toolbar;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajos__mensuales);
-        toolbar= findViewById(R.id.my_toolbar_trabajos_mensuales);
+        toolbar = findViewById(R.id.my_toolbar_trabajos_mensuales);
         setSupportActionBar(toolbar);
-        orientation=getResources().getConfiguration().orientation;
-        ab=getSupportActionBar();
+        orientation = getResources().getConfiguration().orientation;
+        ab = getSupportActionBar();
         lista_tareas_mensuales = new ArrayList<>();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
@@ -83,29 +80,26 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         recyclerViewTMonthlyTask.setLayoutManager(linearLayoutManager_montly_task);
         recyclerViewTMonthlyTask.setHasFixedSize(false);
         recyclerViewTMonthlyTask.setItemAnimator(new DefaultItemAnimator());
-        refreshLayout=findViewById(R.id.refresh_tareas_mensuales);
+        refreshLayout = findViewById(R.id.refresh_tareas_mensuales);
         textViewType = findViewById(R.id.textViewTypeMensual);
         textViewDate = findViewById(R.id.textViewDateMensual);
         textViewState = findViewById(R.id.textViewEstadoMensual);
-        textViewPiso=findViewById(R.id.textViewPisoMensual);
-        textViewArea=findViewById(R.id.textViewAreaMensual);
+        textViewPiso = findViewById(R.id.textViewPisoMensual);
+        textViewArea = findViewById(R.id.textViewAreaMensual);
         textViewState = findViewById(R.id.textViewEstadoMensual);
-        textViewSubarea=findViewById(R.id.textViewSubareaMensual);
-        textViewSubtipo=findViewById(R.id.textViewSubtipoMensual);
-        textViewUbicacion=findViewById(R.id.textViewUbicacionMensual);
+        textViewSubarea = findViewById(R.id.textViewSubareaMensual);
+        textViewSubtipo = findViewById(R.id.textViewSubtipoMensual);
+        textViewUbicacion = findViewById(R.id.textViewUbicacionMensual);
         relativeLayout = findViewById(R.id.relativeLayoutTrabajosMensuales);
 
         floatingActionButtonAddMonthlyTask = findViewById(R.id.floatingActionButton_Add_MonthlyTask);
-        if(orientation== Configuration.ORIENTATION_PORTRAIT)
-        {
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             textViewPiso.setVisibility(View.GONE);
             textViewArea.setVisibility(View.GONE);
             textViewSubarea.setVisibility(View.GONE);
             textViewSubtipo.setVisibility(View.GONE);
             textViewUbicacion.setVisibility(View.GONE);
-        }
-        else
-        {
+        } else {
             textViewState.setVisibility(View.GONE);
         }
         final Query orden_tipo = task.orderByChild("tipo");
@@ -113,16 +107,16 @@ public class Trabajos_Mensuales extends AppCompatActivity {
         final Query orden_estado = task.orderByChild("estado");
         final Query orden_piso = task.orderByChild("piso");
         final Query orden_area = task.orderByChild("area");
-        final Query orden_subtipo=task.orderByChild("subtipo");
-        final Query orden_subarea=task.orderByChild("subarea");
+        final Query orden_subtipo = task.orderByChild("subtipo");
+        final Query orden_subarea = task.orderByChild("subarea");
         final Query orden_ubicacion = task.orderByChild("ubicacion");
         tipo = preferences.getString("administrador", "usuario");
-        adaptador=new Adapter_for_task_list(lista_tareas_mensuales, new Adapter_for_task_list.OnItemClickListener() {
+        adaptador = new Adapter_for_task_list(lista_tareas_mensuales, new Adapter_for_task_list.OnItemClickListener() {
             @Override
             public void onItemClick(data_task data, int position) {
 
             }
-        },Trabajos_Mensuales.this,preferences,"diarios",orientation);
+        }, Trabajos_Mensuales.this, preferences, "diarios", orientation);
         recyclerViewTMonthlyTask.setAdapter(adaptador);
         final ValueEventListener listener = new ValueEventListener() {
 
@@ -139,14 +133,12 @@ public class Trabajos_Mensuales extends AppCompatActivity {
                     @Override
                     public void onItemClick(data_task data, int position) {
                         Intent intent_detalle_tareas = new Intent(Trabajos_Mensuales.this, Detalle_tareas.class);
-                        String id = data.getId();
-                        intent_detalle_tareas.putExtra("Id", id);
-                        intent_detalle_tareas.putExtra("data",data);
+                        intent_detalle_tareas.putExtra("data", data);
                         intent_detalle_tareas.putExtra("trabajos", "mensuales");
                         startActivity(intent_detalle_tareas);
 
                     }
-                }, Trabajos_Mensuales.this, preferences, "mensual",orientation);
+                }, Trabajos_Mensuales.this, preferences, "mensual", orientation);
                 recyclerViewTMonthlyTask.setAdapter(adaptador);
                 // This method is called once with the initial value and again
 
