@@ -47,7 +47,9 @@ public class Menu_Principal extends AppCompatActivity {
         toolbar = findViewById(R.id.my_toolbar_menu_principal);
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();
-        ab.setDisplayShowTitleEnabled(false);
+        if (ab != null) {
+            ab.setDisplayShowTitleEnabled(false);
+        }
         preferences = getSharedPreferences("tipo", Context.MODE_PRIVATE);
         orientation = getResources().getConfiguration().orientation;
         recyclerView_menu_principal = findViewById(R.id.recyclerView_menu_principal);
@@ -99,19 +101,21 @@ public class Menu_Principal extends AppCompatActivity {
         editor.putString("administrador", "usuario");
         editor.apply();
         String tipo = preferences.getString("administrador", "usuario");
-        if (tipo.equals("usuario")) {
-            //FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador_prueba");
-            //FirebaseMessaging.getInstance().subscribeToTopic("usuario_prueba");
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador");
-            FirebaseMessaging.getInstance().subscribeToTopic("usuario");
-            Toast.makeText(Menu_Principal.this, "Usuario", Toast.LENGTH_SHORT).show();
-        } else {
+        if (tipo != null) {
+            if (tipo.equals("usuario")) {
+                //FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador_prueba");
+                //FirebaseMessaging.getInstance().subscribeToTopic("usuario_prueba");
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador");
+                FirebaseMessaging.getInstance().subscribeToTopic("usuario");
+                Toast.makeText(Menu_Principal.this, "Usuario", Toast.LENGTH_SHORT).show();
+            } else {
 
-            //FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario_prueba");
-            //FirebaseMessaging.getInstance().subscribeToTopic("administrador_prueba");
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
-            FirebaseMessaging.getInstance().subscribeToTopic("administrador");
-            Toast.makeText(Menu_Principal.this, "adm", Toast.LENGTH_SHORT).show();
+                //FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario_prueba");
+                //FirebaseMessaging.getInstance().subscribeToTopic("administrador_prueba");
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
+                FirebaseMessaging.getInstance().subscribeToTopic("administrador");
+                Toast.makeText(Menu_Principal.this, "adm", Toast.LENGTH_SHORT).show();
+            }
         }
 
 

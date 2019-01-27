@@ -50,8 +50,12 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
         toolbar = findViewById(R.id.my_toolbar_trabajos_mensuales_finalizados);
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();
-        ab.setDisplayShowTitleEnabled(false);
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayShowTitleEnabled(false);
+        }
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
         swipeRefreshLayoutMonthlyTask = findViewById(R.id.refresh_tareas_mensuales_finalizadas);
         textViewType = findViewById(R.id.textViewType_Finished);
         textViewDateStart = findViewById(R.id.textView_DateStart);

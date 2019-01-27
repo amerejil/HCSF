@@ -50,8 +50,12 @@ public class Trabajos_Diarios_Finalizados extends AppCompatActivity {
         toolbar = findViewById(R.id.my_toolbar_trabajos_diarios_finalizados);
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();
-        ab.setDisplayShowTitleEnabled(false);
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayShowTitleEnabled(false);
+        }
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
         swipeRefreshLayoutDailyTask = findViewById(R.id.refresh_tareas_diarias_finalizadas);
         textViewType = findViewById(R.id.textViewTypeFinished);
         textViewDateStart = findViewById(R.id.textViewDateStart);

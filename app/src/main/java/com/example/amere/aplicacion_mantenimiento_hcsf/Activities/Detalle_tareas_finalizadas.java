@@ -34,8 +34,12 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
         toolbar = findViewById(R.id.my_toolbar_detalle_tareas_finalizadas);
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();
-        ab.setDisplayShowTitleEnabled(false);
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayShowTitleEnabled(false);
+        }
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
         textViewTipoTarea = findViewById(R.id.textViewWorkFinished);
         textViewTipo = findViewById(R.id.textViewDetalleTipoFinalizdo);
         textViewUbicacion = findViewById(R.id.textViewDetalleUbicacionFinalizado);
@@ -49,11 +53,8 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
         cardViewEstadoEquipo = findViewById(R.id.cardViewEstadoEquipo);
         String tipo = getIntent().getExtras().get("trabajos").toString();
         dataTask = (data_task) getIntent().getSerializableExtra("data");
-        if (tipo.equals("diarios")) {
-            //task = database_hcsf.getReference("Tareas_prueba");//cambio
-        } else {
+        if (!tipo.equals("diarios")) {
             //task = database_hcsf.getReference("Tareas_Mensuales_prueba");//cambio
-
             textViewTipoTarea.setText(R.string.submenu_monthly_work_finished);
         }
         if (dataTask != null) {

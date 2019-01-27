@@ -31,7 +31,7 @@ public class NotificationService extends FirebaseMessagingService {
             topics = remoteMessage.getFrom();
             estado = remoteMessage.getData().get("estado");
             if (topics.equals("/topics/usuario")) {
-                if (estado.equals("No iniciado")) {
+                if (estado != null && estado.equals("No iniciado")) {
 
                     administrador_notificaciones adm = new administrador_notificaciones(NotificationService.this);
                     Notification.Builder nb = adm.createNotification("Nueva Tarea", task.getTrabajo_solicitado(), true, task);
@@ -39,7 +39,7 @@ public class NotificationService extends FirebaseMessagingService {
                 }
             }
             if (topics.equals("/topics/administrador")) {
-                if (estado.equals("Finalizado")) {
+                if (estado != null && estado.equals("Finalizado")) {
 
                     administrador_notificaciones adm1 = new administrador_notificaciones(NotificationService.this);
                     Notification.Builder nb1 = adm1.createNotification("Tarea Finalizada", task.getNota(), true, task);

@@ -196,9 +196,9 @@ public class Adapter_for_task_list extends RecyclerView.Adapter<Adapter_for_task
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             String tipo = preferences.getString("administrador", "usuario");
             MenuInflater inflater = activity.getMenuInflater();
-            if (tipo.equals("usuario"))
+            if (tipo != null && tipo.equals("usuario"))
                 inflater.inflate(R.menu.contex_menu_tareas_diarias_usuario, menu);
-            if (tipo.equals("administrador"))
+            if (tipo != null && tipo.equals("administrador"))
                 inflater.inflate(R.menu.context_menu_tareas_diarias_administrador, menu);
             for (int i = 0; i < menu.size(); i++)
                 menu.getItem(i).setOnMenuItemClickListener(this);

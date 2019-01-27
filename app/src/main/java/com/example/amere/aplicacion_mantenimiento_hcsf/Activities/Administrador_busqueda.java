@@ -227,7 +227,7 @@ public class Administrador_busqueda extends AppCompatActivity {
 
                     }
                 };
-                if (newText.isEmpty() || newText == null) {
+                if (newText.isEmpty()) {
                     lista_tareas_diarias = new ArrayList<>();
                     adaptador = new Adapter_for_task_list(lista_tareas_diarias, new Adapter_for_task_list.OnItemClickListener() {
                         @Override

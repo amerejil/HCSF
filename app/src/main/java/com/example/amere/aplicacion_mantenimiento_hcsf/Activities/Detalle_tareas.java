@@ -53,7 +53,9 @@ public class Detalle_tareas extends AppCompatActivity {
         toolbar = findViewById(R.id.my_toolbar_detalle_tareas);
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();
-        ab.setDisplayShowTitleEnabled(false);
+        if (ab != null) {
+            ab.setDisplayShowTitleEnabled(false);
+        }
         ab.setDisplayHomeAsUpEnabled(true);
         textViewTipo_Tarea = findViewById(R.id.textViewDailyWork2);
         textViewTipo = findViewById(R.id.textViewDetalleTipo);

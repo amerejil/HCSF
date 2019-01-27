@@ -56,8 +56,12 @@ public class Agregar_trabajos extends AppCompatActivity {
         toolbar = findViewById(R.id.my_toolbar_agregar_tareas);
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();
-        ab.setDisplayShowTitleEnabled(false);
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayShowTitleEnabled(false);
+        }
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
         area = findViewById(R.id.editTextArea);
         subarea = findViewById(R.id.editTextSubrea);
         subtipo = findViewById(R.id.spinnerSubtipo);
@@ -169,7 +173,9 @@ public class Agregar_trabajos extends AppCompatActivity {
                 data.setTipo(stringTipo);
                 data.setTrabajo_solicitado(trabajo_solicitado.getText().toString());
                 data.setUbicacion(stringUbicacion);
-                task.child(value).setValue(data);//comentariogit
+                if (value != null) {
+                    task.child(value).setValue(data);//comentariogit
+                }
                 area.setText("");
                 subarea.setText("");
                 solicitante.setText("");

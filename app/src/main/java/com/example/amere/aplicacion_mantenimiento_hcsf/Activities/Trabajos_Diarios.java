@@ -292,9 +292,9 @@ public class Trabajos_Diarios extends AppCompatActivity {
         floatingActionButtonAddDailyTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_añadir_trabajo = new Intent(Trabajos_Diarios.this, Agregar_trabajos.class);
-                intent_añadir_trabajo.putExtra("trabajos", "diarios");
-                startActivity(intent_añadir_trabajo);
+                Intent intent_agregar_trabajo = new Intent(Trabajos_Diarios.this, Agregar_trabajos.class);
+                intent_agregar_trabajo.putExtra("trabajos", "diarios");
+                startActivity(intent_agregar_trabajo);
             }
 
         });
