@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -17,14 +18,31 @@ import com.example.amere.aplicacion_mantenimiento_hcsf.Adapters.Adaptader_for_pr
 import com.example.amere.aplicacion_mantenimiento_hcsf.R;
 import com.example.amere.aplicacion_mantenimiento_hcsf.Utils;
 import com.example.amere.aplicacion_mantenimiento_hcsf.data_cardView_item;
+import com.example.amere.aplicacion_mantenimiento_hcsf.data_task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicMarkableReference;
 
 public class Menu_Principal extends AppCompatActivity {
 
@@ -39,7 +57,9 @@ public class Menu_Principal extends AppCompatActivity {
     private DatabaseReference diarioTask;
     private DatabaseReference mensualTask;
     private FirebaseDatabase database_hcsf;
-
+    private FirebaseStorage storage;
+    private data_task data;
+    private int cont=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,44 +77,14 @@ public class Menu_Principal extends AppCompatActivity {
         diarioTask = database_hcsf.getReference("Tareas");
         //diarioTask = database_hcsf.getReference("Tareas_prueba"); //cambio
         mensualTask = database_hcsf.getReference("Tareas_Mensuales"); //cambio
-        //FirebaseStorage storage = FirebaseStorage.getInstance();
+        storage = FirebaseStorage.getInstance();
         if (orientation == Configuration.ORIENTATION_LANDSCAPE)
             gridLayoutManager_menu_principal = new GridLayoutManager(this, 4);
         if (orientation == Configuration.ORIENTATION_PORTRAIT)
             gridLayoutManager_menu_principal = new GridLayoutManager(this, 2);
-        /*Workbook wb = new HSSFWorkbook();
-        Sheet sheet1 = wb.createSheet("new sheet");
-        OutputStream fileOut = null ;
-        try {
-            fileOut = openFileOutput("hola_.xls",Context.MODE_PRIVATE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            wb.write(fileOut);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            fileOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Uri file = Uri.fromFile(new File(getFilesDir()+"/hola_.xls"));
-        StorageReference storageRef = storage.getReference("tareas/"+file.getLastPathSegment());
 
-        UploadTask uploadTask =storageRef.putFile(file);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Menu_Principal.this, "Fail", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(Menu_Principal.this, "Successfully", Toast.LENGTH_SHORT).show();
-            }
-        });*/
+
+
         recyclerView_menu_principal.setLayoutManager(gridLayoutManager_menu_principal);
         SharedPreferences.Editor editor = preferences.edit();
         //editor.putString("administrador", "administrador");
@@ -117,33 +107,114 @@ public class Menu_Principal extends AppCompatActivity {
                 Toast.makeText(Menu_Principal.this, "adm", Toast.LENGTH_SHORT).show();
             }
         }
+        final Workbook wb = new HSSFWorkbook();
+        data=new data_task();
+          final ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-          /*final ValueEventListener listener = new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
-                        if(!datasnapshot.getValue(data_task.class).getFecha_finalizacion().isEmpty()) {
-                            mensualTask.child(datasnapshot.getValue(data_task.class).getId()).child("fecha_finalizacion_entero").setValue(convertir_string_entero(datasnapshot.getValue(data_task.class).getFecha_finalizacion()));
-                        }//Integer.parseInt
-                        // mensualTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_inicio_entero").setValue(Integer.parseInt(datasnapshot.getValue(data_task_temp.class).getFecha_inicio_entero()));
-                        *//*if (datasnapshot.getValue(data_task_temp.class).getFecha_finalizacion_entero().isEmpty()) {
-                            //mensualTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_finalizacion_entero").setValue(0);
-                        }
-                        else
-                        {
-                            //mensualTask.child(datasnapshot.getValue(data_task_temp.class).getId()).child("fecha_finalizacion_entero").setValue(Integer.parseInt(datasnapshot.getValue(data_task_temp.class).getFecha_finalizacion_entero()));
-                        }*//*
-                    }
+                Sheet sheet1 = wb.createSheet("Tareas Diarias");
+                Row row=sheet1.createRow(0);
+                row.createCell(0).setCellValue("Fecha");
+                row.createCell(1).setCellValue("Tipo");
+                row.createCell(2).setCellValue("Subtipo");
+                row.createCell(3).setCellValue("Piso");
+                row.createCell(4).setCellValue("Área");
+                row.createCell(5).setCellValue("Subárea");
+                row.createCell(6).setCellValue("Ubicación");
+                for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
+                    data=datasnapshot.getValue(data_task.class);
+                    row=sheet1.createRow(cont);
+                    row.createCell(0).setCellValue(data.getFecha_inicio());
+                    row.createCell(1).setCellValue(data.getTipo());
+                    row.createCell(2).setCellValue(data.getSubtipo());
+                    row.createCell(3).setCellValue(data.getPiso());
+                    row.createCell(4).setCellValue(data.getArea());
+                    row.createCell(5).setCellValue(data.getSubarea());
+                    row.createCell(6).setCellValue(data.getUbicacion());
+                    cont++;
+
+
 
                 }
+                cont=1;
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        final ValueEventListener listener_m = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                Sheet sheet2 = wb.createSheet("Tareas Mensuales");
+                Row row=sheet2.createRow(0);
+                row.createCell(0).setCellValue("Fecha");
+                row.createCell(1).setCellValue("Tipo");
+                row.createCell(2).setCellValue("Subtipo");
+                row.createCell(3).setCellValue("Piso");
+                row.createCell(4).setCellValue("Área");
+                row.createCell(5).setCellValue("Subárea");
+                row.createCell(6).setCellValue("Ubicación");
+
+                for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
+                    data=datasnapshot.getValue(data_task.class);
+                    row=sheet2.createRow(cont);
+                    row.createCell(0).setCellValue(data.getFecha_inicio());
+                    row.createCell(1).setCellValue(data.getTipo());
+                    row.createCell(2).setCellValue(data.getSubtipo());
+                    row.createCell(3).setCellValue(data.getPiso());
+                    row.createCell(4).setCellValue(data.getArea());
+                    row.createCell(5).setCellValue(data.getSubarea());
+                    row.createCell(6).setCellValue(data.getUbicacion());
+                    cont++;
+
 
                 }
-            };
-            mensualTask.addListenerForSingleValueEvent(listener);*/
+                OutputStream fileOut = null ;
+                try {
+                    fileOut = openFileOutput("Reporte de Tareas HCSF.xls",Context.MODE_PRIVATE);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    wb.write(fileOut);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fileOut.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+            diarioTask.addListenerForSingleValueEvent(listener);
+        mensualTask.addListenerForSingleValueEvent(listener_m);
+        Uri file = Uri.fromFile(new File(getFilesDir()+"/Reporte de Tareas HCSF.xls"));
+        StorageReference storageRef = storage.getReference("tareas/"+file.getLastPathSegment());
+
+        UploadTask uploadTask =storageRef.putFile(file);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Menu_Principal.this, "Fail", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(Menu_Principal.this, "Successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         final ValueEventListener listener1 = new ValueEventListener() {
