@@ -3,6 +3,7 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -67,6 +68,7 @@ public class Administrador_busqueda extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrador_busqueda);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         toolbar = findViewById(R.id.my_toolbar_administrador_busqueda);
         setSupportActionBar(toolbar);
         textView1 = findViewById(R.id.textViewDateSearch);

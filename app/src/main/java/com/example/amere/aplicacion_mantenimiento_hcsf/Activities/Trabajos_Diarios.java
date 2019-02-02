@@ -3,6 +3,7 @@ package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -59,8 +60,10 @@ public class Trabajos_Diarios extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // agregar opcion de quitar dinamicamente layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajos__diarios);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         toolbar = findViewById(R.id.my_toolbar_trabajos_diarios);
         setSupportActionBar(toolbar);
         orientation = getResources().getConfiguration().orientation;

@@ -1,6 +1,7 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -47,6 +48,7 @@ public class Trabajos_Mensuales_Finalizados extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajos_mensuales_finalizados);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         toolbar = findViewById(R.id.my_toolbar_trabajos_mensuales_finalizados);
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();

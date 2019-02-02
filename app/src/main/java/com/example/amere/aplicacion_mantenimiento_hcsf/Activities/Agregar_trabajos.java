@@ -1,5 +1,6 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -53,6 +54,7 @@ public class Agregar_trabajos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_trabajos);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         toolbar = findViewById(R.id.my_toolbar_agregar_tareas);
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();

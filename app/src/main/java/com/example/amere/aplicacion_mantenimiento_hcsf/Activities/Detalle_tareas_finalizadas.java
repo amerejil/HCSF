@@ -1,5 +1,6 @@
 package com.example.amere.aplicacion_mantenimiento_hcsf.Activities;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class Detalle_tareas_finalizadas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_tareas_finalizadas);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         toolbar = findViewById(R.id.my_toolbar_detalle_tareas_finalizadas);
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();
