@@ -121,20 +121,22 @@ public class Menu_Principal extends AppCompatActivity {
                 row.createCell(0).setCellValue("Fecha");
                 row.createCell(1).setCellValue("Tipo");
                 row.createCell(2).setCellValue("Subtipo");
+                row.createCell(6).setCellValue("Ubicación");
                 row.createCell(3).setCellValue("Piso");
                 row.createCell(4).setCellValue("Área");
                 row.createCell(5).setCellValue("Subárea");
-                row.createCell(6).setCellValue("Ubicación");
+
                 for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
                     data=datasnapshot.getValue(data_task.class);
                     row=sheet1.createRow(cont);
                     row.createCell(0).setCellValue(data.getFecha_inicio());
                     row.createCell(1).setCellValue(data.getTipo());
                     row.createCell(2).setCellValue(data.getSubtipo());
+                    row.createCell(6).setCellValue(data.getUbicacion());
                     row.createCell(3).setCellValue(data.getPiso());
                     row.createCell(4).setCellValue(data.getArea());
                     row.createCell(5).setCellValue(data.getSubarea());
-                    row.createCell(6).setCellValue(data.getUbicacion());
+
                     cont++;
 
 
