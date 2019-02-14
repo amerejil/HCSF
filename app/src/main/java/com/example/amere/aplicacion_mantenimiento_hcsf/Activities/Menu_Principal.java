@@ -84,9 +84,9 @@ public class Menu_Principal extends AppCompatActivity {
         orientation = getResources().getConfiguration().orientation;
         recyclerView_menu_principal = findViewById(R.id.recyclerView_menu_principal);
         database_hcsf = Utils.getDatabase();
-        diarioTask = database_hcsf.getReference("Tareas");
-        //diarioTask = database_hcsf.getReference("Tareas_prueba"); //cambio
-        mensualTask = database_hcsf.getReference("Tareas_Mensuales"); //cambio
+        //diarioTask = database_hcsf.getReference("Tareas");
+        diarioTask = database_hcsf.getReference("Tareas_prueba"); //cambio
+        mensualTask = database_hcsf.getReference("Tareas_Mensuales_prueba"); //cambio
         storage = FirebaseStorage.getInstance();
         if (orientation == Configuration.ORIENTATION_LANDSCAPE)
             gridLayoutManager_menu_principal = new GridLayoutManager(this, 4);
@@ -97,23 +97,23 @@ public class Menu_Principal extends AppCompatActivity {
 
         recyclerView_menu_principal.setLayoutManager(gridLayoutManager_menu_principal);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("administrador", "administrador");
-        //editor.putString("administrador", "usuario");
+        //editor.putString("administrador", "administrador");
+        editor.putString("administrador", "usuario");
         editor.apply();
         String tipo = preferences.getString("administrador", "usuario");
         if (tipo != null) {
             if (tipo.equals("usuario")) {
-                //FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador_prueba");
-                //FirebaseMessaging.getInstance().subscribeToTopic("usuario_prueba");
-                FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador");
-                FirebaseMessaging.getInstance().subscribeToTopic("usuario");
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador_prueba");
+                FirebaseMessaging.getInstance().subscribeToTopic("usuario_prueba");
+                //FirebaseMessaging.getInstance().unsubscribeFromTopic("administrador");
+                //FirebaseMessaging.getInstance().subscribeToTopic("usuario");
                 Toast.makeText(Menu_Principal.this, "Usuario", Toast.LENGTH_SHORT).show();
             } else {
 
-                //FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario_prueba");
-                //FirebaseMessaging.getInstance().subscribeToTopic("administrador_prueba");
-                FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
-                FirebaseMessaging.getInstance().subscribeToTopic("administrador");
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario_prueba");
+                FirebaseMessaging.getInstance().subscribeToTopic("administrador_prueba");
+                //FirebaseMessaging.getInstance().unsubscribeFromTopic("usuario");
+                //FirebaseMessaging.getInstance().subscribeToTopic("administrador");
                 Toast.makeText(Menu_Principal.this, "adm", Toast.LENGTH_SHORT).show();
             }
         }

@@ -89,9 +89,9 @@ public class Agregar_trabajos extends AppCompatActivity {
         final String tipo_trabajo = getIntent().getExtras().get("trabajos").toString();
         if (!tipo_trabajo.equals("diarios")) {
             textViewTipo.setText(R.string.new_monthly_task);
-            task = database_hcsf.getReference("Tareas_Mensuales");
+            task = database_hcsf.getReference("Tareas_Mensuales_prueba");
         } else {
-            task = database_hcsf.getReference("Tareas");
+            task = database_hcsf.getReference("Tareas_prueba");
         }
         tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

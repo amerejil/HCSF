@@ -77,7 +77,7 @@ public class administrador_notificaciones extends ContextWrapper {
                     .setContentTitle(title)
                     .setContentText(message)
                     .setContentIntent(pIntent)
-                    .setSmallIcon(R.drawable.icon_task)
+                    //.setSmallIcon(R.drawable.icon_task)
                     .setAutoCancel(true);
         }
         return null;
